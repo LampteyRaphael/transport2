@@ -48,7 +48,7 @@ class TblCourse extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['courseName', 'course_number', 'level_id', 'section_id', 'semester', 'program_id', 'date', 'required_courses'], 'required'],
+            [['courseName', 'course_number', 'level_id', 'section_id', 'semester', 'program_id', 'required_courses'], 'required'],
             [['level_id', 'semester', 'section_id', 'program_id'], 'integer'],
             [['course_description'], 'string'],
             [['acadamic_year'],'required'],

@@ -9,7 +9,7 @@ use common\models\TblAcadamicYear;
 /**
  * TblAcadamicYearSearch represents the model behind the search form of `common\models\TblAcadamicYear`.
  */
-class TblAcadamicYearSearch extends TblAcadamicYear
+class TblAcadamicYearSearch extends TblAcademicYear
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class TblAcadamicYearSearch extends TblAcadamicYear
     {
         return [
             [['id', 'status'], 'integer'],
-            [['date_of_admission', 'doa', 'doc'], 'safe'],
+            [['academic_year', 'doa', 'doc'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class TblAcadamicYearSearch extends TblAcadamicYear
      */
     public function search($params)
     {
-        $query = TblAcadamicYear::find();
+        $query = TblAcademicYear::find();
 
         // add conditions that should always apply here
 
@@ -64,7 +64,7 @@ class TblAcadamicYearSearch extends TblAcadamicYear
             'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'date_of_admission', $this->date_of_admission]);
+        $query->andFilterWhere(['like', 'academic_year', $this->academic_year]);
 
         return $dataProvider;
     }

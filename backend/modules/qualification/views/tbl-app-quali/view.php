@@ -34,10 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php include (Yii::getAlias('@backend/modules/layout/personalEmployment.php'))?>
 <!-- End Employment -->
 <?php  if(Yii::$app->user->can('admission permission')):?>
-  <?= Html::a('Reject Applicant\'s', ['delete', 'id' => $id], ['class' => 'btn btn-danger float-right','data' => ['confirm' => 'Are you sure you want to admit this applicant?','method' => 'post']]) ?>
-<?= Html::a('Admit Applicant\'s', ['qualification', 'id' => $id], ['class' => 'btn btn-success float-right','data' => ['confirm' => 'Are you sure you want to admit this applicant?','method' => 'post']]) ?>    
-
+  <?= Html::a('Admit Applicant\'s', ['qualification', 'id' => $id], ['class' => 'btn btn-success float-right','data' => ['confirm' => 'Are you sure you want to admit this applicant?','method' => 'post']]) ?>   
+  <?= Html::a('Reject Applicant\'s', ['delete', 'id' => $id], ['class' => 'btn btn-danger float-right','data' => ['confirm' => 'Are you sure you want to admit this applicant?','method' => 'post']]) ?> 
 <?php endif ?>
+<br><br>
     </div>
 </div>
 

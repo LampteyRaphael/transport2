@@ -21,7 +21,7 @@ $this->registerCssFile('https://code.ionicframework.com/ionicons/2.0.1/css/ionic
     <?php $this->head() ?>
     <style>
              .banner{
-            background:url('images/upsa3.jpg');
+            background:url('image/upsa3.jpg');
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;

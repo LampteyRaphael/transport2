@@ -53,7 +53,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Payments', 'url' => ['index']];
                 'attribute'=>'user_id', 
                 'label'=>'System Admin',
                 'format'=>'raw', 
-                'value'=>$model->user->username,
+                'value'=>$model->user->username??'',
                 'displayOnly'=>true,
                 'type'=>DetailView::INPUT_TEXT, 
                 'widgetOptions'=>[
@@ -78,21 +78,21 @@ $this->params['breadcrumbs'][] = ['label' => 'Payments', 'url' => ['index']];
                 'valueColOptions'=>['style'=>'width:30%'],
             ],
 
-            [
-                'attribute'=>'program_id', 
-                'label'=>'Programs',
-                'displayOnly'=>true,
-                'value'=>$model->program->program_name,
-                'format'=>'raw',
-                'type'=>DetailView::INPUT_TEXT, 
-                'valueColOptions'=>['style'=>'width:30%'],
-            ]
+            // [
+            //     'attribute'=>'program_id', 
+            //     'label'=>'Programs',
+            //     'displayOnly'=>true,
+            //     'value'=>$model->program->program_name,
+            //     'format'=>'raw',
+            //     'type'=>DetailView::INPUT_TEXT, 
+            //     'valueColOptions'=>['style'=>'width:30%'],
+            // ]
         ],
     ],
     [
         'columns' => [
             [
-                'attribute'=>'date', 
+                'attribute'=>'dates', 
                 'label'=>'Date',
                 'format'=>'raw', 
                 'displayOnly'=>true,

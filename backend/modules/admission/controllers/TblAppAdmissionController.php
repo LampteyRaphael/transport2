@@ -21,6 +21,7 @@ use common\models\TblAppPersDetails;
 use common\models\TblAppProgram;
 use common\models\TblAppStudProgram;
 use common\models\TblPayment;
+use common\models\TblPayments;
 use common\models\TblStudDoc;
 use common\models\User;
 use Exception;
@@ -258,7 +259,6 @@ class TblAppAdmissionController extends Controller
         return $app;
     }
 
-
    /*
     Migrating  Admitted Applicant Personal Details To Student Personal Details Table
   */
@@ -365,7 +365,7 @@ public function studDoc($id,$perID){
 
             $adminID=TblAppAdmission::find()->where(['application_id'=>$id])->select('id')->one();
 
-            $payment=TblPayment::find()->where(['admission_id'=>$adminID->id])->all();
+            $payment=TblPayments::find()->where(['admission_id'=>$adminID->id])->all();
         
             foreach($payment as $amount){
                 $pay +=$amount->amount;
@@ -397,17 +397,21 @@ public function studDoc($id,$perID){
                     $stu= new TblStud();
                     $stu->personal_details_id= $perID;
                     $stu->personal_address_id= $perAd;
-                    $stu->personal_education_id=$perEd;
-                    $stu->personal_employment_id=$perEm;
+                    $stu->personal_education_id=$perID;
+                    $stu->personal_employment_id=$perID;
                     $stu->personal_document_id=$perID;
+                    $stu->program_id=$perID;
                     $stu->application_type=$admitt->application_type;
                     $stu->status=1;
-                    $stu->user_id=$userAdmin->id;
-                    $stu->program_id=$perID;
-                    $stu->date=$admitt->date;
+                    $stu->user_id=Yii::$app->user->identity->id;
+                    $stu->dates=date('Y-m-d');
                     $stu->save();
-
+                    
                     Yii::$app->session->setFlash('success', 'Successfully Registered Applicant as Student');
+
+                    return $this->redirect(['index']);
+                //    }
+
                 }catch(Exception $e){
                     Yii::$app->session->setFlash('error', 'Already Migrated'.$e->getMessage());
                     return $this->redirect(['index']);

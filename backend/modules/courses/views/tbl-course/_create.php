@@ -15,8 +15,7 @@ use yii\helpers\ArrayHelper;
 ?>
 
 <div class="tbl-course-form">
-
-    <?php $form = ActiveForm::begin(['action' => Yii::$app->urlManager->createUrl(['courses/tbl-course/create'])]) ?>
+<?php $form = ActiveForm::begin(['action' => Yii::$app->urlManager->createUrl(['courses/tbl-course/create'])]) ?>
     <div class="row">
         <div class="col-4">
             <b>Course Name</b>
@@ -62,7 +61,8 @@ use yii\helpers\ArrayHelper;
                 'language'=>'en',
                 'pluginOptions'=>[
                     'allowClear'=>true,
-                ]])->label(false)?>        </div>
+                ]])->label(false)?>
+         </div>
     </div>
 
   <div class="row">

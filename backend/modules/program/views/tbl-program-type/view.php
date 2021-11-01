@@ -11,9 +11,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Program Category', 'url' => ['inde
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<!-- Navigation Bar -->
+<?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
+<!-- End Of Navigation Bar -->
 <div class="tbl-program-type-view">
-<div class="box">
- <div class="box-body">
+<div class="card">
+ <div class="card-body">
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [

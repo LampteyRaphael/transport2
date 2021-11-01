@@ -1,6 +1,6 @@
 <?php
 
-namespace frontend\modules\student\models;
+namespace common\models;
 
 use Yii;
 
@@ -9,9 +9,13 @@ use Yii;
  *
  * @property int $id
  * @property string $date_of_admission
+ * @property string $doc
+ * @property string $created_at
+ * @property string|null $updated_at
  *
  * @property TblStudAdmis[] $tblStudAdmis
  * @property TblStudQuali[] $tblStudQualis
+ * @property TblStudRegistYear[] $tblStudRegistYears
  */
 class TblStudAcadYear extends \yii\db\ActiveRecord
 {
@@ -29,7 +33,8 @@ class TblStudAcadYear extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date_of_admission'], 'required'],
+            [['date_of_admission', 'doc'], 'required'],
+            [['doc', 'created_at', 'updated_at'], 'safe'],
             [['date_of_admission'], 'string', 'max' => 50],
         ];
     }
@@ -42,6 +47,9 @@ class TblStudAcadYear extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'date_of_admission' => 'Date Of Admission',
+            'doc' => 'Doc',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
@@ -63,5 +71,15 @@ class TblStudAcadYear extends \yii\db\ActiveRecord
     public function getTblStudQualis()
     {
         return $this->hasMany(TblStudQuali::className(), ['accadamin_year_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TblStudRegistYears]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblStudRegistYears()
+    {
+        return $this->hasMany(TblStudRegistYear::className(), ['stud_acadamic_year_id' => 'id']);
     }
 }

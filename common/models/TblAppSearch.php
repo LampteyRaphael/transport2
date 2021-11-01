@@ -17,8 +17,8 @@ class TblAppSearch extends TblApp
     public function rules()
     {
         return [
-            [['id', 'personal_details_id', 'personal_address_id', 'personal_education_id', 'personal_employment_id', 'personal_document_id', 'application_type', 'account_id'], 'integer'],
-            [['date', 'created_by','status','program_id', 'updated_by', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'personal_details_id', 'personal_address_id', 'personal_education_id', 'personal_employment_id', 'personal_document_id', 'application_type'], 'integer'],
+            [['date','status','program_id', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -72,15 +72,16 @@ class TblAppSearch extends TblApp
             // 'status' => $this->status,
             // 'app_quali_id' => $this->app_quali_id,
             'date' => $this->date,
-            'account_id' => $this->account_id,
+            // 'account_id' => $this->account_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'created_by', $this->created_by])
-            ->andFilterWhere(['like', 'tbl_app_status.name', $this->status])
+        $query
+        // ->andFilterWhere(['like', 'created_by', $this->created_by])
+            ->andFilterWhere(['like', 'tbl_app_status.name', $this->status]);
             // ->andFilterWhere(['like', 'tbl_program_type.name', $this->program_id])
-            ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
+            // ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
 
         return $dataProvider;
     }

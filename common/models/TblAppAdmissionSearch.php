@@ -54,7 +54,7 @@ class TblAppAdmissionSearch extends TblAppAdmission
             return $dataProvider;
         }
 
-        $query->joinWith(['accadaminYear']);
+        // $query->joinWith(['accadaminYear']);
 
         // grid filtering conditions
         $query->andFilterWhere([

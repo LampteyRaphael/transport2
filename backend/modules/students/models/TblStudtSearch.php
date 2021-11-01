@@ -17,7 +17,7 @@ class TblStudtSearch extends TblStud
     public function rules()
     {
         return [
-            [['id', 'personal_details_id', 'personal_address_id', 'personal_education_id', 'personal_employment_id', 'personal_document_id', 'application_type', 'status', 'user_id', 'program_id', 'date'], 'integer'],
+            [['id', 'personal_details_id', 'personal_address_id', 'personal_education_id', 'personal_employment_id', 'personal_document_id', 'application_type', 'status', 'user_id', 'program_id', 'dates'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
         ];
     }
@@ -68,7 +68,7 @@ class TblStudtSearch extends TblStud
             'status' => $this->status,
             'user_id' => $this->user_id,
             'program_id' => $this->program_id,
-            'date' => $this->date,
+            'dates' => $this->dates,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);

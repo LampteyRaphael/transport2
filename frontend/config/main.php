@@ -1,4 +1,7 @@
 <?php
+
+use yii2mod\rbac\filters\AccessControl;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -91,43 +94,70 @@ return [
         // ],
 
 
-        'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            'rules' => [
-
-                'course'=>'student/tbl-course/index',
-                'result'=>'student/tbl-st-registration/result',
-                'registered-courses'=>'student/tbl-st-registration/index',
-                'profile'=>'student',
-                'lecturer'=>'profile',
-                'lecturer'=>'lecturer/lecturer/index',
-                'lecturer-courses'=>'lecturer/lecturer/courses',
-                'lecturer-result'=>'lecturer/lecturer/result',
-                'lecturer-student-result'=>'lecturer/tbl-studs-result/index',
-                'login'=>'site/login',
-                'osn'=>'site/osn',
-                'application'=>'site/application'
-            ],
-        ],
+        // 'urlManager' => [
+        //     'enablePrettyUrl' => true,
+        //     'showScriptName' => false,
+        //     'rules' => [
+        //         'course'=>'student/tbl-course/index',
+        //         'result'=>'student/tbl-st-registration/result',
+        //         'registered-courses'=>'student/tbl-st-registration/index',
+        //         'profile'=>'student',
+        //         'lecturer'=>'profile',
+        //         'lecturer'=>'lecturer/lecturer/index',
+        //         'lecturer-courses'=>'lecturer/lecturer/courses',
+        //         'lecturer-result'=>'lecturer/lecturer/result',
+        //         'lecturer-student-result'=>'lecturer/tbl-studs-result/index',
+        //         'login'=>'site/login',
+        //         'osn'=>'site/osn',
+        //         'personal-details'=>'site/application',
+        //         'program'=>'site/program',
+        //         'education'=>'site/education',
+        //         'employment'=>'site/employment',
+        //         'document'=>'site/document',
+        //         'declaration-summary'=>'site/declaration'
+                
+        //     ],
+        // ],
         
     ],
-    'as beforeRequest' => [
-        'class' => 'yii\filters\AccessControl',
-        'rules' => [
-            [
-                'allow' => true,
-                'actions' => ['login', 'verify','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
-            ],
-            [
-                'allow' => true,
-                'roles' => ['lecturer','student'],
-            ],
-        ],
-        'denyCallback' => function () {
-            return Yii::$app->response->redirect(['site/login']);
-        },
-     ],
+    // 'as access' => [
+    //     'class' => AccessControl::className(),
+    //     'denyCallback' => function ($rule, $action) {
+    //         Yii::$app->user->logout();
+    //         return Yii::$app->response->redirect(['site/login']);
+    //     },
+
+
+    //     'rules' => [
+       
+    //         [
+    //             'actions' => ['login', 'error','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
+    //             'allow' => true,
+    //         ],
+    //         [
+    //             'allow' => true,
+    //             'roles' => ['student','lecturer'],
+    //         ],
+    //     ],
+    // ],
+
+    // 'as beforeRequest' => [
+    //     'class' => 'yii\filters\AccessControl',
+    //     'denyCallback' => function () {
+    //         return Yii::$app->response->redirect(['site/login']);
+    //     },
+    //     'rules' => [
+    //         [
+    //             'allow' => true,
+    //             'actions' => ['login', 'verify','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
+    //         ],
+    //         [
+    //             'allow' => true,
+    //             'roles' => ['lecturer','student'],
+    //         ],
+    //     ],
+       
+    //  ],
      
     'params' => $params,
 ];

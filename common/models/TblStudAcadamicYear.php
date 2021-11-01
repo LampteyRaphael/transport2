@@ -5,14 +5,17 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "tbl_stud_acadamic_year".
+ * This is the model class for table "tbl_stud_acad_year".
  *
  * @property int $id
- * @property string $name
+ * @property string $date_of_admission
+ * @property string $doc
+ * @property string $created_at
+ * @property string|null $updated_at
  *
- * @property TblLecturerCourse[] $tblLecturerCourses
- * @property TblRegisCourse[] $tblRegisCourses
- * @property TblStRegistration[] $tblStRegistrations
+ * @property TblStudAdmis[] $tblStudAdmis
+ * @property TblStudQuali[] $tblStudQualis
+ * @property TblStudRegistYear[] $tblStudRegistYears
  */
 class TblStudAcadamicYear extends \yii\db\ActiveRecord
 {
@@ -21,7 +24,7 @@ class TblStudAcadamicYear extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'tbl_stud_acadamic_year';
+        return 'tbl_stud_acad_year';
     }
 
     /**
@@ -30,8 +33,9 @@ class TblStudAcadamicYear extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['name'], 'string', 'max' => 50],
+            [['date_of_admission', 'doc'], 'required'],
+            [['doc', 'created_at', 'updated_at'], 'safe'],
+            [['date_of_admission'], 'string', 'max' => 50],
         ];
     }
 
@@ -42,37 +46,40 @@ class TblStudAcadamicYear extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'date_of_admission' => 'Date Of Admission',
+            'doc' => 'Doc',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
     /**
-     * Gets query for [[TblLecturerCourses]].
+     * Gets query for [[TblStudAdmis]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTblLecturerCourses()
+    public function getTblStudAdmis()
     {
-        return $this->hasMany(TblLecturerCourse::className(), ['acadamic_year' => 'id']);
+        return $this->hasMany(TblStudAdmis::className(), ['accadamin_year_id' => 'id']);
     }
 
     /**
-     * Gets query for [[TblRegisCourses]].
+     * Gets query for [[TblStudQualis]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTblRegisCourses()
+    public function getTblStudQualis()
     {
-        return $this->hasMany(TblRegisCourse::className(), ['acadamic_year' => 'id']);
+        return $this->hasMany(TblStudQuali::className(), ['accadamin_year_id' => 'id']);
     }
 
     /**
-     * Gets query for [[TblStRegistrations]].
+     * Gets query for [[TblStudRegistYears]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTblStRegistrations()
+    public function getTblStudRegistYears()
     {
-        return $this->hasMany(TblStRegistration::className(), ['acadamic_year' => 'id']);
+        return $this->hasMany(TblStudRegistYear::className(), ['stud_acadamic_year_id' => 'id']);
     }
 }

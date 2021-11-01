@@ -1,6 +1,7 @@
 <?php
 
 use common\models\TblAcadamicYear;
+use common\models\TblAcademicYear;
 use common\models\TblAppAdmissStatus;
 use common\models\TblAppPersDetails;
 use common\models\User;
@@ -104,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'accadamin_year_id',
                 'value'=>'accadaminYear.date_of_admission',
-                'filter'=>ArrayHelper::map(TblAcadamicYear::find()->asArray()->all(),'date_of_admission','date_of_admission'),
+                'filter'=>ArrayHelper::map(TblAcademicYear::find()->asArray()->all(),'academic_year','academic_year'),
                 'filterType'=>GridView::FILTER_SELECT2,
                 'filterWidgetOptions'=>[
                     'options'=>['prompt'=>'Category'],
@@ -151,7 +152,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'width'=>100,
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-                    return Html::a ( 'View', ['view', 'id' => $model->application_id],['class'=>'btn btn-primary btn-xs'] );
+                    return Html::a ( 'View', ['view', 'id' => $model->application_id],['class'=>'btn btn-primary'] );
                 }
             ],
         ],

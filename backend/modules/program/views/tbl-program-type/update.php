@@ -9,6 +9,9 @@ $this->title = 'Program Category';
 $this->params['breadcrumbs'][] = ['label' => 'Program Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
+<!-- Navigation Bar -->
+<?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
+<!-- End Of Navigation Bar -->
 <div class="tbl-program-type-update">
 <div class="box">
  <div class="box-body">

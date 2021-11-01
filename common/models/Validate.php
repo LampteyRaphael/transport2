@@ -2,6 +2,11 @@
 
 namespace common\models;
 
+use Exception;
+use Yii;
+use yii\helpers\Url;
+use yii\web\UploadedFile;
+
 class Validate  extends  \yii\db\ActiveRecord
 {
     
@@ -42,6 +47,74 @@ class Validate  extends  \yii\db\ActiveRecord
     }
 
 
+    public function userAdmins($password,$email,$role,$status){
+   
+      $userAdmin = new User();
+      $imageFile = UploadedFile::getInstance($userAdmin, 'photo');
+      if(isset($imageFile->size)){
+      if(!file_exists(Url::to('@webfront/application/images/'))){
+          mkdir(Url::to('@webfront/application/images/'),0777,true);
+      }
+      $fileName=time().''.$imageFile->baseName.'.'.$imageFile->extension;
+      $imageName=Url::to('@webfront/application/images/').$fileName;
+      $imageFile->saveAs($imageName);
+      }
+      $SID=date('Y').rand(0001,9999);
+      $userAdmin->photo = $fileName;
+      $userAdmin->username=$SID;
+      $userAdmin->email= $email;
+      $userAdmin->role_id=$role;
+      $userAdmin->password_hash = $userAdmin->setPassword($password);
+      $userAdmin->status = $status;
+      $userAdmin->auth_key=$userAdmin->generateAuthKey();
+      $userAdmin->save();
+      
+      //    Yii::$app->mailer->compose()
+        //   ->setFrom(['ips.admin@upsamail.edu.gh'=>'UPSA'])
+        //   ->setTo($email)
+        //   ->setSubject('UPSA Admission')
+        //   ->setHtmlBody('')
+        //  ->send();
+      // Yii::$app->mailer->compose()
+      // ->setFrom(['ips.admin@upsamail.edu.gh'=>'UPSA'])
+      // ->setTo($email)
+      // ->setSubject('Your Credentials IPS Portal')
+      //   ->setHtmlBody('Your Pass:'.$password.' And Your Account Name is :'.$SID)
+      // ->send();
+
+
+              //  $image=Yii::getAlias('@app/web/image/logo.png');
+            // $content=$this->renderPartial('mail');
+          // $body= Yii::$app->view->renderFile('@common/mail/students-details.php',['username'=>$SID, 'email'=>$email]);
+
+        //   Yii::$app->mailer->compose()
+        //   ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name. ' robot'])
+        //   ->setTo($email)
+        //   ->setSubject('IPS Student Credentials Admission')
+        //   ->setHtmlBody('')
+        //  ->send();
+
+  // return Yii::$app->mailer->compose(['html' => 'students-details'],['name'=>$SID])
+  // ->setTo($email)
+  // ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name ])
+  // ->setSubject('Your Credentials UPSA Hostel Management System')
+  // ->setTextBody("")
+  // ->send();
+
+      // return Yii::$app
+      // ->mailer
+      // ->compose(
+      //     ['html' => 'students-details'],
+      //     ['user' => $SID]
+      // )
+      // ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name. ' robot'])
+      // ->setTo($email)
+      //  ->setSubject('Account registration at ' . $password)
+      //  ->setTextBody("")
+      // ->send();
+   return $userAdmin->id;
+    }
+
 
   //   private  function actionGetpass($name) {
   //     $alphabet = "abcdefghijklmnopqrstuwxyz0123456789".$name;
@@ -80,13 +153,13 @@ class Validate  extends  \yii\db\ActiveRecord
 
 // $smail->sendEmail($model->email,$username,$username,$pass);
 
-//   function sendEmail($email,$name,$username,$pass){
-//   return Yii::$app->mailer->compose(['html' => 'passsend-html'],['name'=>$name,'username'=>$username,'pass'=>$pass])
-//   ->setTo($email)
-//   ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name ])
-//   ->setSubject('Your Credentials UPSA Hostel Management System')
-//   ->setTextBody("")
-//   ->send();
+  // function sendEmail($email,$name,$username,$pass){
+  // return Yii::$app->mailer->compose(['html' => 'passsend-html'],['name'=>$name,'username'=>$username,'pass'=>$pass])
+  // ->setTo($email)
+  // ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name ])
+  // ->setSubject('Your Credentials UPSA Hostel Management System')
+  // ->setTextBody("")
+  // ->send();
 // }
 
 

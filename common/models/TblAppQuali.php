@@ -39,7 +39,7 @@ class TblAppQuali extends \yii\db\ActiveRecord
             [['application_id', 'status', 'user_id', 'accadamin_year_id'], 'required'],
             [['application_id', 'status', 'user_id', 'accadamin_year_id'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
-            [['accadamin_year_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblAcadamicYear::className(), 'targetAttribute' => ['accadamin_year_id' => 'id']],
+            [['accadamin_year_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblAcademicYear::className(), 'targetAttribute' => ['accadamin_year_id' => 'id']],
             [['application_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblApp::className(), 'targetAttribute' => ['application_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => TblAppQualiStatus::className(), 'targetAttribute' => ['status' => 'id']],
@@ -69,7 +69,7 @@ class TblAppQuali extends \yii\db\ActiveRecord
      */
     public function getAccadaminYear()
     {
-        return $this->hasOne(TblAcadamicYear::className(), ['id' => 'accadamin_year_id']);
+        return $this->hasOne(TblAcademicYear::className(), ['id' => 'accadamin_year_id']);
     }
 
     /**

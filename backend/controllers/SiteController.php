@@ -7,8 +7,15 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use common\models\TblApp;
+use common\models\TblAppAdmission;
 use common\models\TblAppQuali;
+use common\models\TblLecturer;
+use common\models\TblLevel;
+use common\models\TblProgram;
 use common\models\TblQualiLog;
+use common\models\TblStaff;
+use common\models\TblStud;
+use common\models\User;
 
 /**
  * Site controller
@@ -31,7 +38,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['logout', 'index'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['staff','hod'],
                     ],
                 ],
             ],
@@ -64,12 +71,27 @@ class SiteController extends Controller
     public function actionIndex()
     {
        $qualification=TblAppQuali::find()->count();
-       $admission=TblAppQuali::find()->count();
+       $admission=TblAppAdmission::find()->count();
        $application=TblApp::find()->select('id')->count();
+       $students=TblStud::find()->select('id')->count();
+
+       $lecturer=TblLecturer::find()->select('id')->count();
+
+       $staff=TblStaff::find()->select('id')->count();
+
+       $userAdmins=User::find()->select('id')->count();
+
+       $programs=TblProgram::find()->all();
+
         return $this->render('index',[
             'qualification'=>$qualification,
             'admission'=>$admission,
-            'application'=>$application
+            'application'=>$application,
+            'lecturer'=>$lecturer,
+            'students'=>$students,
+            'staff'=>$staff,
+            'userAdmins'=>$userAdmins,
+            'programs'=>$programs,
         ]);
     }
 

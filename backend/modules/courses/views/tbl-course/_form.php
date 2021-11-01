@@ -48,7 +48,7 @@ use yii\helpers\ArrayHelper;
                     'allowClear'=>true,
                 ]])->label(false)?>  
         </div>
-    </div>aq`
+    </div>
 
 
     <div class="row">

@@ -6,7 +6,7 @@ use yii\bootstrap4\Nav;
 
 
 echo Nav::widget([
-  'options'=>['class'=>'nav nav-tabs','id'=>"nav-tab",'style'=>'font-size:15px; '],
+  'options'=>['class'=>'nav nav-tabs nav-pills','id'=>"nav-tab",'style'=>'font-size:15px; '],
   'items'=>[
     ['label'=>'Students And Course Registration','url'=>['/students/tbl-st-registration/index'],['class'=>'nav-link','id'=>'program','role'=>'tab']],
     ['label'=>'Registered Courses','url'=>['/students/tbl-regis-course/index'],['class'=>'nav-link','id'=>'level','role'=>'tab']],

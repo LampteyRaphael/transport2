@@ -4,6 +4,7 @@ use common\models\TblAcadamicYear;
 use common\models\TblAppPersDetails;
 use common\models\TblSemester;
 use common\models\TblStudAcadamicYear;
+use common\models\TblStudAcadYear;
 use common\models\User;
 use yii\helpers\Html;
 use kartik\grid\GridView;
@@ -45,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'striped' => true,
     'condensed' => false,
     'responsive' => true,
+    'responsiveWrap' => false,
     'bootstrap'=>true,
     'hover' => true,
     'floatHeader' => false,
@@ -82,7 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'course_id',
                 'value'=>'course.courseName',
                 'label'=>'Courses',
-                'filter'=>ArrayHelper::map(TblStudAcadamicYear::find()->asArray()->all(),'name','name'),
+                // 'filter'=>ArrayHelper::map(TblStudAcadamicYear::find()->asArray()->all(),'name','name'),
                 'filterType'=>GridView::FILTER_SELECT2,
                 'filterWidgetOptions'=>[
                     'options'=>['prompt'=>'Category'],
@@ -105,7 +107,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'acadamic_year',
                 'value'=>'acadamicYear.name',
                 'label'=>'Academic Year',
-                'filter'=>ArrayHelper::map(TblStudAcadamicYear::find()->asArray()->all(),'name','name'),
+                // 'filter'=>ArrayHelper::map(TblStudAcadYear::find()->asArray()->all(),'id','id'),
                 'filterType'=>GridView::FILTER_SELECT2,
                 'filterWidgetOptions'=>[
                     'options'=>['prompt'=>'Category'],

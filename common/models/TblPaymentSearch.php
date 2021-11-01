@@ -4,12 +4,12 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\TblPayment;
+
 
 /**
  * TblPaymentSearch represents the model behind the search form of `common\models\TblPayment`.
  */
-class TblPaymentSearch extends TblPayment
+class TblPaymentSearch extends TblPayments
 {
     /**
      * {@inheritdoc}
@@ -20,7 +20,7 @@ class TblPaymentSearch extends TblPayment
             [['id', 'user_id', 'admission_id'], 'integer'],
             [['amount', 'balance'], 'number'],
             [['receipt_no'], 'string'],
-            [['date', 'status','program_id','created_at', 'updated_at'], 'safe'],
+            [['dates', 'status','created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -42,7 +42,7 @@ class TblPaymentSearch extends TblPayment
      */
     public function search($params)
     {
-        $query = TblPayment::find();
+        $query = TblPayments::find();
 
         // add conditions that should always apply here
 
@@ -58,7 +58,7 @@ class TblPaymentSearch extends TblPayment
             return $dataProvider;
         }
 
-        $query->joinWith(['program','status0']);
+        $query->joinWith(['status0']);
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
@@ -68,12 +68,12 @@ class TblPaymentSearch extends TblPayment
             'user_id' => $this->user_id,
             'admission_id' => $this->admission_id,
             // 'program_id' => $this->program,
-            'date' => $this->date,
+            'dates' => $this->dates,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-         $query->andFilterWhere(['like', 'tbl_program.program_name', $this->program_id]);
+        //  $query->andFilterWhere(['like', 'tbl_program.program_name', $this->program_id]);
          $query->andFilterWhere(['like', 'tbl_payment_status.name', $this->status]);
 
 

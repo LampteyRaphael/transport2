@@ -12,6 +12,9 @@ $this->title = 'Application';
     <div class="col">
         <table class="table table-borderless">
             <tr>
+                <marquee class="text-danger">Remember to logout or exit after you print out the summary snd declaration</marquee>
+            </tr>
+            <tr>
                 <td>
                 <?php echo Html::img(Yii::getAlias('@web').'/images/logo.png',['width'=>'100','height'=>'70'],['alt' => 'alt image'], ['class' => 'img-fluid']);?>
                 </td>

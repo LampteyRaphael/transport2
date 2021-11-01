@@ -49,7 +49,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return 'tbl_user';
     }
 
-    public $name;
+    public $name,$title,$first_name,$surname,$middle_name,$staff_category_id,$city,$date_of_birth,$doa,$country;
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 2;
     const STATUS_ACTIVE = 1;
@@ -62,12 +62,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['username', 'password_hash', 'email'], 'required'],
-            [['status', 'role_id'], 'integer'],
+            [['username', 'password_hash', 'email','photo'], 'required'],
+            [['status'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
+            [['photo'], 'string', 'max' => 200],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
             [['role_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblRole::className(), 'targetAttribute' => ['role_id' => 'id']],
@@ -89,6 +90,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             'email' => 'Email',
             'status' => 'Status',
             'role_id' => 'Role ID',
+            'photo'=>'File',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'verification_token' => 'Verification Token',
@@ -187,7 +189,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getTblPayments()
     {
-        return $this->hasMany(TblPayment::className(), ['user_id' => 'id']);
+        return $this->hasMany(TblPayments::className(), ['user_id' => 'id']);
     }
 
     /**
@@ -325,14 +327,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return Yii::$app->security->validatePassword($password, $this->password_hash);
     }
 
-    // public function getPassword()
-
-    // {
-
-    //     return '';
-
-    // }
-
+  
        public function generateAuthKey() {
        return Yii::$app->security->generateRandomString();
    }

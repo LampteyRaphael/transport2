@@ -68,10 +68,10 @@ class TblAppQualiSearch extends TblAppQuali
         ]);
 
 
-        $query->joinWith(['application','status0','accadaminYear','user']);
+        $query->joinWith(['application','status0','user']);
 
          $query->andFilterWhere(['like', 'tbl_app_quali_status.name', $this->status]);
-         $query->andFilterWhere(['like', 'tbl_acadamic_year.date_of_admission', $this->accadamin_year_id]);
+        //  $query->andFilterWhere(['like', 'tbl_acadamic_year.date_of_admission', $this->accadamin_year_id]);
          $query->andFilterWhere(['like', 'tbl_user.username', $this->user_id]);
          $query->andFilterWhere(['like', 'tbl_app.personal_details_id', $this->application_id]);
 

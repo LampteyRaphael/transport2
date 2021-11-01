@@ -1,7 +1,4 @@
 <?php
-
-use common\models\TblAppAdmission;
-use common\models\TblProgram;
 use kartik\select2\Select2;
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
@@ -15,15 +12,12 @@ use yii\helpers\ArrayHelper;
 
        <div class="col-sm-2">Admission Applicant</div>
        <div class="col-sm-8">
-           <?php
-           $additional_users = [];
-            foreach(TblAppAdmission::find()->all() as $user){
-                array_push($additional_users, ['id'=>$user->id, 'admission_id'=>($user->application->personalDetails->title0->name) .' ' . ($user->application->personalDetails->first_name??'') .' '. ($user->application->personalDetails->middle_name??'') .' '. ($user->application->personalDetails->last_name??'')]);
-            }
-            $users= \yii\helpers\ArrayHelper::map($additional_users, 'id', 'admission_id');           
-           ?>
+    
        <?= $form->field($model, 'admission_id')->widget(Select2::className(),[
-                'data'=>$users,
+                'data'=>ArrayHelper::map($personal, 'id', function($personal){
+
+                    return $personal->first_name . ' ' . $personal->middle_name . ' ' .  $personal->last_name;
+                }),
                 'options'=>['placeholder'=>'',],
                 'language'=>'en',
                 'pluginOptions'=>[
@@ -46,12 +40,7 @@ use yii\helpers\ArrayHelper;
         <?= $form->field($model, 'receipt_no')->textInput()->label(false) ?>
         </div>
     </div>
-   <div class="row">
-       <div class="col-sm-2">Balance</div>
-       <div class="col-sm-8">
-        <?= $form->field($model, 'balance')->Input('number')->label(false) ?>
-        </div>
-   </div>
+   
    <?= $form->field($model, 'user_id')->hiddenInput(['value'=>Yii::$app->user->identity->id])->label(false) ?>
   <?= $form->field($model, 'date')->hiddenInput(['value'=>date('Y-m-d')])->label(false) ?>
     <div class="form-group">

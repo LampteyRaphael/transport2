@@ -38,7 +38,6 @@ class TblOsnController extends Controller
         if(Yii::$app->user->can('osn permission')){
         $searchModel = new TblOsnSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

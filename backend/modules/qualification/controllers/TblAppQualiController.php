@@ -341,7 +341,7 @@ protected function findEmploymentDetails($id){
         $adminssion->user_id=$quali->user_id;
         $adminssion->application_id=$quali->application_id;
         $adminssion->accadamin_year_id=$quali->accadamin_year_id;
-        
+        $adminssion->save();
             // Details from Applicant Personal Information
     //    $modelp= $this->findPersonalDetails($quali->application->personalDetails->id);
 
@@ -371,10 +371,10 @@ protected function findEmploymentDetails($id){
         //  ->send();
 
 
-         if( $adminssion->save()){
-             $adminssionLog=new TblAdmissLog();
-             $adminssionLog->user_id=Yii::$app->user->identity->id;
-             $adminssionLog->status=$quali->status;
+        //  if( $adminssion->save()){
+        //      $adminssionLog=new TblAdmissLog();
+        //      $adminssionLog->user_id=Yii::$app->user->identity->id;
+        //      $adminssionLog->status=$quali->status;
 
             // Creating Portal For Applicant User
         //    $this->appAccount($quali->application->personalDetails->date_of_birth,$quali->application->personalDetails->first_name);
@@ -396,12 +396,9 @@ protected function findEmploymentDetails($id){
             //    ->setTextBody("")
             //    ->send();
 
-
-
-             if ($adminssionLog->save()){
-                 $quali->delete();
-             }
-
+            //  if ($adminssionLog->save()){
+            //      $quali->delete();
+            //  }
 
             //  $model = new User();
             //  $model->username='20212021';
@@ -416,10 +413,10 @@ protected function findEmploymentDetails($id){
 
             Yii::$app->session->setFlash('success', 'Successfully Qualified Applicant');
             return $this->redirect(['index']);
-       }else{
-        Yii::$app->session->setFlash('error', 'Already Admitted');
-         return $this->redirect(['index']);
-       }
+    //    }else{
+    //     Yii::$app->session->setFlash('error', 'Already Admitted');
+    //      return $this->redirect(['index']);
+    //    }
    
 
         // $selection = (array) Yii::$app->request->post('selection');

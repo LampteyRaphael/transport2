@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel common\models\TblOsnSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Tbl Osns';
+$this->title = 'Osn';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-osn-index">

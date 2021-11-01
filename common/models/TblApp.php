@@ -54,7 +54,7 @@ class TblApp extends \yii\db\ActiveRecord
     {
         return [
             [['personal_details_id', 'personal_address_id', 'personal_education_id', 'personal_employment_id', 'personal_document_id', 'application_type', 'program_id', 'status', 'osn'], 'required'],
-            [['personal_details_id', 'personal_address_id', 'personal_education_id', 'personal_employment_id', 'personal_document_id', 'application_type', 'program_id', 'status', 'osn', 'created_by', 'updated_by', 'account_id'], 'integer'],
+            [['personal_details_id', 'personal_address_id', 'personal_education_id', 'personal_employment_id', 'personal_document_id', 'application_type', 'program_id', 'status', 'osn'], 'integer'],
             [['date', 'created_at', 'updated_at'], 'safe'],
             [['osn'], 'exist', 'skipOnError' => true, 'targetClass' => TblOsn::className(), 'targetAttribute' => ['osn' => 'id']],
             [['personal_details_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblAppPersDetails::className(), 'targetAttribute' => ['personal_details_id' => 'id']],

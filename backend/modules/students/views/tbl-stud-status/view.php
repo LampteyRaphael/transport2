@@ -13,8 +13,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-stud-status-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+<!-- Navigation Bar -->
+<?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
+<!-- End Of Navigation Bar -->
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -29,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'name',
         ],
     ]) ?>

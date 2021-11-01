@@ -42,28 +42,22 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout','requestPasswordReset','application','forgot', 'logout','error', 'forgot', 'verify','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
                 'rules' => [
-                    [
-                        'actions' => ['signup','requestPasswordReset','forgot', 'logout','error', 'forgot', 'verify','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
-                        'allow' => true,
-                        //  'roles' => ['?'],
-                    ],
                      [
-                        'actions' => ['logout'],
+                'allow' => true,
+                'actions' => ['login', 'verify','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
+            ],
+                    [
+                        'actions' => ['login', 'error','logout'],
                         'allow' => true,
-                        'roles' => ['@'],
                     ],
                     [
-                        'actions' => ['login'],
+                        'actions' => ['logout', 'index','resetPassword'],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['student','lecturer'],
                     ],
                 ],
-
-               
             ],
-
             
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -97,16 +91,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        // if(Yii::$app->user->can('student')){
-         Yii::$app->user->logout();
-    
-        return $this->redirect(['login']);
-
-    // }else
-    // {
-    //     Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
-    //     return  $this->goBack(Yii::$app->request->referrer);
-    // } 
+        if(Yii::$app->user->can('student')){
+            // return  $this->goBack(Yii::$app->request->referrer);
+            return $this->redirect(['index']);
+         }else{
+          
+            return  $this->goBack(Yii::$app->request->referrer);
+        } 
     }
 
     /**
@@ -116,10 +107,11 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
+        
         $this->layout = 'main-login';
 
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+         return $this->goHome();
         }
 
         $model = new LoginForm();
@@ -132,10 +124,11 @@ class SiteController extends Controller
             }else if(Yii::$app->user->can('lecturer')){
 
                 return $this->redirect(['/lecturer']);
-            }else
-            {
-                Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
-                
+            }
+
+            // return $this->redirect(['login']);
+            else
+            {                
                 return $this->render('login', [
                     'model' => $model,
                 ]);
@@ -190,13 +183,13 @@ class SiteController extends Controller
     */
     public function actionOsn()
     {
-       $this->layout = 'main-login';
+       $this->layout = 'main-osn';
         $model = new TblOsn();
         try {
             if ($model->load(Yii::$app->request->post())){
                 // Query Applicant OSN Information
                 $osn= TblOsn::find()->where(['osn_number'=> $_POST['TblOsn']['osn_number']])->one();
-                // If Can Fetch OSN Details, Then grant the access
+                // Fetch OSN Details, if grant access
                 if(!empty($osn->osn_number)){
                     // Saving Transaction Number for the first Post
                     $osn->transaction_no=$_POST['TblOsn']['transaction_no'];
@@ -210,6 +203,7 @@ class SiteController extends Controller
                     return $this->redirect(['application']);
 
                 } else  if(empty($osn->osn_number)) {
+                    Yii::$app->session->setFlash('error', 'Error');
                     return $this->redirect(['osn']);
                 }
             } 
@@ -234,7 +228,6 @@ class SiteController extends Controller
        // $this->layout = 'main2';
         try {
             if (isset($_POST['applicant'])){
-
                 if ($_POST['applicant']==1){
                     Yii::$app->session->setFlash('success', 'Welcome Enter Your OSN');
                     return  $this->redirect('/site/osn');
@@ -242,12 +235,10 @@ class SiteController extends Controller
                     return  $this->redirect('/site/login');
                 }
             }
-
         }catch (\Exception $exception){
             Yii::$app->session->setFlash('success', 'Welcome, Please Enter Your OSN');
             return  $this->redirect('signup');
         }
-
         return $this->render('signup', [
 //            'model' => $model,
         ]);
@@ -428,7 +419,7 @@ protected function applicantDocument($imageFile, $perID){
                             'modelad' => $modelad,
                         ]);
                 }catch(Exception $e){
-                    Yii::$app->session->setFlash('error', 'Error!! something went wrong'.$e->getMessage());
+                    Yii::$app->session->setFlash('error', 'Error!! something went wrong');
                     return $this->redirect(['application']);
                 }
 
@@ -455,7 +446,7 @@ protected function applicantDocument($imageFile, $perID){
             }
         }catch(Exception $e){
             /* Preving Programes Loading Error */
-            Yii::$app->session->setFlash('error', 'Error!! something went wrong'.$e->getMessage());
+            Yii::$app->session->setFlash('error', 'Error!! something went wrong');
             return $this->redirect(['program']);
         }
 
@@ -500,7 +491,7 @@ protected function applicantDocument($imageFile, $perID){
     }
 
     }catch(Exception $e){
-        Yii::$app->session->setFlash('error', 'Error!! something went wrong'.$e->getMessage());
+        Yii::$app->session->setFlash('error', 'Error!! something went wrong');
         return $this->redirect(['program']);
     }
  }else{
@@ -621,31 +612,35 @@ protected function applicantDocument($imageFile, $perID){
         if (!empty($this->osnID())) {
             try{
                 $perID=$this->personalDetails();
-                $applications=$this->applicantMainTable();
-                $model=new  TblAppDocument();
-            if ($model->load( Yii::$app->request->post())) {
-                $imageFile=UploadedFile::getInstances($model, 'doc_name');
-                // Save Applicant Documents
-                $this->applicantDocument($imageFile, $perID);
-                if (!empty($applications)){
-                    $application=$applications;
-                }else {
-                    /* creating new applicant table if it doesn't exist */
-                    $application = new TblApp();
+                 if($perID !==null){
+                    $applications=$this->applicantMainTable();
+                    $model=new  TblAppDocument();
+                if ($model->load( Yii::$app->request->post())) {
+                    $imageFile=UploadedFile::getInstances($model, 'doc_name');
+                    // Save Applicant Documents
+                    $this->applicantDocument($imageFile, $perID);
+                    if (!empty($applications)){
+                        $application=$applications;
+                    }else {
+                        /* creating new applicant table if it doesn't exist */
+                        $application = new TblApp();
+                    }
+                   /* Main Applicant Table with foreign keys*/
+                     $this->applicantMainStoreTable($application);  
+                    // if(!empty($app->id)){
+                     return $this->redirect(['declaration', 'personal' => $applications]);
+                    // }              
                 }
-               /* Main Applicant Table with foreign keys*/
-                 $this->applicantMainStoreTable($application);  
-                // if(!empty($app->id)){
-                 return $this->redirect(['declaration', 'personal' => $applications]);
-                // }              
-            }
-        return $this->render('document', [
-            'model' => $model,
-        ]);
+            return $this->render('document', [
+                'model' => $model,
+            ]);
+                }else{
+                    Yii::$app->session->setFlash('error', 'You Have Not Complete All The Steps');
+                    return $this->redirect(['application']);
+                }
+             
     }catch(Exception $e){
-        var_dump($e->getMessage());
-        die;
-        Yii::$app->session->setFlash('error', 'Error!! something went wrong'.$e->getMessage());
+        Yii::$app->session->setFlash('error', 'Error!! something went wrong');
         return $this->redirect(['document']);
     }
         }else{
@@ -659,9 +654,13 @@ protected function applicantDocument($imageFile, $perID){
         $this->layout = 'main2';
         if (!empty(Yii::$app->session->get('osn'))) {
             try{
-                $applications=$this->applicantMainTable();
-                if($applications){
+              $applications=$this->applicantMainTable();
+              
+                 if($applications !==null){
                     return $this->render('declaration', [ 'personal' => $applications]);
+                }else{
+                    Yii::$app->session->setFlash('error', 'You Have Not Complete All The Steps');
+                    return $this->redirect(['document']);
                 }
             }catch(Exception $e){
                 return $this->redirect(['document']);
@@ -785,13 +784,13 @@ protected function applicantDocument($imageFile, $perID){
                 // any mpdf options you wish to set
             ],
             'methods' => [
-                'SetTitle' => 'Privacy Policy - Krajee.com',
-                'SetSubject' => 'Generating PDF files via yii2-mpdf extension has never been easy',
+                'SetTitle' => 'IPS',
+                'SetSubject' => 'UPSA',
                 'SetHeader' => ['Institute Of Professional Studies(IPS)||Generated On: ' . date("r")],
                 'SetFooter' => ['|Page {PAGENO}|'],
-                'SetAuthor' => 'Kartik Visweswaran',
-                'SetCreator' => 'Kartik Visweswaran',
-                'SetKeywords' => 'Krajee, Yii2, Export, PDF, MPDF, Output, Privacy, Policy, yii2-mpdf',
+                'SetAuthor' => 'UPSA',
+                'SetCreator' => 'UPSA',
+                'SetKeywords' => 'UPSA',
             ]
         ]);
         return $pdf->render();
@@ -801,7 +800,7 @@ protected function applicantDocument($imageFile, $perID){
         public function actionExit()
         {
             Yii::$app->user->logout();
-    
+            Yii::$app->getSession()->destroy();
             return $this->redirect(['osn']);
         }
 
@@ -818,9 +817,6 @@ protected function applicantDocument($imageFile, $perID){
             $application->status = 1;
             $application->osn = $this->osnID();
             $application->date = date('Y-m-d');
-            $application->account_id = 1;
-            $application->created_by = 1;
-            $application->updated_by = 1;
             $application->save();
             return $application->id;
         }

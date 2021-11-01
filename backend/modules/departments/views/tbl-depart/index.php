@@ -46,6 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'striped' => true,
     'condensed' => false,
     'responsive' => true,
+    'responsiveWrap' => false,
     'bootstrap'=>true,
     'hover' => true,
     'floatHeader' => false,
@@ -63,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'kartik\grid\ActionColumn',
             'template' => '{view} {delete} ',
-            'width'=>100,
+            'width'=>50,
             'buttons' => [
                 'view' => function ($url, $model, $key) {
                     return Html::a ( '<span class="btn btn-success" aria-hidden="true"><i class="fa fa-edit"></i></span> ', ['/departments/tbl-depart/update', 'id' => $model->id] );

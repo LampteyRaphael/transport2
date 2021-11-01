@@ -1,8 +1,13 @@
 <?php
 
 use common\models\AuthItem;
+use common\models\TblCountry;
+use common\models\TblDepart;
+use common\models\TblProgram;
 use common\models\TblRole;
+use common\models\TblStaffCategory;
 use common\models\TblStatusCategory;
+use common\models\TblTitleTb;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap4\Html;
@@ -14,47 +19,141 @@ use yii\bootstrap4\ActiveForm;
 ?>
 
 <div class="tbl-user-form">
-
-    <?php $form = ActiveForm::begin(['action' => Yii::$app->urlManager->createUrl(['/user/tbl-user/create'])] ); ?>
-    <div class="row">
-        <div class="col-md-2">Username</div>
-        <div class="col-md-8">
-             <?= $form->field($model, 'username')->textInput(['maxlength' => true])->label(false); ?>
-         </div>
-    </div>
-
+<!-- ['action' => Yii::$app->urlManager->createUrl(['/user/tbl-user/create'])] -->
+    <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
-        <div class="col-md-2">Email</div>
+        <div class="col-md-2">Title</div>
         <div class="col-md-8">
-        <?= $form->field($model, 'email')->textInput(['maxlength' => true])->label(false); ?>
-         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-2">Status</div>
-        <div class="col-md-8">
-            <?= 
-            $form->field($model, 'status')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(TblStatusCategory::find()->all(),'id','name'),
+        <?= $form->field($staff, 'title')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(TblTitleTb::find()->all(),'id','name'),
                 'language' => 'en',
-                'options' => ['placeholder' => 'Select a state ...'],
+                'options' => ['placeholder' => 'title'],
                 'pluginOptions' => [
                     'allowClear' => true
                 ],
-            ])->label(false); 
-            ?>
+            ])->label(false); ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Surename</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'surname')->textInput(['placeholder' => 'surname'],['maxlength' => true])->label(false);  ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Middle Name</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'middle_name')->textInput(['placeholder' => 'middle name'],['maxlength' => true])->label(false);  ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">First Name</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'first_name')->textInput(['placeholder' => 'first name'],['maxlength' => true])->label(false);  ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Date Of Birth</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'date_of_birth')->Input('date',['maxlength' => true],['placeholder' => 'date of birth'])->label(false);  ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">City</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'city')->textInput(['placeholder' => 'city'],['maxlength' => true])->label(false);  ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Country</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'country')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(TblCountry::find()->all(),'id','country'),
+                'language' => 'en',
+                'options' => ['placeholder' => 'country'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])->label(false); ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Email</div>
+        <div class="col-md-8">
+        <?= $form->field($model, 'email')->textInput(['placeholder' => 'email'],['maxlength' => true])->label(false);  ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Rank</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'ranks')->textInput(['placeholder' => 'ranks'],['maxlength' => true])->label(false);   ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Date Employed</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'doa')->Input('date',['placeholder' => 'date employed'],['maxlength' => true])->label(false);   ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Phone Number</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'telephone_number')->Input('number',['placeholder' => 'phone number'],['maxlength' => true])->label(false);   ?>
          </div>
     </div>
 
     <div class="row">
-        <div class="col-md-2">Role</div>
+        <div class="col-md-2">Staff Category</div>
         <div class="col-md-8">
-            <?= 
-                $form->field($model, 'role_id')->widget(Select2::classname(), [
-                    'data' => ArrayHelper::map(TblRole::find()->asArray()->all(),'id','name'),
+        <?= $form->field($staff, 'staff_category_id')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(TblStaffCategory::find()->all(),'id','name'),
+                'language' => 'en',
+                'options' => ['placeholder' => 'staff category'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])->label(false);  
+            ?>
+         </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">Department</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'depart_id')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(TblDepart::find()->all(),'id','department_name'),
+                'language' => 'en',
+                'options' => ['placeholder' => 'department'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])->label(false);  
+             ?>
+         </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">Programme</div>
+        <div class="col-md-8">
+        <?= $form->field($staff, 'program_id')->widget(Select2::classname(), [
+                'data' => ArrayHelper::map(TblProgram::find()->all(),'id','program_name'),
+                'language' => 'en',
+                'options' => ['placeholder' => 'programme'],
+                'pluginOptions' => [
+                    'allowClear' => true
+                ],
+            ])->label(false);  
+             ?>
+         </div>
+    </div>
+   
+    <div class="row">
+        <div class="col-md-2">System Role</div>
+        <div class="col-md-8">
+            <?= $form->field($model, 'role_id')->widget(Select2::classname(), [
+                    'data' => ArrayHelper::map(AuthItem::find()->where(['type'=>1])->asArray()->all(),'name','name'),
                     'language' => 'en',
-                    'options' => ['placeholder' => 'Select a state ...'],
+                    'options' => ['placeholder' => 'role'],
                     'pluginOptions' => [
                         'allowClear' => true
                     ],
@@ -62,19 +161,18 @@ use yii\bootstrap4\ActiveForm;
                 ?>
          </div>
     </div>
-
+   
     <div class="row">
-        <div class="col-md-2">Password</div>
+        <div class="col-md-2">Photo</div>
         <div class="col-md-8">
-            <?= $form->field($model, 'password_hash')->passwordInput(['maxlength' => true])->label(false); ?>
+            <?= $form->field($model, 'photo')->fileInput(['maxlength' => true])->label(false);  ?>
         </div>
     </div>
-
 
     <div class="row">
         <div class="col-md-2">Permissions</div>
         <div class="col-md-8">
-            <?= $form->field($model, 'name[]')->checkboxList(ArrayHelper::map(AuthItem::find()->asArray()->all(),'name','name'))->label(false); ?>
+            <?= $form->field($model, 'name[]')->checkboxList(ArrayHelper::map(AuthItem::find()->where(['type'=>2])->asArray()->all(),'name','name'))->label(false); ?>
          </div>
     </div>
 
@@ -90,6 +188,10 @@ use yii\bootstrap4\ActiveForm;
             ]) ?>
         </div>
     </div>
+
+
+
+  
 
 <?php ActiveForm::end(); ?>
 

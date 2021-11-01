@@ -8,7 +8,8 @@ $this->title = 'Application';
 
 <div class="login-page" style="padding-top: 0%; background-color: lightblue">
     <div class="col text-center">
-    <?php echo Html::img(Yii::getAlias('@web').'images/download.png',['width'=>'150','height'=>'70'],['alt' => 'alt image'], ['class' => 'rounded float-left img-responsive']);?>
+    <img src="images/download.png" alt="" height="70" width="150">
+    <!-- < echo Html::img(Yii::getAlias('@web').'images/download.png',['width'=>'150','height'=>'70'],['alt' => 'alt image'], ['class' => 'rounded float-left img-responsive']);?> -->
     </div>
      <div class="form" style="background-color: lightblue">
 <?php

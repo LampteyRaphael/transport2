@@ -73,9 +73,9 @@ class TblCourseController extends Controller
             $model = new TblCourse();
             if ($model->load(Yii::$app->request->post())) {
                 //Posted Values to store
-                $this->coursePost($model);
+                $models=$this->coursePost($model);
 
-                if($model->save()){
+                if($models){
                     Yii::$app->session->setFlash('success','Successfully saved');
                     return $this->redirect(['index', 'id' => $model->id]);
                 }
@@ -179,6 +179,7 @@ class TblCourseController extends Controller
         $model->date=date('Y-m-d');
         $model->required_courses=$validate->check_only_int($_POST['TblCourse']['required_courses']);
         $model->semester=$validate->replace2($_POST['TblCourse']['semester']);
+        $model->save();
 }
 
 

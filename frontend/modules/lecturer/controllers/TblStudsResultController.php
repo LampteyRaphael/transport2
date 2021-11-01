@@ -39,6 +39,7 @@ class TblStudsResultController extends Controller
     public function actionIndex()
     {
         if(Yii::$app->user->can('lecturer')){
+            // try{
             $searchModel = new TblStudsResultSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -46,6 +47,10 @@ class TblStudsResultController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
+        // }catch (\Exception $e){
+
+        //     return  $this->goBack(Yii::$app->request->referrer);
+        // }
         }else
         {
             Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
@@ -62,9 +67,14 @@ class TblStudsResultController extends Controller
     public function actionView($id)
     {
         if(Yii::$app->user->can('lecturer')){
+            try{
             return $this->render('view', [
                 'model' => $this->findModel($id),
             ]);
+        }catch (\Exception $e){
+
+            return  $this->goBack(Yii::$app->request->referrer);
+        }
         }else
         {
             Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
@@ -80,6 +90,7 @@ class TblStudsResultController extends Controller
     public function actionCreate()
     {
         if(Yii::$app->user->can('lecturer')){
+            try{
             $model = new TblStudsResult();
 
             if ($this->request->isPost) {
@@ -93,6 +104,10 @@ class TblStudsResultController extends Controller
             return $this->render('create', [
                 'model' => $model,
             ]);
+        }catch (\Exception $e){
+
+            return  $this->goBack(Yii::$app->request->referrer);
+        }
         }else
         {
             Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
@@ -110,6 +125,7 @@ class TblStudsResultController extends Controller
     public function actionUpdate($id)
     {
         if(Yii::$app->user->can('lecturer')){
+            try{
             $model = $this->findModel($id);
 
             if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
@@ -119,6 +135,10 @@ class TblStudsResultController extends Controller
             return $this->render('update', [
                 'model' => $model,
             ]);
+        }catch (\Exception $e){
+
+            return  $this->goBack(Yii::$app->request->referrer);
+        }
         }else
         {
             Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
@@ -136,9 +156,14 @@ class TblStudsResultController extends Controller
     public function actionDelete($id)
     {
         if(Yii::$app->user->can('lecturer')){
+            try{
             $this->findModel($id)->delete();
 
             return $this->redirect(['index']);
+        }catch (\Exception $e){
+
+            return  $this->goBack(Yii::$app->request->referrer);
+        }
         }else
         {
             Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
@@ -156,11 +181,16 @@ class TblStudsResultController extends Controller
     protected function findModel($id)
     {
         if(Yii::$app->user->can('lecturer')){
+            try{
             if (($model = TblStudsResult::findOne($id)) !== null) {
                 return $model;
             }
 
             throw new NotFoundHttpException('The requested page does not exist.');
+        }catch (\Exception $e){
+
+            return  $this->goBack(Yii::$app->request->referrer);
+        }
         }else
         {
             Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');

@@ -18,7 +18,7 @@ use yii\helpers\ArrayHelper;
     <div class="col">
     <div class="col-md-2"><b>Date Open Application</b></div>
     <div class="col-md-10">
-    <?= $form->field($model, 'date_of_admission')->Input('date')->label(false) ?>
+    <?= $form->field($model, 'academic_year')->Input('date')->label(false) ?>
     </div>
     
     </div>

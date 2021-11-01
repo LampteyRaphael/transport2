@@ -40,6 +40,8 @@ class TblStRegistration extends \yii\db\ActiveRecord
         return 'tbl_st_registration';
     }
 
+    public $file;
+
     /**
      * {@inheritdoc}
      */
@@ -49,6 +51,7 @@ class TblStRegistration extends \yii\db\ActiveRecord
             [['stud_Id', 'program_id', 'level_id', 'acadamic_year', 'status', 'semester', 'section_id', 'date_o_regis', 'courese_id'], 'required'],
             [['stud_Id', 'program_id', 'level_id', 'acadamic_year', 'status', 'semester', 'section_id', 'courese_id'], 'integer'],
             [['date_o_regis', 'created_at', 'updated_at'], 'safe'],
+            [['file'],'file'],
             [['level_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblLevel::className(), 'targetAttribute' => ['level_id' => 'id']],
             [['program_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblProgram::className(), 'targetAttribute' => ['program_id' => 'id']],
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblSection::className(), 'targetAttribute' => ['section_id' => 'id']],
@@ -57,6 +60,7 @@ class TblStRegistration extends \yii\db\ActiveRecord
             [['stud_Id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStud::className(), 'targetAttribute' => ['stud_Id' => 'id']],
             [['courese_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblCourse::className(), 'targetAttribute' => ['courese_id' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => TblRegistCourseStatus::className(), 'targetAttribute' => ['status' => 'id']],
+        
         ];
     }
 

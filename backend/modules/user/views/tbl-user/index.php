@@ -16,7 +16,10 @@ $this->title = 'Users';
         'filterRowOptions'=>['class'=>'kartik-sheet-style'],
 
         'toolbar' => [
-            ['content'=>Html::a('Add New User', ['create'], ['class' => 'btn btn-success'])
+            ['content'=>
+            Html::button(('Add User'), ['class' => 'btn btn-primary','data-toggle'=>"modal", 'data-target'=>"#exampleModal"]),
+
+            // Html::a('Add New User', ['create'], ['class' => 'btn btn-success'])
             ],
             '{export}',
             '{toggleData}'
@@ -37,6 +40,15 @@ $this->title = 'Users';
     ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            'created_at',
+            [
+                'attribute'=>'photo', 
+                'label'=>'Photo',
+                'format'=>'raw', 
+                'value'=>function($model){
+                    return  Html::img('/../../../application/images/'.$model->photo,['height'=>'50px','width'=>'50px'])??'';
+                },
+            ],
             'username',
             'email:email',
             [
@@ -60,7 +72,7 @@ $this->title = 'Users';
             'width'=>100,
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-                    return Html::a ( 'view', ['/user/tbl-user/update', 'id' => $model->id],['class'=>'btn btn-primary'] );
+                    return Html::a ( 'view', ['/user/tbl-user/view', 'id' => $model->id],['class'=>'btn btn-primary'] );
                 },
 
                 'delete' => function ($url, $model, $key) {
@@ -72,4 +84,22 @@ $this->title = 'Users';
         ],
     ]); ?>
     <?php Pjax::end(); ?>
+</div>
+
+<div class="modal fade" id="exampleModal">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl">
+    <div class="modal-content" style="background-color: lightblue;">
+        <div class="modal-header bg-primary">
+            <h5 class="modal-title">Add New User</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+      <div class="modal-body">
+      <?php echo $this->render('create', ['model' => $model,'staff'=>$staff]); ?>
+      </div>
+      <div class="modal-footer bg-primary">
+       </div>
+    </div>
+  </div>
 </div>

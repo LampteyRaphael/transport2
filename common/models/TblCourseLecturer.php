@@ -11,11 +11,12 @@ use Yii;
  * @property int $course_id
  * @property int $lecturer_id
  * @property int $section_id
+ * @property int $course_lecture_status_id
  *
  * @property TblCourse $course
- * @property TblLecturer $lecturer
+ * @property CourseLectureStatus $courseLectureStatus
+ * @property TblStaffList $lecturer
  * @property TblSection $section
- * @property TblStudResult[] $tblStudResults
  */
 class TblCourseLecturer extends \yii\db\ActiveRecord
 {
@@ -33,11 +34,12 @@ class TblCourseLecturer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['course_id', 'lecturer_id', 'section_id'], 'required'],
-            [['course_id', 'lecturer_id', 'section_id'], 'integer'],
+            [['course_id', 'lecturer_id', 'section_id', 'course_lecture_status_id'], 'required'],
+            [['course_id', 'lecturer_id', 'section_id', 'course_lecture_status_id'], 'integer'],
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblSection::className(), 'targetAttribute' => ['section_id' => 'id']],
-            [['lecturer_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblLecturer::className(), 'targetAttribute' => ['lecturer_id' => 'id']],
             [['course_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblCourse::className(), 'targetAttribute' => ['course_id' => 'id']],
+            [['course_lecture_status_id'], 'exist', 'skipOnError' => true, 'targetClass' => CourseLectureStatus::className(), 'targetAttribute' => ['course_lecture_status_id' => 'course_lecturer_id']],
+            [['lecturer_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStaffList::className(), 'targetAttribute' => ['lecturer_id' => 'id']],
         ];
     }
 
@@ -48,9 +50,10 @@ class TblCourseLecturer extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'course_id' => 'Course',
-            'lecturer_id' => 'Lecturer',
-            'section_id' => 'Section',
+            'course_id' => 'Course ID',
+            'lecturer_id' => 'Lecturer ID',
+            'section_id' => 'Section ID',
+            'course_lecture_status_id' => 'Course Lecture Status ID',
         ];
     }
 
@@ -65,13 +68,23 @@ class TblCourseLecturer extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[CourseLectureStatus]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCourseLectureStatus()
+    {
+        return $this->hasOne(CourseLectureStatus::className(), ['course_lecturer_id' => 'course_lecture_status_id']);
+    }
+
+    /**
      * Gets query for [[Lecturer]].
      *
      * @return \yii\db\ActiveQuery
      */
     public function getLecturer()
     {
-        return $this->hasOne(TblLecturer::className(), ['id' => 'lecturer_id']);
+        return $this->hasOne(TblStaffList::className(), ['id' => 'lecturer_id']);
     }
 
     /**
@@ -82,15 +95,5 @@ class TblCourseLecturer extends \yii\db\ActiveRecord
     public function getSection()
     {
         return $this->hasOne(TblSection::className(), ['id' => 'section_id']);
-    }
-
-    /**
-     * Gets query for [[TblStudResults]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTblStudResults()
-    {
-        return $this->hasMany(TblStudResult::className(), ['course_lecture_id' => 'id']);
     }
 }

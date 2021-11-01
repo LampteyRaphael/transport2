@@ -10,6 +10,9 @@ use yii\widgets\Pjax;
 $this->title = 'Program Categories';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<!-- Navigation Bar -->
+<?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
+<!-- End Of Navigation Bar -->
 <div class="tbl-program-type-index">
 
 
@@ -26,9 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'beforeHeader'=>[
             [
                 'columns'=>[
-                    ['content'=>'Programs Categories', 'options'=>['colspan'=>5, 'class'=>'text-center warning']], 
-                    ['content'=>'', 'options'=>['colspan'=>1, 'class'=>'text-center warning']], 
-                    ['content'=>'', 'options'=>['colspan'=>1, 'class'=>'text-center warning']], 
+                    // ['content'=>'Programs Categories', 'options'=>['colspan'=>5, 'class'=>'text-center warning']], 
                 ],
                  'options'=>['class'=>'skip-export'] // remove this row from export
             ]
@@ -59,6 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
+            'amount',
 
             ['class' => 'kartik\grid\ActionColumn',
             'template' => '{view} {delete} ',

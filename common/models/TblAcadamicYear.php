@@ -24,7 +24,7 @@ class TblAcadamicYear extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'tbl_acadamic_year';
+        return 'tbl_academic_year';
     }
 
     /**
@@ -33,7 +33,7 @@ class TblAcadamicYear extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date_of_admission', 'status'], 'required'],
+            [['academic_year', 'status'], 'required'],
             [['doa', 'doc'], 'safe'],
             [['status'], 'integer'],
             [['date_of_admission'], 'string', 'max' => 50],
@@ -48,7 +48,7 @@ class TblAcadamicYear extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'date_of_admission' => 'Date Of Admission',
+            'academic_year' => 'Date Of Admission',
             'doa' => 'Doa',
             'doc' => 'Doc',
             'status' => 'Status',

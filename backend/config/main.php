@@ -1,4 +1,7 @@
 <?php
+
+use yii2mod\rbac\filters\AccessControl;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -114,19 +117,19 @@ return [
         // ],
         
         'urlManager' => [
-            'enablePrettyUrl' => true,
+            // 'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'home'=>'site/index',
-                'login'=>'site/login',
-                'admins'=>'user/tbl-user/index',
-                'application'=>'application/app/index',
-                'qualification'=>'qualification/tbl-app-quali/index',
-                'admission'=>'admission/tbl-app-admission/index',
-                'admitted-students'=>'students/tbl-stud/index',
-                'registered-courses'=>'students/tbl-regis-course/index',
-                'fees-payment'=>'payment/tbl-payment/index',
-                'settings'=>'program/tbl-program/index'
+                // 'home'=>'site/index',
+                // 'login'=>'site/login',
+                // 'admins'=>'user/tbl-user/index',
+                // 'application'=>'application/app/index',
+                // 'qualification'=>'qualification/tbl-app-quali/index',
+                // 'admission'=>'admission/tbl-app-admission/index',
+                // 'admitted-students'=>'students/tbl-stud/index',
+                // 'registered-courses'=>'students/tbl-regis-course/index',
+                // 'fees-payment'=>'payment/tbl-payment/index',
+                // 'settings'=>'program/tbl-program/index'
             ],
         ],
         
@@ -161,23 +164,23 @@ return [
         ]
     ],
   
-    
-    'as beforeRequest' => [
-        'class' => 'yii\filters\AccessControl',
-        'rules' => [
-            [
-                'allow' => true,
-                'actions' => ['login', 'logout','error'],
-            ],
-            [
-                'allow' => true,
-                'roles' => ['student','lecturer'],
-            ],
-        ],
-        'denyCallback' => function () {
+    'as access' => [
+        'class' => AccessControl::className(),
+        'denyCallback' => function ($rule, $action) {
+            Yii::$app->user->logout();
             return Yii::$app->response->redirect(['site/login']);
         },
-     ],
+        'rules' => [
+            [
+                'actions' => ['login', 'error'],
+                'allow' => true,
+            ],
+            [
+                'allow' => true,
+                'roles' => ['staff','hod'],
+            ],
+        ],
+    ],
 
     'params' => $params,
 ];

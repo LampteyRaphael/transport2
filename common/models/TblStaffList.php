@@ -13,22 +13,26 @@ use Yii;
  * @property string $surname
  * @property string|null $middle_name
  * @property string|null $city
- * @property string|null $country
+ * @property int|null $country
  * @property string $date_of_birth
  * @property string $ranks
+ * @property int $depart_id
+ * @property int|null $program_id
  * @property string|null $doa
  * @property string|null $telephone_number
  * @property int $user_id
  * @property int $staff_category_id
  * @property string $created_at
- * @property string $updated_at
- * @property string|null $date
+ * @property string|null $updated_at
+ * @property string|null $dates
  *
+ * @property TblCountry $country0
+ * @property TblDepart $depart
+ * @property TblProgram $program
  * @property TblStaffCategory $staffCategory
  * @property TblComment[] $tblComments
  * @property TblLecturer[] $tblLecturers
  * @property TblLogBook[] $tblLogBooks
- * @property TblStaff[] $tblStaff
  * @property TblUser $user
  */
 class TblStaffList extends \yii\db\ActiveRecord
@@ -47,14 +51,17 @@ class TblStaffList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'first_name', 'surname', 'date_of_birth', 'ranks', 'user_id', 'staff_category_id'], 'required'],
-            [['date_of_birth', 'doa', 'created_at', 'updated_at', 'date'], 'safe'],
-            [['user_id', 'staff_category_id'], 'integer'],
+            [['title', 'first_name', 'surname', 'date_of_birth', 'ranks', 'depart_id', 'user_id', 'staff_category_id'], 'required'],
+            [['country', 'depart_id', 'program_id', 'user_id', 'staff_category_id'], 'integer'],
+            [['date_of_birth', 'doa', 'created_at', 'updated_at', 'dates'], 'safe'],
             [['title', 'ranks'], 'string', 'max' => 50],
-            [['first_name', 'surname', 'middle_name', 'city', 'country'], 'string', 'max' => 255],
+            [['first_name', 'surname', 'middle_name', 'city'], 'string', 'max' => 255],
             [['telephone_number'], 'string', 'max' => 20],
             [['staff_category_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStaffCategory::className(), 'targetAttribute' => ['staff_category_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['country'], 'exist', 'skipOnError' => true, 'targetClass' => TblCountry::className(), 'targetAttribute' => ['country' => 'id']],
+            [['depart_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblDepart::className(), 'targetAttribute' => ['depart_id' => 'id']],
+            [['program_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblProgram::className(), 'targetAttribute' => ['program_id' => 'id']],
         ];
     }
 
@@ -73,14 +80,46 @@ class TblStaffList extends \yii\db\ActiveRecord
             'country' => 'Country',
             'date_of_birth' => 'Date Of Birth',
             'ranks' => 'Ranks',
+            'depart_id' => 'Depart ID',
+            'program_id' => 'Program ID',
             'doa' => 'Doa',
             'telephone_number' => 'Telephone Number',
             'user_id' => 'User ID',
             'staff_category_id' => 'Staff Category ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
-            'date' => 'Date',
+            'dates' => 'Dates',
         ];
+    }
+
+    /**
+     * Gets query for [[Country0]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCountry0()
+    {
+        return $this->hasOne(TblCountry::className(), ['id' => 'country'])->inverseOf('tblStaffLists');
+    }
+
+    /**
+     * Gets query for [[Depart]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDepart()
+    {
+        return $this->hasOne(TblDepart::className(), ['id' => 'depart_id'])->inverseOf('tblStaffLists');
+    }
+
+    /**
+     * Gets query for [[Program]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProgram()
+    {
+        return $this->hasOne(TblProgram::className(), ['id' => 'program_id'])->inverseOf('tblStaffLists');
     }
 
     /**
@@ -90,7 +129,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getStaffCategory()
     {
-        return $this->hasOne(TblStaffCategory::className(), ['id' => 'staff_category_id']);
+        return $this->hasOne(TblStaffCategory::className(), ['id' => 'staff_category_id'])->inverseOf('tblStaffLists');
     }
 
     /**
@@ -100,7 +139,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getTblComments()
     {
-        return $this->hasMany(TblComment::className(), ['staff_id' => 'id']);
+        return $this->hasMany(TblComment::className(), ['staff_id' => 'id'])->inverseOf('staff');
     }
 
     /**
@@ -110,7 +149,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getTblLecturers()
     {
-        return $this->hasMany(TblLecturer::className(), ['staff_id' => 'id']);
+        return $this->hasMany(TblLecturer::className(), ['staff_id' => 'id'])->inverseOf('staff');
     }
 
     /**
@@ -120,17 +159,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getTblLogBooks()
     {
-        return $this->hasMany(TblLogBook::className(), ['staff_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[TblStaff]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTblStaff()
-    {
-        return $this->hasMany(TblStaff::className(), ['staff_id' => 'id']);
+        return $this->hasMany(TblLogBook::className(), ['staff_id' => 'id'])->inverseOf('staff');
     }
 
     /**
@@ -140,6 +169,6 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id']);
+        return $this->hasOne(User::className(), ['id' => 'user_id'])->inverseOf('tblStaffLists');
     }
 }

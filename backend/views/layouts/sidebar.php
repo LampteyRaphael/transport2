@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
-        <b class=" tect-center text-uppercase">IPS</b>
+        <b class=" tect-center text-uppercase">UNIVERSITY</b>
         <!-- <img src="/images/logo.png" alt="AdminLTE Logo" class="brand-image bg-white elevation-3" style="opacity: .8"> -->
-        <span class="brand-text font-weight-bold text-uppercase"><b>-MS</b></span>
+        <span class="brand-text font-weight-bold text-uppercase"><b>-IPS</b></span>
     </a>
 
     <!-- Sidebar -->
@@ -11,7 +11,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="<?=$assetDir?>/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="image/upsa3.jpg" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
                 <a href="#" class="d-block"><?= Yii::$app->user->identity->username??'' ?></a>
@@ -39,27 +39,27 @@
                     ['label' => 'Dashboard', 'url'=>['/site/index'], 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
 
                     [
-                        'label' => 'Users',
+                        'label' => 'Admin Users',
                         'icon' => 'fa fa-users',
                         'badge' => '<span class="right badge badge-info">2</span>',
                         'items' => [
-                            ['label' => 'Active Page', 'url' => ['/user/tbl-user/index'], 'iconStyle' => 'far'],
+                            ['label' => 'User', 'url' => ['/user/tbl-user/index'], 'iconStyle' => 'far'],
                             ['label' => 'Permissions', 'url'=>['/admin/assignment/index'],'iconStyle' => 'far'],
                             ['label' => 'Roles', 'url'=>['/admin/role/index'],'iconStyle' => 'far'],
                         ]
                     ],
                    
-                    [
-                        'label' => 'Applicants',
-                        'icon' => 'tachometer-alt',
+                    // [
+                    //     'label' => 'Applicants',
+                    //     'icon' => 'tachometer-alt',
                         // 'badge' => '<span class="right badge badge-info">2</span>',
-                        'items'=>[
+                        // 'items'=>[
                             // ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                             ['label' => 'Application',  'iconStyle' => 'far', 'url' => ['/application/app/index']],
                             ['label' => 'Qualification', 'iconStyle' => 'far', 'url' => ['/qualification/tbl-app-quali/index']],
                             ['label' => 'Admission', 'iconStyle' => 'far', 'url' => ['/admission/tbl-app-admission/index']],
-                        ]
-                    ],
+                        // ]
+                    // ],
 
                     [
                         'label' => 'Students',
@@ -67,12 +67,29 @@
                         // 'badge' => '<span class="right badge badge-info">2</span>',
                         'items'=>[
                             ['label' => 'Students List', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud/index']],
-                            ['label' => 'Registered Courses', 'iconStyle' => 'far', 'url' => ['/students/tbl-regis-course/index']],    
+                            ['label' => 'Registered Courses', 'iconStyle' => 'far', 'url' => ['/students/tbl-regis-course/index']], 
+                            // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],  
+                            // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],    
+  
                         ],
                     ],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     ['label' => 'Finance Report',  'iconStyle' => 'far', 'url' => ['/payment/tbl-payment/index']],
+                    
+                    [
+                        'label' => 'Departments',
+                        'icon' => 'fa fa-user',
+                        // 'badge' => '<span class="right badge badge-info">2</span>',
+                        'items'=>[
+                            ['label' => 'Departments',  'iconStyle' => 'far', 'url' => ['/departments/tbl-depart/index']],
+                            ['label' => 'Courses && Department ', 'iconStyle' => 'far', 'url' => ['/departments/tbl-course-depart/index']], 
+                            // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],  
+                            // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],    
+  
+                        ],
+                    ],
 
+                 
                     ['label' => 'Settings', 'iconStyle' => 'far', 'url' => ['/program/tbl-program/index']],
                     // ['label' => 'Stud. Course Registered', 'iconStyle' => 'far', 'url' => ['/students/tbl-regis-course']],
 

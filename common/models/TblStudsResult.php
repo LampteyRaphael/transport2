@@ -38,6 +38,7 @@ class TblStudsResult extends \yii\db\ActiveRecord
         return 'tbl_studs_result';
     }
 
+    public $file;
     /**
      * {@inheritdoc}
      */

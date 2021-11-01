@@ -12,8 +12,9 @@ use yii\widgets\ActiveForm;
 <div class="row">
         <div class="col-md-12">
             <header class="text-center"><h3>Personal Information</h3></header>
-            <div class="float-right">
-                <?= Html::img(Yii::$app->request->baseUrl.'../../../application/images/'.$modelp->photo ,['width' => 100 ,'height' => 100])?>   
+            <div class="float-right pl-lg-5">
+                <?= Html::img('../../application/images/'.$modelp->photo,['height'=>'50px','width'=>'50px'])??'';?>
+                <!-- < Html::img(Yii::$app->request->baseUrl.'../../../application/images/'.$modelp->photo ,['width' => 100 ,'height' => 100])?>    -->
             </div>
         </div>
             <div class="col-md-2">

@@ -3,6 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+use yii2mod\alert\Alert;
 use yii\helpers\Html;
 
 \hail812\adminlte3\assets\FontAwesomeAsset::register($this);
@@ -18,6 +19,7 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
     <meta charset="<?= Yii::$app->charset ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="/image/logo.png" type="image/png">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -26,9 +28,27 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
              background-color: #212c4a;
         }
         @media screen and (max-width: 600px) {
+            
             #ips-title{
                 font-size: 12px;
             }
+        }
+
+        .breadcrumb-item.active {
+             color: #e7f1fb;
+         }
+
+         .content-header{
+            background-color:#212c4a;
+            height: 170px;
+             z-index:7; 
+             color:#FFFFFF;
+             font-size: smaller; 
+         }
+          .nav-pills .nav-link {
+           color: #FFFFFF;
+           font-weight: 500;
+           font-family:'Courier New', Courier, monospace,
         }
     </style>
 </head>
@@ -42,8 +62,11 @@ $assetDir = Yii::$app->assetManager->getPublishedUrl('@vendor/almasaeed2010/admi
 
     <!-- Main Sidebar Container -->
     <?= $this->render('sidebar', ['assetDir' => $assetDir]) ?>
+    <?= Alert::widget(); ?>
+   
 
-    <!-- Content Wrapper. Contains page content -->
+   
+                 <!-- Content Wrapper. Contains page content -->
     <?= $this->render('content', ['content' => $content, 'assetDir' => $assetDir]) ?>
     <!-- /.content-wrapper -->
 

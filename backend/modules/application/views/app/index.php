@@ -59,6 +59,8 @@ use yii\helpers\ArrayHelper;
               'value'=>function ($model, $key, $index,$column) {  
                         return GridView::ROW_COLLAPSED;  
                }, 
+               'expandIcon' => '<i class="fa fa-expand text-success" aria-hidden="true"></i>',
+               'collapseIcon' => '<i class="fa fa-close small" aria-hidden="true"></i>',
                'detailUrl'=> Yii::$app->request->getBaseUrl().'/application/app/details',
             ], 
 
@@ -136,7 +138,7 @@ use yii\helpers\ArrayHelper;
             'template' => '{view}',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-                 return   Html::a('View', ['/application/app/view', 'id' => $model->id], ['class' => 'btn btn-primary btn-xs']);
+                 return   Html::a('View', ['/application/app/view', 'id' => $model->id], ['class' => 'btn btn-primary']);
 //                    return Html::a ( '<span class="btn btn-success" aria-hidden="true"><i class="fa fa-edit"></i></span> ', ['/application/app/view', 'id' => $model->id] );
                 },
             ],

@@ -9,7 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">
+                    <h4 class="m-0">
                         <?php
                         if (!is_null($this->title)) {
                             echo \yii\helpers\Html::encode($this->title);
@@ -17,7 +17,7 @@ use yii\bootstrap4\Breadcrumbs;
                             echo \yii\helpers\Inflector::camelize($this->context->id);
                         }
                         ?>
-                    </h1>
+                    </h4>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <?php
@@ -35,7 +35,7 @@ use yii\bootstrap4\Breadcrumbs;
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
+    <div class="content" style="margin-top: -70px;">
         <?= $content ?><!-- /.container-fluid -->
     </div>
     <!-- /.content -->

@@ -1,6 +1,7 @@
 <?php
 
 use common\models\TblAcadamicYear;
+use common\models\TblAcademicYear;
 use common\models\TblAppPersDetails;
 use common\models\TblAppQualiStatus;
 use common\models\User;
@@ -86,8 +87,8 @@ $this->params['breadcrumbs'][] = $this->title;
               'value'=>function ($model, $key, $index,$column) {  
                         return GridView::ROW_COLLAPSED;  
                },  
-//               'expandIcon' => '<i class="fa fa-expand text-success" aria-hidden="true"></i>',
-//               'collapseIcon' => '<i class="fa fa-close small" aria-hidden="true"></i>',
+              'expandIcon' => '<i class="fa fa-expand text-success" aria-hidden="true"></i>',
+              'collapseIcon' => '<i class="fa fa-close small" aria-hidden="true"></i>',
                'detailUrl'=> Yii::$app->request->getBaseUrl().'/qualification/tbl-app-quali/details', 
             ], 
 
@@ -110,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'accadamin_year_id',
                 'value'=>'accadaminYear.date_of_admission',
-                'filter'=>ArrayHelper::map(TblAcadamicYear::find()->asArray()->all(),'date_of_admission','date_of_admission'),
+                'filter'=>ArrayHelper::map(TblAcademicYear::find()->asArray()->all(),'academic_year','academic_year'),
                 'filterType'=>GridView::FILTER_SELECT2,
                 'filterWidgetOptions'=>[
                     'options'=>['prompt'=>'Category'],
@@ -172,7 +173,7 @@ $this->params['breadcrumbs'][] = $this->title;
           'width'=>100,
           'buttons' => [
               'view' => function ($url, $model, $key) {
-                  return Html::a ( 'View', ['/qualification/tbl-app-quali/view', 'id' => $model->application_id],['class'=>'btn btn-primary btn-xs'] );
+                  return Html::a ( 'View', ['/qualification/tbl-app-quali/view', 'id' => $model->application_id],['class'=>'btn btn-primary'] );
               }
 
             //   'delete' => function ($url, $model, $key) {

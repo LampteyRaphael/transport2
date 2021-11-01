@@ -11,6 +11,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-user-create">
   <?= $this->render('_form', [
-        'model' => $model,
+        'model' => $model,'staff'=>$staff
     ]) ?>
 </div>

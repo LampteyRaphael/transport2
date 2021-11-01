@@ -34,9 +34,11 @@ $this->params['breadcrumbs'][] = $this->title;
     'striped' => true,
     'condensed' => false,
     'responsive' => true,
+    'responsiveWrap' => false,
     'bootstrap'=>true,
     'hover' => true,
     'floatHeader' => false,
+    'showPageSummary'=>true,
     'panel' => [
         'heading'=>'<h3 class="panel-title">Students Fees</h3>',
         'type' => GridView::TYPE_PRIMARY,
@@ -44,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'date:date',
+            'dates:date',
             [
                 'attribute'=>'admission_id',
                 'label'=>'Admission',
@@ -52,29 +54,36 @@ $this->params['breadcrumbs'][] = $this->title;
                     return ($model->admission->application->personalDetails->title0->name??'') .' '. ($model->admission->application->personalDetails->first_name??'') .' '. ($model->admission->application->personalDetails->middle_name??'') .' ' . ($model->admission->application->personalDetails->last_name??'');
                 }
             ],
+            [
+                'attribute'=>'admission_id',
+                'label'=>'Program',
+                'value'=>function($model){
+                    return $model->admission->application->program->program->program_name??'';
+                }
+            ],
            [
                'attribute'=>'amount',
                'label'=>'Amount',
                'value'=>function($model){
-                   return 'GHS '. number_format($model->amount,2);
-               }
+                   return $model->amount;
+               },
+               'format'=>['decimal', 2], 
+               'hAlign'=>'right', 
+               'width'=>'100px', 
+               'pageSummary'=>true
            ],
-            'receipt_no',
             [
                 'attribute'=>'balance',
                 'label'=>'Balance',
                 'value'=>function($model){
-                    return 'GHS '. number_format($model->balance,2);
-                }
+                    return $model->balance;
+                },
+                    'format'=>['decimal', 2], 
+                'hAlign'=>'right', 
+                'width'=>'100px', 
+                'pageSummary'=>true
             ],
-            [
-                'attribute'=>'program_id',
-                'label'=>'Program',
-                'value'=>function($model){
-                    return $model->program->program_name??'';
-                }
-            ],
-
+            'receipt_no',
             [
                 'attribute'=>'status',
                 'label'=>'Status:',
@@ -111,17 +120,17 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 </div>
 <!-- Creating New Courses -->
-<div class="modal fade" id="addpayment" tabindex="-1"  aria-hidden="true" data-backdrop="static" data-keyboard="false"  aria-labelledby="staticBackdropLabel">
+<div class="modal fade" id="addpayment">
   <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content" style="background-color: lightblue;">
         <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel"><b>Enter Admission Payment Here</b></h5>
+            <h5 class="modal-title" id=""><b>Enter Admission Payment Fees Here</b></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
       <div class="modal-body">
-      <?php echo $this->render('create', ['model' => $model]); ?>
+      <?php echo $this->render('create', ['model' => $model,'personal'=>$personal]); ?>
       </div>
     </div>
   </div>

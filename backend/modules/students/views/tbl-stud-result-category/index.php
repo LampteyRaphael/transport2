@@ -12,11 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-stud-result-category-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Create Tbl Stud Result Category', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+  <!-- Navigation Bar -->
+<?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
+<!-- End Of Navigation Bar -->
 
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -26,10 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'name',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

@@ -2,6 +2,7 @@
 
 namespace backend\modules\application\controllers;
 
+use common\models\TblAcademicYear;
 use common\models\TblAppQualiSearch;
 use common\models\TblApp;
 use common\models\TblAppAddress;
@@ -263,11 +264,12 @@ protected function findEmploymentDetails($id)
     public function actionQualification($id){
 
         if(Yii::$app->user->can('qualification permission')){
+            $acadamic=TblAcademicYear::find()->where(['status'=>1])->select('id')->one();
             $app = TblApp::findOne($id);
             $quali =new TblAppQuali();
             $quali->application_id=$id;
             $quali->status=1;
-            $quali->accadamin_year_id=1;
+            $quali->accadamin_year_id=$acadamic->id;
             $quali->user_id=Yii::$app->user->identity->id;
            if ($quali->save()){
                //after saving the information , go ahead and remove the applicants connec

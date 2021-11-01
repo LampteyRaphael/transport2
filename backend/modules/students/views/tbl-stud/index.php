@@ -53,6 +53,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'striped' => true,
     'condensed' => false,
     'responsive' => true,
+    'responsiveWrap' => false,
     'bootstrap'=>true,
     'hover' => true,
     'floatHeader' => false,

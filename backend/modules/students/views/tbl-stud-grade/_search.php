@@ -9,7 +9,9 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="tbl-stud-grade-search">
-
+<!-- Navigation Bar -->
+<?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
+<!-- End Of Navigation Bar -->
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
@@ -17,9 +19,6 @@ use yii\widgets\ActiveForm;
             'data-pjax' => 1
         ],
     ]); ?>
-
-    <?= $form->field($model, 'id') ?>
-
     <?= $form->field($model, 'grade_name') ?>
 
     <?= $form->field($model, 'grade_point') ?>
