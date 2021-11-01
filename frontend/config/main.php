@@ -120,26 +120,26 @@ return [
         // ],
         
     ],
-    // 'as access' => [
-    //     'class' => AccessControl::className(),
-    //     'denyCallback' => function ($rule, $action) {
-    //         Yii::$app->user->logout();
-    //         return Yii::$app->response->redirect(['site/login']);
-    //     },
+    'as access' => [
+        'class' => AccessControl::className(),
+        'denyCallback' => function ($rule, $action) {
+            Yii::$app->user->logout();
+            return Yii::$app->response->redirect(['site/login']);
+        },
 
 
-    //     'rules' => [
+        'rules' => [
        
-    //         [
-    //             'actions' => ['login', 'error','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
-    //             'allow' => true,
-    //         ],
-    //         [
-    //             'allow' => true,
-    //             'roles' => ['student','lecturer'],
-    //         ],
-    //     ],
-    // ],
+            [
+                'actions' => ['login', 'error','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
+                'allow' => true,
+            ],
+            [
+                'allow' => true,
+                'roles' => ['student','lecturer'],
+            ],
+        ],
+    ],
 
     // 'as beforeRequest' => [
     //     'class' => 'yii\filters\AccessControl',
