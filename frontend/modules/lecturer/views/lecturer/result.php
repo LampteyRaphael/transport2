@@ -42,15 +42,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         <td><?= $course->course->level->level_name??''?></td>
                         <td><?= $total??''?></td>
                         <td>
-                            <?= Html::a('download',['/lecturer/lecturer/download', 'id' => $course->course->id],['class'=>'btn btn-primary']) ?>
-                           
-                            <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'],'action' => Yii::$app->urlManager->createUrl(['/lecturer/lecturer/upload'])]);?>
-                                <?= $form->field($model, 'file')->fileInput();?>
-                                  <input type="text" name="course_id" value="<?= $course->course->id ?>">
-                                <?= Html::submitButton('Save Upload', ['class' => 'btn btn-primary btn-xs']) ?>
-                            <?php ActiveForm::end(); ?>
-
+                        <?= Html::a('download',['/lecturer/lecturer/download', 'id' => $course->course->id],['class'=>'btn btn-primary']) ?>
                         </td>
+                        
+                            <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'],'action' => Yii::$app->urlManager->createUrl(['/lecturer/lecturer/upload'])]);?>
+                            <td colspan="4">
+                                <?= $form->field($model, 'file')->fileInput();?>
+                               <?= Html::submitButton('Save Upload', ['class' => 'btn btn-primary btn-xs']) ?>
+                            </td>
+                            <?php ActiveForm::end(); ?>
+                       
                     </tr>
                     <?php endif; ?>
                     <?php endforeach; ?>

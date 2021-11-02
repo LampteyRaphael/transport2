@@ -1,20 +1,14 @@
 <?php
 
 use kartik\grid\GridView;
-
-/* @var $this yii\web\View */
-/* @var $searchModel common\models\TblStudsResultSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = 'Student Results';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-studs-result-index">
-
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-       // 'filterModel' => $searchModel,
+       'filterModel' => $searchModel,
        'headerRowOptions'=>['class'=>'kartik-sheet-style'],
        'filterRowOptions'=>['class'=>'kartik-sheet-style'],
        'containerOptions' => ['style'=>'overflow: auto'], 
@@ -55,9 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 return  $model->course->courseName;
             },
             'label'=>'Course'
-        ],
-
-       
+        ], 
         [
             'attribute'=>'semester',
             'value'=>function($model){
@@ -65,7 +57,27 @@ $this->params['breadcrumbs'][] = $this->title;
             },
             'label'=>'Semester'
         ],
-
+        [
+            'attribute'=>'class_marks',
+            'value'=>function($model){
+                return  $model->class_marks;
+            },
+            'label'=>'Class Marks'
+        ],
+        [
+            'attribute'=>'exams_marks',
+            'value'=>function($model){
+                return  $model->exams_marks;
+            },
+            'label'=>'Exam Marks'
+        ],
+        [
+            'attribute'=>'total_marks',
+            'value'=>function($model){
+                return  $model->total_marks;
+            },
+            'label'=>'Total Marks'
+        ],
         [
             'attribute'=>'grade_id',
             'value'=>function($model){
@@ -73,13 +85,6 @@ $this->params['breadcrumbs'][] = $this->title;
             },
             'label'=>'Grade'
         ],
-        // [
-        //     'attribute'=>'grade_id',
-        //     'value'=>function($model){
-        //         return  $model->grade->grade_point??'';
-        //     },
-        //     //'label'=>'Grade Point'
-        // ],
     ],
 ]); ?>
 </div>

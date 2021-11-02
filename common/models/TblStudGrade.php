@@ -9,9 +9,11 @@ use Yii;
  *
  * @property int $id
  * @property string $grade_name
- * @property int $grade_point
+ * @property int $from
+ * @property int $to
+ * @property string $grade_point
  *
- * @property TblStudResult[] $tblStudResults
+ * @property TblStudsResult[] $tblStudsResults
  */
 class TblStudGrade extends \yii\db\ActiveRecord
 {
@@ -29,9 +31,10 @@ class TblStudGrade extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['grade_name', 'grade_point'], 'required'],
-            [['grade_point'], 'integer'],
+            [['grade_name', 'from', 'to', 'grade_point'], 'required'],
+            [['from', 'to'], 'integer'],
             [['grade_name'], 'string', 'max' => 255],
+            [['grade_point'], 'string', 'max' => 20],
         ];
     }
 
@@ -43,17 +46,19 @@ class TblStudGrade extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'grade_name' => 'Grade Name',
+            'from' => 'From',
+            'to' => 'To',
             'grade_point' => 'Grade Point',
         ];
     }
 
     /**
-     * Gets query for [[TblStudResults]].
+     * Gets query for [[TblStudsResults]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTblStudResults()
+    public function getTblStudsResults()
     {
-        return $this->hasMany(TblStudResult::className(), ['grade_id' => 'id']);
+        return $this->hasMany(TblStudsResult::className(), ['grade_id' => 'id']);
     }
 }

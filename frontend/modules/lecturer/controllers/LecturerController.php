@@ -9,6 +9,7 @@ use common\models\TblStaffList;
 use common\models\TblStRegistration;
 use common\models\TblStRegistrationSearch;
 use common\models\TblStud;
+use common\models\TblStudGrade;
 use common\models\TblStudsResult;
 use common\models\User;
 use kartik\mpdf\Pdf;
@@ -231,21 +232,20 @@ class LecturerController extends \yii\web\Controller
     public function actionUpload(){
 
         if(Yii::$app->user->can('lecturer')){
-
+            
          try{
             $model=new TblStRegistration();
             $model->file=UploadedFile::getInstance($model,'file');  
             if($model->file !=null){
-                $model->file->saveAs('uploads/'.$model->file.''.$model->file->extension);
-                $inputFile='uploads/'.$model->file;
+                $model->file->saveAs('uploads/'.time().$model->file);
             }
-            
-             $inputFileType= \PHPExcel_IOFactory::identify($inputFile);
-             $objReader =    \PHPExcel_IOFactory::createReader($inputFileType);
-             $objPHPExcel = $objReader->load($inputFile);
- 
+            $inputFile='uploads/'.time().$model->file;
+            $inputFileType= \PHPExcel_IOFactory::identify($inputFile);
+            $objReader =    \PHPExcel_IOFactory::createReader($inputFileType);
+            $objPHPExcel = $objReader->load($inputFile);
+
          }catch(\Exception $e){
-             die('Error'.$e->getMessage());
+              die('Error');
          }
          $sheet = $objPHPExcel->getSheet(0);
          $highestRow = $sheet->getHighestRow();
@@ -258,11 +258,36 @@ class LecturerController extends \yii\web\Controller
              }
 
                //entrying new item that is not in the Item table  whiles importing to inventory table
-            $item1= new TblStudsResult();
-        //    var_dump($item1->student_id=$rowData[0][0];
-            $item1->save();
+            $student= new TblStudsResult();
 
+            $user=User::find()->where(['username'=>$rowData[0][0]])->select('id')->one();
+
+            $stud=TblStud::find()->where(['user_id'=>$user->id])->one();
+
+            $total=($rowData[0][1]+$rowData[0][2]);
+            $student->student_id=$stud->id;
+            $student->course_id=1;
+            $student->semester=1;
+            $student->section_id=1;
+            $student->class_marks=$rowData[0][1];
+            $student->exams_marks=$rowData[0][2];
+            $student->total_marks=$total;
+            foreach(TblStudGrade::find()->all() as $grad){
+                if($total >=$grad->from && $total <= $grad->to){
+
+                    $student->grade_id=$grad->id;
+                }
+
+            }
+        
+            $student->status=1;
+            $student->date_of_entry=date('Y-m-d');
+            $student->course_lecture_id=Yii::$app->user->identity->id;
+            $student->save();
          }
+         Yii::$app->session->setFlash('success', 'Successfully Uploaded Students Results');
+         return  $this->goBack(Yii::$app->request->referrer);
+
         }else
         {
             Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');

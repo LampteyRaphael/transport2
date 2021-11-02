@@ -17,8 +17,8 @@ class TblStudsResultSearch extends TblStudsResult
     public function rules()
     {
         return [
-            [['id', 'student_id', 'course_id', 'semester', 'section_id', 'marks', 'grade_id', 'status', 'course_lecture_id'], 'integer'],
-            [['date_of_entry', 'created_at', 'updated_at'], 'safe'],
+            [['id', 'student_id', 'course_id', 'semester', 'section_id', 'grade_id', 'status', 'course_lecture_id'], 'integer'],
+            [['date_of_entry', 'class_marks', 'total_marks', 'exams_marks', 'created_at', 'updated_at'], 'safe'],
         ];
     }
 
@@ -63,7 +63,7 @@ class TblStudsResultSearch extends TblStudsResult
             'course_id' => $this->course_id,
             'semester' => $this->semester,
             'section_id' => $this->section_id,
-            'marks' => $this->marks,
+            'total_marks' => $this->total_marks,
             'grade_id' => $this->grade_id,
             'status' => $this->status,
             'date_of_entry' => $this->date_of_entry,
