@@ -14,7 +14,7 @@ use yii\bootstrap4\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
           OSN Number
         </div>
         <div class="col-md-8">
@@ -22,7 +22,7 @@ use yii\bootstrap4\ActiveForm;
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             Status
         </div>
         <div class="col-md-8">
@@ -30,7 +30,7 @@ use yii\bootstrap4\ActiveForm;
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             Year
         </div>
         <div class="col-md-8">
@@ -39,7 +39,7 @@ use yii\bootstrap4\ActiveForm;
     </div>
 
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-2">
             Transaction Number
         </div>
         <div class="col-md-8">
@@ -47,7 +47,7 @@ use yii\bootstrap4\ActiveForm;
         </div>
     </div>
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success float-right']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

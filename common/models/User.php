@@ -49,7 +49,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return 'tbl_user';
     }
 
-    public $name,$title,$first_name,$surname,$middle_name,$staff_category_id,$city,$date_of_birth,$doa,$country;
+
+
+    public $name,$title,$first_name,$surname,$middle_name,$staff_category_id,$city,$date_of_birth,$doa,$country,$file;
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 2;
     const STATUS_ACTIVE = 1;
@@ -68,6 +70,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             [['username', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'string', 'max' => 255],
             [['auth_key'], 'string', 'max' => 32],
             [['username'], 'unique'],
+            [['file'],'file'],
             [['photo'], 'string', 'max' => 200],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],

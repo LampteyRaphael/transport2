@@ -2,12 +2,14 @@
 
 namespace backend\modules\program\controllers;
 
-use Yii;
 use common\models\TblOsn;
+use Yii;
 use common\models\TblOsnSearch;
+use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * TblOsnController implements the CRUD actions for TblOsn model.
@@ -36,11 +38,13 @@ class TblOsnController extends Controller
     public function actionIndex()
     {
         if(Yii::$app->user->can('osn permission')){
+            $user=new User();
         $searchModel = new TblOsnSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model'=>$user
         ]);
     }else
     {
@@ -48,6 +52,56 @@ class TblOsnController extends Controller
         return  $this->goBack(Yii::$app->request->referrer);
     } 
     }
+
+
+    public function actionUpload(){
+        if(Yii::$app->user->can('lecturer')){
+            
+            try{
+               $model=new User();
+               $model->file=UploadedFile::getInstance($model,'file');  
+               if($model->file !=null){
+                   $model->file->saveAs('uploads/'.time().$model->file);
+               }
+               $inputFile='uploads/'.time().$model->file;
+               $inputFileType= \PHPExcel_IOFactory::identify($inputFile);
+               $objReader =    \PHPExcel_IOFactory::createReader($inputFileType);
+               $objPHPExcel = $objReader->load($inputFile);
+   
+            }catch(\Exception $e){
+               Yii::$app->session->setFlash('error', 'Excel is not uploaded');
+               return $this->redirect(['result']);
+            }
+            $sheet = $objPHPExcel->getSheet(0);
+            $highestRow = $sheet->getHighestRow();
+            $highestColumn = $sheet->getHighestColumn();
+    
+            for($row =1; $row <= $highestRow; $row++){
+                $rowData = $sheet->rangeToArray('A'.$row.':'.$highestColumn.$row,NULL,TRUE,FALSE);
+                if($row==1){
+                    continue;
+                }
+                  $num=$rowData[0][0];
+                  $osn=new TblOsn();
+                  $osn->osn_number="$num";
+                  $osn->status=0;
+                  $osn->year=date('Y-m-d');
+                  $osn->transaction_no='0';
+                  $osn->save();
+            }
+            Yii::$app->session->setFlash('success', 'Successfully Uploaded Students Results');
+            return  $this->goBack(Yii::$app->request->referrer);
+   
+           }else
+           {
+               Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
+               return  $this->goBack(Yii::$app->request->referrer);
+           } 
+
+        
+    }
+
+
 
     /**
      * Displays a single TblOsn model.

@@ -13,6 +13,19 @@ $this->params['breadcrumbs'][] = $this->title;
       <h3>Registered Courses</h3> 
     </div>
     <div class="card-body">
+        
+               <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'],'action' => Yii::$app->urlManager->createUrl(['/lecturer/lecturer/upload'])]);?>
+                    <div class="row">
+                            <div class="col-md-2">
+                            <?= $form->field($model, 'file')->fileInput()->label(false);?>
+                            </div>
+                            <div class="col-md-3">
+                            <?= Html::submitButton('Save Upload', ['class' => 'btn btn-primary']) ?>
+                            </div>
+                    </div>
+                <?php ActiveForm::end(); ?>
+            
+      
         <p class="card-text">
             <table class="table table-striped">
                 <thead>
@@ -44,14 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         <td>
                         <?= Html::a('download',['/lecturer/lecturer/download', 'id' => $course->course->id],['class'=>'btn btn-primary']) ?>
                         </td>
-                        
-                            <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'],'action' => Yii::$app->urlManager->createUrl(['/lecturer/lecturer/upload'])]);?>
-                            <td colspan="4">
-                                <?= $form->field($model, 'file')->fileInput();?>
-                               <?= Html::submitButton('Save Upload', ['class' => 'btn btn-primary btn-xs']) ?>
-                            </td>
-                            <?php ActiveForm::end(); ?>
-                       
                     </tr>
                     <?php endif; ?>
                     <?php endforeach; ?>

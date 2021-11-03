@@ -6839,3 +6839,608 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1635882985.8342
     'REQUEST_TIME' => 1635882985
 ]
+2021-11-03 11:08:16 [::1][1][-][error][yii\web\HttpException:403] yii\web\ForbiddenHttpException: You are not allowed to perform this action. in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/filters/AccessControl.php:158
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/filters/AccessControl.php(140): yii\filters\AccessControl->denyAccess(Object(yii\web\User))
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/ActionFilter.php(77): yii\filters\AccessControl->beforeAction(Object(yii\base\InlineAction))
+#2 [internal function]: yii\base\ActionFilter->beforeFilter(Object(yii\base\ActionEvent))
+#3 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Component.php(628): call_user_func(Array, Object(yii\base\ActionEvent))
+#4 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(300): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#5 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Controller.php(216): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#6 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(179): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#7 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('index', Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('site/index', Array)
+#9 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#11 {main}
+2021-11-03 11:08:16 [::1][1][-][info][application] $_GET = [
+    'r' => 'site/index'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'fol6mvr7eaf1h4je65444be6sb'
+    '_csrf-frontend' => '0cb4f8bad8cb4dd6c440e7a5263934a06180df1a76eb6eb87d5a689661b53c6ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"0VPRxVR9FNqJZ12C1S4b4lwAX0A1xeU7\";}'
+    'advanced-backend' => '3oe5a9bl51j2s0bb2ugtfk9qst'
+    '_csrf-backend' => 'ee8d3d9c570ff6a7c5cd6db169032a6f6ff49e1dc65771e29b27dc3ed356157ca:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"LEJZU9Et9lNXH8Ikl3HCJhqeDEXLvQFG\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"student/tbl-st-registration/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '57900'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/index.php?r=site%2Findex'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=site%2Findex'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'none'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-frontend=fol6mvr7eaf1h4je65444be6sb; _csrf-frontend=0cb4f8bad8cb4dd6c440e7a5263934a06180df1a76eb6eb87d5a689661b53c6ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%220VPRxVR9FNqJZ12C1S4b4lwAX0A1xeU7%22%3B%7D; advanced-backend=3oe5a9bl51j2s0bb2ugtfk9qst; _csrf-backend=ee8d3d9c570ff6a7c5cd6db169032a6f6ff49e1dc65771e29b27dc3ed356157ca%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22LEJZU9Et9lNXH8Ikl3HCJhqeDEXLvQFG%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1635934096.3899
+    'REQUEST_TIME' => 1635934096
+]
+2021-11-03 11:08:17 [::1][1][-][error][yii\web\HttpException:403] yii\web\ForbiddenHttpException: You are not allowed to perform this action. in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/filters/AccessControl.php:158
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/filters/AccessControl.php(140): yii\filters\AccessControl->denyAccess(Object(yii\web\User))
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/ActionFilter.php(77): yii\filters\AccessControl->beforeAction(Object(yii\base\InlineAction))
+#2 [internal function]: yii\base\ActionFilter->beforeFilter(Object(yii\base\ActionEvent))
+#3 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Component.php(628): call_user_func(Array, Object(yii\base\ActionEvent))
+#4 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(300): yii\base\Component->trigger('beforeAction', Object(yii\base\ActionEvent))
+#5 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Controller.php(216): yii\base\Controller->beforeAction(Object(yii\base\InlineAction))
+#6 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(179): yii\web\Controller->beforeAction(Object(yii\base\InlineAction))
+#7 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('index', Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('site/index', Array)
+#9 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#10 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#11 {main}
+2021-11-03 11:08:17 [::1][1][-][info][application] $_GET = [
+    'r' => 'site/index'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-frontend' => 'fol6mvr7eaf1h4je65444be6sb'
+    '_csrf-frontend' => '0cb4f8bad8cb4dd6c440e7a5263934a06180df1a76eb6eb87d5a689661b53c6ca:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"0VPRxVR9FNqJZ12C1S4b4lwAX0A1xeU7\";}'
+    'advanced-backend' => '3oe5a9bl51j2s0bb2ugtfk9qst'
+    '_csrf-backend' => 'ee8d3d9c570ff6a7c5cd6db169032a6f6ff49e1dc65771e29b27dc3ed356157ca:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"LEJZU9Et9lNXH8Ikl3HCJhqeDEXLvQFG\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"student/tbl-st-registration/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '57903'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/index.php?r=site%2Findex'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=site%2Findex'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'none'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-frontend=fol6mvr7eaf1h4je65444be6sb; _csrf-frontend=0cb4f8bad8cb4dd6c440e7a5263934a06180df1a76eb6eb87d5a689661b53c6ca%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%220VPRxVR9FNqJZ12C1S4b4lwAX0A1xeU7%22%3B%7D; advanced-backend=3oe5a9bl51j2s0bb2ugtfk9qst; _csrf-backend=ee8d3d9c570ff6a7c5cd6db169032a6f6ff49e1dc65771e29b27dc3ed356157ca%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22LEJZU9Et9lNXH8Ikl3HCJhqeDEXLvQFG%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1635934097.3537
+    'REQUEST_TIME' => 1635934097
+]
+2021-11-03 12:47:48 [::1][1][-][error][yii\web\HeadersAlreadySentException] yii\web\HeadersAlreadySentException: Headers already sent in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 394. in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#3 {main}
+2021-11-03 12:47:48 [::1][1][-][info][application] $_GET = [
+    'r' => 'lecturer/lecturer/download'
+    'id' => '1'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-backend' => '1hbl57mohnn47991avmg370ulg'
+    '_csrf-backend' => '108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy\";}'
+    'advanced-frontend' => 'bjnmahslufsdig8kco3kga5uub'
+    '_csrf-frontend' => '2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/lecturer/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '65507'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/index.php?r=lecturer%2Flecturer%2Fdownload&id=1'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=lecturer%2Flecturer%2Fdownload&id=1'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_REFERER' => 'http://localhost:8888/index.php?r=lecturer%2Flecturer%2Fresult'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=1hbl57mohnn47991avmg370ulg; _csrf-backend=108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy%22%3B%7D; advanced-frontend=bjnmahslufsdig8kco3kga5uub; _csrf-frontend=2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1635940068.7505
+    'REQUEST_TIME' => 1635940068
+]
+2021-11-03 12:47:49 [::1][1][-][error][yii\web\HeadersAlreadySentException] yii\web\HeadersAlreadySentException: Headers already sent in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 394. in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#3 {main}
+2021-11-03 12:47:49 [::1][1][-][info][application] $_GET = [
+    'r' => 'lecturer/lecturer/download'
+    'id' => '1'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-backend' => '1hbl57mohnn47991avmg370ulg'
+    '_csrf-backend' => '108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy\";}'
+    'advanced-frontend' => 'bjnmahslufsdig8kco3kga5uub'
+    '_csrf-frontend' => '2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/lecturer/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '65510'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/index.php?r=lecturer%2Flecturer%2Fdownload&id=1'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=lecturer%2Flecturer%2Fdownload&id=1'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CACHE_CONTROL' => 'no-cache'
+    'HTTP_PRAGMA' => 'no-cache'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+    'HTTP_REFERER' => 'http://localhost:8888/index.php?r=lecturer%2Flecturer%2Fresult'
+    'HTTP_COOKIE' => 'advanced-backend=1hbl57mohnn47991avmg370ulg; _csrf-backend=108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy%22%3B%7D; advanced-frontend=bjnmahslufsdig8kco3kga5uub; _csrf-frontend=2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8%22%3B%7D'
+    'HTTP_CONNECTION' => 'Keep-Alive'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GH,*'
+    'REQUEST_TIME_FLOAT' => 1635940069.1491
+    'REQUEST_TIME' => 1635940069
+]
+2021-11-03 12:47:51 [::1][1][-][error][yii\web\HeadersAlreadySentException] yii\web\HeadersAlreadySentException: Headers already sent in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 394. in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#3 {main}
+2021-11-03 12:47:51 [::1][1][-][info][application] $_GET = [
+    'r' => 'lecturer/lecturer/download'
+    'id' => '1'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-backend' => '1hbl57mohnn47991avmg370ulg'
+    '_csrf-backend' => '108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy\";}'
+    'advanced-frontend' => 'bjnmahslufsdig8kco3kga5uub'
+    '_csrf-frontend' => '2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/lecturer/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '65508'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/index.php?r=lecturer%2Flecturer%2Fdownload&id=1'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=lecturer%2Flecturer%2Fdownload&id=1'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_SEC_FETCH_SITE' => 'none'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_DEST' => 'empty'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=1hbl57mohnn47991avmg370ulg; _csrf-backend=108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy%22%3B%7D; advanced-frontend=bjnmahslufsdig8kco3kga5uub; _csrf-frontend=2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1635940071.7652
+    'REQUEST_TIME' => 1635940071
+]
+2021-11-03 15:52:04 [::1][1][bjnmahslufsdig8kco3kga5uub][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: common\models\TblOsn::studOption in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Component.php:155
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/db/BaseActiveRecord.php(298): yii\base\Component->__get('studOption')
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/helpers/BaseHtml.php(2248): yii\db\BaseActiveRecord->__get('studOption')
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/helpers/BaseHtml.php(1840): yii\helpers\BaseHtml::getAttributeValue(Object(common\models\TblOsn), 'studOption')
+#3 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/helpers/BaseHtml.php(1678): yii\helpers\BaseHtml::activeListInput('dropDownList', Object(common\models\TblOsn), 'studOption', Array, Array)
+#4 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/widgets/ActiveField.php(654): yii\helpers\BaseHtml::activeDropDownList(Object(common\models\TblOsn), 'studOption', Array, Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2-bootstrap4/src/ActiveField.php(424): yii\widgets\ActiveField->dropDownList(Array, Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/views/site/osn.php(17): yii\bootstrap4\ActiveField->dropdownList(Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/View.php(348): require('/Applications/X...')
+#8 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/Applications/X...', Array)
+#9 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/Applications/X...', Array, Object(frontend\controllers\SiteController))
+#10 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(410): yii\base\View->render('osn', Array, Object(frontend\controllers\SiteController))
+#11 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/controllers/SiteController.php(216): yii\base\Controller->render('osn', Array)
+#12 [internal function]: frontend\controllers\SiteController->actionOsn()
+#13 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#14 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#15 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('osn', Array)
+#16 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('site/osn', Array)
+#17 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#18 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#19 {main}
+2021-11-03 15:52:04 [::1][1][bjnmahslufsdig8kco3kga5uub][info][application] $_GET = [
+    'r' => 'site/osn'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-backend' => '1hbl57mohnn47991avmg370ulg'
+    '_csrf-backend' => '108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy\";}'
+    'advanced-frontend' => 'bjnmahslufsdig8kco3kga5uub'
+    '_csrf-frontend' => '2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/tbl-studs-result/index\",\"page\":\"8\",\"_pjax\":\"#w0-pjax\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '58561'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/index.php?r=site/osn'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=site/osn'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'none'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=1hbl57mohnn47991avmg370ulg; _csrf-backend=108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy%22%3B%7D; advanced-frontend=bjnmahslufsdig8kco3kga5uub; _csrf-frontend=2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1635951124.3549
+    'REQUEST_TIME' => 1635951124
+]
+2021-11-03 15:52:27 [::1][1][bjnmahslufsdig8kco3kga5uub][error][ParseError] ParseError: syntax error, unexpected ';', expecting variable (T_VARIABLE) in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/common/models/TblOsn.php:34
+Stack trace:
+#0 [internal function]: yii\BaseYii::autoload('common\\models\\T...')
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/controllers/SiteController.php(187): spl_autoload_call('common\\models\\T...')
+#2 [internal function]: frontend\controllers\SiteController->actionOsn()
+#3 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('osn', Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('site/osn', Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#9 {main}
+2021-11-03 15:52:27 [::1][1][bjnmahslufsdig8kco3kga5uub][info][application] $_GET = [
+    'r' => 'site/osn'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-backend' => '1hbl57mohnn47991avmg370ulg'
+    '_csrf-backend' => '108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy\";}'
+    'advanced-frontend' => 'bjnmahslufsdig8kco3kga5uub'
+    '_csrf-frontend' => '2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/tbl-studs-result/index\",\"page\":\"8\",\"_pjax\":\"#w0-pjax\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '58566'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/index.php?r=site/osn'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=site/osn'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'none'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=1hbl57mohnn47991avmg370ulg; _csrf-backend=108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy%22%3B%7D; advanced-frontend=bjnmahslufsdig8kco3kga5uub; _csrf-frontend=2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1635951147.535
+    'REQUEST_TIME' => 1635951147
+]
+2021-11-03 15:52:38 [::1][1][bjnmahslufsdig8kco3kga5uub][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: common\models\TblOsn::options in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Component.php:155
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/db/BaseActiveRecord.php(298): yii\base\Component->__get('options')
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/helpers/BaseHtml.php(2248): yii\db\BaseActiveRecord->__get('options')
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/helpers/BaseHtml.php(1363): yii\helpers\BaseHtml::getAttributeValue(Object(common\models\TblOsn), 'options')
+#3 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/helpers/BaseHtml.php(1419): yii\helpers\BaseHtml::activeInput('text', Object(common\models\TblOsn), 'options', Array)
+#4 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/widgets/ActiveField.php(407): yii\helpers\BaseHtml::activeTextInput(Object(common\models\TblOsn), 'options', Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/views/site/osn.php(19): yii\widgets\ActiveField->textInput(Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/View.php(348): require('/Applications/X...')
+#7 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/Applications/X...', Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/Applications/X...', Array, Object(frontend\controllers\SiteController))
+#9 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(410): yii\base\View->render('osn', Array, Object(frontend\controllers\SiteController))
+#10 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/controllers/SiteController.php(216): yii\base\Controller->render('osn', Array)
+#11 [internal function]: frontend\controllers\SiteController->actionOsn()
+#12 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#13 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#14 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('osn', Array)
+#15 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('site/osn', Array)
+#16 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#17 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#18 {main}
+2021-11-03 15:52:38 [::1][1][bjnmahslufsdig8kco3kga5uub][info][application] $_GET = [
+    'r' => 'site/osn'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-backend' => '1hbl57mohnn47991avmg370ulg'
+    '_csrf-backend' => '108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy\";}'
+    'advanced-frontend' => 'bjnmahslufsdig8kco3kga5uub'
+    '_csrf-frontend' => '2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/tbl-studs-result/index\",\"page\":\"8\",\"_pjax\":\"#w0-pjax\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '58572'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/index.php?r=site/osn'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=site/osn'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'none'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=1hbl57mohnn47991avmg370ulg; _csrf-backend=108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy%22%3B%7D; advanced-frontend=bjnmahslufsdig8kco3kga5uub; _csrf-frontend=2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1635951158.3612
+    'REQUEST_TIME' => 1635951158
+]
+2021-11-03 15:52:39 [::1][1][bjnmahslufsdig8kco3kga5uub][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Getting unknown property: common\models\TblOsn::options in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Component.php:155
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/db/BaseActiveRecord.php(298): yii\base\Component->__get('options')
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/helpers/BaseHtml.php(2248): yii\db\BaseActiveRecord->__get('options')
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/helpers/BaseHtml.php(1363): yii\helpers\BaseHtml::getAttributeValue(Object(common\models\TblOsn), 'options')
+#3 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/helpers/BaseHtml.php(1419): yii\helpers\BaseHtml::activeInput('text', Object(common\models\TblOsn), 'options', Array)
+#4 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/widgets/ActiveField.php(407): yii\helpers\BaseHtml::activeTextInput(Object(common\models\TblOsn), 'options', Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/views/site/osn.php(19): yii\widgets\ActiveField->textInput(Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/View.php(348): require('/Applications/X...')
+#7 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/View.php(257): yii\base\View->renderPhpFile('/Applications/X...', Array)
+#8 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/View.php(156): yii\base\View->renderFile('/Applications/X...', Array, Object(frontend\controllers\SiteController))
+#9 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(410): yii\base\View->render('osn', Array, Object(frontend\controllers\SiteController))
+#10 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/controllers/SiteController.php(216): yii\base\Controller->render('osn', Array)
+#11 [internal function]: frontend\controllers\SiteController->actionOsn()
+#12 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#13 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#14 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('osn', Array)
+#15 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('site/osn', Array)
+#16 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#17 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#18 {main}
+2021-11-03 15:52:39 [::1][1][bjnmahslufsdig8kco3kga5uub][info][application] $_GET = [
+    'r' => 'site/osn'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-backend' => '1hbl57mohnn47991avmg370ulg'
+    '_csrf-backend' => '108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy\";}'
+    'advanced-frontend' => 'bjnmahslufsdig8kco3kga5uub'
+    '_csrf-frontend' => '2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/tbl-studs-result/index\",\"page\":\"8\",\"_pjax\":\"#w0-pjax\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '58577'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8888'
+    'REQUEST_URI' => '/index.php?r=site/osn'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=site/osn'
+    'HTTP_HOST' => 'localhost:8888'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'none'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=1hbl57mohnn47991avmg370ulg; _csrf-backend=108b5244d6e3b5e03ae55fa48e818494d125991cc18af9ac1fe20b82eff3ba0aa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22nSgHOyGR9JrvZRoOM06RIzSu--g6vZpy%22%3B%7D; advanced-frontend=bjnmahslufsdig8kco3kga5uub; _csrf-frontend=2f7df437ce41dcea5e9c5f4aefcfbad7556fc9673b23d7f0440f07eabdaa0352a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22tTMSiFEiKYR7hOtDVknsmKTzQOr2LHs8%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1635951159.2143
+    'REQUEST_TIME' => 1635951159
+]

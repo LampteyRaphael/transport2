@@ -8,6 +8,7 @@ use common\models\User;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\TblAppQualiSearch */
@@ -89,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                },  
               'expandIcon' => '<i class="fa fa-expand text-success" aria-hidden="true"></i>',
               'collapseIcon' => '<i class="fa fa-close small" aria-hidden="true"></i>',
-               'detailUrl'=> Yii::$app->request->getBaseUrl().'/qualification/tbl-app-quali/details', 
+               'detailUrl'=> Url::to(['/qualification/tbl-app-quali/details']), 
             ], 
 
             [

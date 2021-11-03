@@ -9,7 +9,7 @@ use common\models\TblProgramType;
 use yii\bootstrap\Html;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
-
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\AppSearch */
@@ -61,7 +61,7 @@ use yii\helpers\ArrayHelper;
                }, 
                'expandIcon' => '<i class="fa fa-expand text-success" aria-hidden="true"></i>',
                'collapseIcon' => '<i class="fa fa-close small" aria-hidden="true"></i>',
-               'detailUrl'=> Yii::$app->request->getBaseUrl().'/application/app/details',
+               'detailUrl'=> Url::to(['/application/app/details']),
             ], 
 
             [

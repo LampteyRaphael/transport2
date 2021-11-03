@@ -182,5 +182,23 @@ return [
         ],
     ],
 
+    'as beforeRequest' => [
+        'class' => 'yii\filters\AccessControl',
+        'denyCallback' => function () {
+            return Yii::$app->response->redirect(['site/login']);
+        },
+        'rules' => [
+            [
+                'actions' => ['login', 'error'],
+                'allow' => true,
+            ],
+            [
+                'allow' => true,
+                'roles' => ['staff','hod'],
+            ],
+        ],
+       
+     ],
+
     'params' => $params,
 ];

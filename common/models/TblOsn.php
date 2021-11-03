@@ -8,22 +8,21 @@ use Yii;
  * This is the model class for table "tbl_osn".
  *
  * @property int $id
- * @property int $osn_number
- * @property int $status
- * @property string $year
- * @property string $transaction_no
+ * @property string|null $osn_number
+ * @property int|null $status
+ * @property string|null $year
+ * @property string|null $transaction_no
  *
- * @property TblApp[] $tblApps
  * @property TblAppAddress[] $tblAppAddresses
  * @property TblAppDocument[] $tblAppDocuments
  * @property TblAppEduBg[] $tblAppEduBgs
  * @property TblAppEmpDetails[] $tblAppEmpDetails
  * @property TblAppPersDetails[] $tblAppPersDetails
- * @property TblAppStudProgram[] $tblAppStudPrograms
+ * @property TblAppProgram[] $tblAppPrograms
+ * @property TblApp[] $tblApps
  */
 class TblOsn extends \yii\db\ActiveRecord
 {
-    public $studOption,$options;
     /**
      * {@inheritdoc}
      */
@@ -32,16 +31,18 @@ class TblOsn extends \yii\db\ActiveRecord
         return 'tbl_osn';
     }
 
+    public $file,$studOption,$options;
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['osn_number', 'status', 'year', 'transaction_no'], 'required'],
-            [['osn_number', 'status'], 'integer'],
+            [['status'], 'integer'],
             [['year'], 'safe'],
-            [['transaction_no'], 'string', 'max' => 20],
+            [['file'],'file'],
+            [['osn_number', 'transaction_no'], 'string', 'max' => 50],
         ];
     }
 
@@ -57,16 +58,6 @@ class TblOsn extends \yii\db\ActiveRecord
             'year' => 'Year',
             'transaction_no' => 'Transaction No',
         ];
-    }
-
-    /**
-     * Gets query for [[TblApps]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getTblApps()
-    {
-        return $this->hasMany(TblApp::className(), ['osn' => 'id']);
     }
 
     /**
@@ -120,12 +111,22 @@ class TblOsn extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[TblAppStudPrograms]].
+     * Gets query for [[TblAppPrograms]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTblAppStudPrograms()
+    public function getTblAppPrograms()
     {
-        return $this->hasMany(TblAppStudProgram::className(), ['osn_id' => 'id']);
+        return $this->hasMany(TblAppProgram::className(), ['osn_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TblApps]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblApps()
+    {
+        return $this->hasMany(TblApp::className(), ['osn' => 'id']);
     }
 }

@@ -245,7 +245,8 @@ class LecturerController extends \yii\web\Controller
             $objPHPExcel = $objReader->load($inputFile);
 
          }catch(\Exception $e){
-              die('Error');
+            Yii::$app->session->setFlash('error', 'Excel is not uploaded');
+            return $this->redirect(['result']);
          }
          $sheet = $objPHPExcel->getSheet(0);
          $highestRow = $sheet->getHighestRow();

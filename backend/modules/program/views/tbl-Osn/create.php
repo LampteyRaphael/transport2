@@ -10,9 +10,18 @@ $this->params['breadcrumbs'][] = ['label' => 'Tbl Osns', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-osn-create">
-
-    <?= $this->render('_form', [
+<div class="card">
+    <div class="card-header bg-primary">
+        OSN
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+        <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+        </p>
+    </div>
+</div>
+  
 
 </div>

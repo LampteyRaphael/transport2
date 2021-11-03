@@ -28,6 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'content'=>
             Html::a('Create OSN', ['create'], ['class' => 'btn btn-primary']) 
          ],
+
+         [
+            'content'=>
+            Html::button(('Upload'), ['class' => 'btn btn-primary','data-toggle'=>"modal", 'data-target'=>"#exampleModal"]),
+         ],
             '{export}',
             '{toggleData}'
         ],
@@ -65,5 +70,23 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <?php Pjax::end(); ?>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1"  aria-hidden="true" data-backdrop="static" data-keyboard="false"  aria-labelledby="staticBackdropLabel">
+  <div class="modal-dialog modal-dialog-scrollable modal-xl">
+    <div class="modal-content" style="background-color: lightblue;">
+        <div class="modal-header bg-primary">
+            <h5 class="modal-title" id="staticBackdropLabel">Add Online Serial Number</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+      <div class="modal-body">
+      <?php echo $this->render('_upload', ['model' => $model]); ?>
+      </div>
+      <div class="modal-footer bg-primary">
+       </div>
+    </div>
+  </div>
+</div>
 
 </div>

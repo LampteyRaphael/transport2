@@ -193,7 +193,7 @@ class SiteController extends Controller
                 if(!empty($osn->osn_number)){
                     // Saving Transaction Number for the first Post
                     $osn->transaction_no=$_POST['TblOsn']['transaction_no'];
-                    $osn->year= date('Y');
+                    $osn->year= date('Y-m-d');
                     // Active =1 And Non Active=0
                     $osn->status=1;
                     $osn->save();

@@ -144,16 +144,17 @@ return [
     // 'as beforeRequest' => [
     //     'class' => 'yii\filters\AccessControl',
     //     'denyCallback' => function () {
+    //         Yii::$app->user->logout();
     //         return Yii::$app->response->redirect(['site/login']);
     //     },
     //     'rules' => [
     //         [
+    //             'actions' => ['login', 'error','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
     //             'allow' => true,
-    //             'actions' => ['login', 'verify','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
     //         ],
     //         [
     //             'allow' => true,
-    //             'roles' => ['lecturer','student'],
+    //             'roles' => ['student','lecturer'],
     //         ],
     //     ],
        

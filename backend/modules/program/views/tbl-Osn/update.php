@@ -11,9 +11,19 @@ $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' 
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="tbl-osn-update">
-
-    <?= $this->render('_form', [
+<div class="card">
+    <div class="card-header bg-primary">
+        OSN Update
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+        <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+        </p>
+    </div>
+
+</div>
+    
 
 </div>

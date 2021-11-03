@@ -21,7 +21,7 @@ $form = ActiveForm::begin(); ?>
 <?= $form->field($model, 'transaction_no')->textInput(['placeholder' => 'Enter OSN Receipt number here','class'=>'form-control form-control-lg'])?>
 
 <?= $form->field($model, 'osn_number')
-->Input('number',['placeholder' => 'Enter Online Serial Number Here','id'=>'osn','class'=>'form-control form-control-lg'])
+->textInput(['placeholder' => 'Enter Online Serial Number Here','id'=>'osn','class'=>'form-control form-control-lg'])
 ->label('ENTER OSN'.'<span class="text-red"> * </span>',['class'=>'label-class']); ?>
 <div class="form-group">
     <?= Html::submitButton('Login', ['class' => 'btn btn-success btn-lg btn-block', 'name' => 'login-button']) ?>
