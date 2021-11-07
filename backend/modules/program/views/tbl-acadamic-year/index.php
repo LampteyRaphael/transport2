@@ -46,16 +46,29 @@ $this->params['breadcrumbs'][] = $this->title;
     'hover' => true,
     'floatHeader' => false,
     'panel' => [
-        // 'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Programs</h3>',
+        'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Admission Academic Year</h3>',
         'type' => GridView::TYPE_PRIMARY,
     ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'date_of_admission',
-            'doa',
-            'doc',
-            'status0.name',
-
+            [
+                'attribute'=>'academic_year', 
+                'label'=>'Academic Year',
+            ],
+            [
+                'attribute'=>'doa', 
+                'label'=>'Date Of Admission',
+            ],
+            [
+                'attribute'=>'doc', 
+                'label'=>'Date Of Completion',
+            ],
+            [
+                'attribute'=>'status', 
+                'label'=>'Status',
+                'value'=>'status0.name'
+            ],
+            
             ['class' => 'kartik\grid\ActionColumn',
             'template' => '{view}',
             'buttons' => [

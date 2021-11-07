@@ -9,6 +9,7 @@ use common\models\TblStudStatus;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\students\models\TblStudtSearch */
@@ -78,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
               'value'=>function ($model, $key, $index,$column) {  
                         return GridView::ROW_COLLAPSED;  
                }, 
-               'detailUrl'=> Yii::$app->request->getBaseUrl().'/students/tbl-stud/details', 
+               'detailUrl'=> Url::to(['/students/tbl-stud/details']), 
 
             ],
             [

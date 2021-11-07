@@ -22,15 +22,15 @@ $this->params['breadcrumbs'][] = ['label' => 'Acadamic Year', 'url' => ['index']
     [
         'columns' => [
             [
-                'attribute'=>'date_of_admission', 
-                'label'=>'Date Of Admission',
+                'attribute'=>'academic_year', 
+                'label'=>'Academic Year',
                 'format'=>'raw',
                 'type'=>DetailView::INPUT_DATE, 
                 'valueColOptions'=>['style'=>'width:30%'],
             ],
             [
                 'attribute'=>'doa', 
-                'label'=>'Date Of Application',
+                'label'=>'Date Of Admission',
                 'format'=>'raw', 
                 'valueColOptions'=>['style'=>'width:30%'], 
             ],

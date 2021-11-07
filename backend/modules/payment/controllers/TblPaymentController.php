@@ -13,6 +13,7 @@ use common\models\TblAppProgram;
 use common\models\TblAppStudProgram;
 use Yii;
 use common\models\TblPayment;
+use common\models\TblPaymentLog;
 use common\models\TblPayments;
 use common\models\TblPaymentSearch;
 use common\models\TblStud;
@@ -22,6 +23,7 @@ use common\models\TblStudEmployDetails;
 use common\models\TblStudPersAddress;
 use common\models\TblStudPersDetails;
 use common\models\User;
+use Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -105,7 +107,7 @@ class TblPaymentController extends Controller
         if(Yii::$app->user->can('admission fees permission')){
         
         $personal=$this->admissionList();
-     
+     $amount=0;
         $model = new TblPayments();
         if ($model->load(Yii::$app->request->post())) {
             $amount=$_POST['TblPayments']['amount'];
@@ -120,49 +122,60 @@ class TblPaymentController extends Controller
                 $model1->amount=$amount;
             }
 
-            // if ($app->program->program->programCategory->amount>=$amount+$admiss->amount){
 
-
-            //     return 5544545;
-            //     die;
-            //     // migration
-            //     $admitt=$this->application($app->id);
-            //     $perID= $this->saveStudentPersonalDetails($app->id); 
-            //     $perAd=$this->saveStudentPersonalAddress($app->id);
-    
-            //     $perEm= $this->saveStudentPersonalEmployment($app->id,$perID);
-            //     $perEd= $this->studEducationalBackground($app->id,$perID);
-            //     $this->studprograms($app->id,$perID);
-            //     $this->studDoc($app->id,$perID); 
-                        
-            //     $userAdmin = new User();
-            //     $userAdmin->username=date('Y').rand(0001,9999);
-            //     $userAdmin->email= date('Y').rand(0001,9999).'@upsamail.edu.gh';
-            //     $userAdmin->role_id=1;
-            //     $userAdmin->password_hash = $userAdmin->setPassword($admitt->personalDetails->date_of_birth);
-            //     $userAdmin->status = 1;
-            //     $userAdmin->auth_key=$userAdmin->generateAuthKey();
-            //     $userAdmin->save();
-    
-            //     $stu= new TblStud();
-            //     $stu->personal_details_id= $perID;
-            //     $stu->personal_address_id= $perAd;
-            //     $stu->personal_education_id=$perEd;
-            //     $stu->personal_employment_id=$perEm;
-            //     $stu->personal_document_id=$perID;
-            //     $stu->application_type=$admitt->application_type;
-            //     $stu->status=1;
-            //     $stu->user_id=$userAdmin->id;
-            //     $stu->program_id=$perID;
-            //     $stu->date=$admitt->date;
-            //     $stu->save();
-            //     // end of migration
-            //   }
-
-          if($amount < 2000){
-            $model1->status=2;
-          }else{
+          if(($amount ?? 0)+ ($admiss->amount?? 0) >= $app->program->program->programCategory->amount){
             $model1->status=1;
+
+            ////
+
+            // try{
+                $id=$app->id;
+                $admitt=$this->application($id);
+                $perID= $this->saveStudentPersonalDetails($id); 
+                $perAd=$this->saveStudentPersonalAddress($id);
+
+                $perEm= $this->saveStudentPersonalEmployment($id,$perID);
+                $perEd= $this->studEducationalBackground($id,$perID);
+                $this->studprograms($id,$perID);
+                $this->studDoc($id,$perID); 
+                        
+                $userAdmin = new User();
+                $userAdmin->username=date('Y').rand(0001,9999);
+                $userAdmin->email= date('Y').rand(0001,9999).'@upsamail.edu.gh';
+                $userAdmin->role_id=1;
+                $userAdmin->password_hash = $userAdmin->setPassword($admitt->personalDetails->date_of_birth);
+                $userAdmin->status = 1;
+                $userAdmin->auth_key=$userAdmin->generateAuthKey();
+                $userAdmin->save();
+
+                $stu= new TblStud();
+                $stu->personal_details_id= $perID;
+                $stu->personal_address_id= $perAd;
+                $stu->personal_education_id=$perID;
+                $stu->personal_employment_id=$perID;
+                $stu->personal_document_id=$perID;
+                $stu->program_id=$perID;
+                $stu->application_type=$admitt->application_type;
+                $stu->status=1;
+                $stu->user_id=Yii::$app->user->identity->id;
+                $stu->dates=date('Y-m-d');
+                $stu->save();
+                
+                // Yii::$app->session->setFlash('success', 'Successfully Registered Applicant as Student');
+
+                // return $this->redirect(['index']);
+            //    }
+
+            // }catch(Exception $e){
+            //     Yii::$app->session->setFlash('error', 'Already Migrated'.$e->getMessage());
+            //     return $this->redirect(['index']);
+            // }
+
+
+            ////
+
+          }else{
+            $model1->status=2;
           } 
 
           $model1->admission_id=$admission->id;
@@ -171,9 +184,8 @@ class TblPaymentController extends Controller
           $model1->user_id=Yii::$app->user->identity->id;
           $model1->save();
 
-        
-
-        //   $app->program->program->programCategory->name;
+          $this->paymentLog($model1->id,$amount,$_POST['TblPayments']['receipt_no']);
+          
 
           Yii::$app->session->setFlash('success', 'Successfully Saved');
           return $this->redirect(['index', 'id' => $model1->id]);
@@ -191,6 +203,15 @@ class TblPaymentController extends Controller
     }
 
 
+    /** Payment Log */
+
+    public function paymentLog($id,$amount,$reciept){
+        $payLog=new TblPaymentLog();
+        $payLog->payment_id=$id;
+        $payLog->amount=$amount;
+        $payLog->reciept_no=$reciept;
+        $payLog->save();
+    }
 
 
     //calling the personal details of the applicant information
@@ -266,23 +287,23 @@ class TblPaymentController extends Controller
    /*
     Migrating  Admitted Applicant Personal Details To Student Personal Details Table
   */
-    public function saveStudentPersonalDetails($id){
-        $register=$this->application($id);
-        $personalD=new  TblStudPersDetails();
-        $personalD->title=$register->personalDetails->title;
-        $personalD->last_name=$register->personalDetails->last_name;
-        $personalD->first_name=$register->personalDetails->first_name;
-        $personalD->middle_name=$register->personalDetails->middle_name;
-        $personalD->gender=$register->personalDetails->gender;
-        $personalD->date_of_birth=$register->personalDetails->date_of_birth;
-        $personalD->nationality=$register->personalDetails->nationality;
-        $personalD->contact_person=$register->personalDetails->contact_person;
-        $personalD->contact_number=$register->personalDetails->contact_number;
-        $personalD->date_apply=$register->personalDetails->date_apply;
-        $personalD->photo=$register->personalDetails->photo;
-        $personalD->save();         
-        return $personalD->id;
-    }
+  public function saveStudentPersonalDetails($id){
+    $register=$this->application($id);
+    $personalD=new  TblStudPersDetails();
+    $personalD->title=$register->personalDetails->title;
+    $personalD->last_name=$register->personalDetails->last_name;
+    $personalD->first_name=$register->personalDetails->first_name;
+    $personalD->middle_name=$register->personalDetails->middle_name;
+    $personalD->gender=$register->personalDetails->gender;
+    $personalD->date_of_birth=$register->personalDetails->date_of_birth;
+    $personalD->nationality=$register->personalDetails->nationality;
+    $personalD->contact_person=$register->personalDetails->contact_person;
+    $personalD->contact_number=$register->personalDetails->contact_number;
+    $personalD->date_apply=$register->personalDetails->date_apply;
+    $personalD->photo=$register->personalDetails->photo;
+    $personalD->save();         
+    return $personalD->id;
+}
 
     /*
         Migrating  Admitted Applicant Address Details To Student Address Table
@@ -302,7 +323,7 @@ class TblPaymentController extends Controller
         return  $add->id;
     }
 
-    /*
+  /*
         Migrating  Admitted Applicant Empluyment Details To Student Employment Table
     */
     public function saveStudentPersonalEmployment($id,$persID){
@@ -336,7 +357,7 @@ public function studEducationalBackground($id,$perID){
  The Admitted Student Program Applied For 
  * is Migrated To Students Program Table 
   */
-public function studprograms($id,$perID){
+  public function studprograms($id,$perID){
     $prag=$this->application($id);
     $pro= TblAppProgram::find()->andwhere(['id'=>$prag->program_id])->one();
     // foreach($program as $pro){ 

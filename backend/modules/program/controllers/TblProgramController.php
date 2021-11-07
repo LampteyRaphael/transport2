@@ -31,12 +31,22 @@ class TblProgramController extends Controller
         ];
     }
 
+    // function GetMAC(){
+    //     ob_start();
+    //     system('getmac');
+    //     $Content = ob_get_contents();
+    //     ob_clean();
+    //     return substr($Content, strpos($Content,'\\')-20, 17);
+    // }
+
+
     /**
      * Lists all TblProgram models.
      * @return mixed
      */
     public function actionIndex()
     {
+           
         $model = new TblProgram();
         $searchModel = new TblProgramSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

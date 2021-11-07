@@ -64,12 +64,12 @@ class TblStudController extends Controller
      */
     public function actionView($id)
     {
-        if(Yii::$app->user->can('backend students permission')){
+        // if(Yii::$app->user->can('backend students permission')){
         //  Applicant'spersonal details
          $modelp=$this->findPersonalDetails($id);
 
         //Applicant'spersonal address
-        $modelad=$this->findAddressOfApplicant($id);
+         $modelad=$this->findAddressOfApplicant($id);
 
         // Applicant's programs
         $courses=$this->findAppProgram($id);
@@ -78,21 +78,21 @@ class TblStudController extends Controller
         $modeledu=$this->findAppEducation($id);
 
         // Applicant's employment details
-        $modelemp= $this->findEmploymentDetails($id);
+       $modelemp= $this->findEmploymentDetails($id);
 
         return $this->render('view', [
-            'modelp' => $modelp,
+           'modelp' => $modelp,
             'modelad' => $modelad,
             'courses'=>  $courses,
             'modeledu'=>  $modeledu,
-            'modelemp'=>  $modelemp,
-            'id'=>$id,
+             'modelemp'=>  $modelemp,
+            // 'id'=>$id,
         ]);
-    }else
-    {
-        Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
-        return  $this->goBack(Yii::$app->request->referrer);
-    }
+    // }else
+    // {
+    //     Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
+    //     return  $this->goBack(Yii::$app->request->referrer);
+    // }
     }
 
     /**
@@ -136,8 +136,6 @@ class TblStudController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
            $_POST['TblStud']['first_name'];
-
-
 
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -217,7 +215,7 @@ protected function findStudent($id,$opt){
   
   // Fetching applicant program and courses applied for
       protected function findAppProgram($id){
-          $studprog=$this->findStudent($id,'program_id');
+          $studprog=$this->findStudent($id,'personal_details_id');
           if(!empty( $prog=TblAppStudProgram::find()->where(['id'=>$studprog])->one())){
               return $prog;
           }

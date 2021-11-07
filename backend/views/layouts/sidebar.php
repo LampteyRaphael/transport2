@@ -61,6 +61,9 @@
                         // ]
                     // ],
 
+                    ['label' => 'Finance Report',  'iconStyle' => 'far', 'url' => ['/payment/tbl-payment/index']],
+
+
                     [
                         'label' => 'Students',
                         'icon' => 'fa fa-user',
@@ -74,7 +77,6 @@
                         ],
                     ],
                     ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-                    ['label' => 'Finance Report',  'iconStyle' => 'far', 'url' => ['/payment/tbl-payment/index']],
                     
                     [
                         'label' => 'Departments',

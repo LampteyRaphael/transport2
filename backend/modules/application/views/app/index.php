@@ -25,8 +25,7 @@ use yii\helpers\Url;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-       
-          'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
+        'containerOptions'=>['style'=>'overflow: auto'], // only set when $responsive = false
         'headerRowOptions'=>['class'=>'kartik-sheet-style'],
         'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'containerOptions' => ['style'=>'overflow: auto;'],

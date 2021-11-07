@@ -1,25 +1,5 @@
 <?php
-
-
-
-/* @var $this yii\web\View */
-/* @var $model backend\modules\students\models\TblStud */
-
-use common\models\TblAppStudProgram;
-use common\models\TblCountry;
-use common\models\TblLevel;
-use common\models\TblProgram;
-use common\models\TblSection;
-use common\models\TblSemester;
-use common\models\TblStudPersDetails;
-use common\models\TblTitleTb;
-use kartik\detail\DetailView;
-use yii\bootstrap4\Html;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
-use yii\widgets\Pjax;
-
-
+$this->title='Student Info';
 $this->params['breadcrumbs'][] = ['label' => 'Students', 'url' => ['index']];
 ?>
 <div class="tbl-stud-view">
@@ -39,14 +19,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Students', 'url' => ['index']];
         <!-- Employment -->
     <?php include (Yii::getAlias('@backend/modules/layout/personalEmployment.php'))?>
     <!-- End Employment -->
-    </div>
-<script>
-    document.getElementById('ips-header').style.display="none";
-</script>
+   </div> 
 </div>
-
-
-
 
 
 

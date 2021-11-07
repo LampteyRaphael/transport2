@@ -410,7 +410,6 @@ public function studDoc($id,$perID){
                     Yii::$app->session->setFlash('success', 'Successfully Registered Applicant as Student');
 
                     return $this->redirect(['index']);
-                //    }
 
                 }catch(Exception $e){
                     Yii::$app->session->setFlash('error', 'Already Migrated'.$e->getMessage());

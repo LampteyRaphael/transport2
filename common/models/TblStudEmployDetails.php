@@ -11,8 +11,10 @@ use Yii;
  * @property string|null $company_name
  * @property string|null $position
  * @property string|null $employer_address
- * @property int|null $employer_telephone_number
+ * @property string|null $employer_telephone_number
  * @property int $stud_per_id
+ *
+ * @property TblStudPersDetails $studPer
  */
 class TblStudEmployDetails extends \yii\db\ActiveRecord
 {
@@ -30,10 +32,12 @@ class TblStudEmployDetails extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['employer_telephone_number', 'stud_per_id'], 'integer'],
             [['stud_per_id'], 'required'],
+            [['stud_per_id'], 'integer'],
             [['company_name', 'employer_address'], 'string', 'max' => 255],
             [['position'], 'string', 'max' => 200],
+            [['employer_telephone_number'], 'string', 'max' => 20],
+            [['stud_per_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersDetails::className(), 'targetAttribute' => ['stud_per_id' => 'id']],
         ];
     }
 
@@ -50,5 +54,15 @@ class TblStudEmployDetails extends \yii\db\ActiveRecord
             'employer_telephone_number' => 'Employer Telephone Number',
             'stud_per_id' => 'Stud Per ID',
         ];
+    }
+
+    /**
+     * Gets query for [[StudPer]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStudPer()
+    {
+        return $this->hasOne(TblStudPersDetails::className(), ['id' => 'stud_per_id']);
     }
 }

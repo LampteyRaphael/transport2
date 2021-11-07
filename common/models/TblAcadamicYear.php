@@ -34,9 +34,9 @@ class TblAcadamicYear extends \yii\db\ActiveRecord
     {
         return [
             [['academic_year', 'status'], 'required'],
-            [['doa', 'doc'], 'safe'],
+            [['doa', 'doc', 'created_at', 'updated_at'], 'safe'],
             [['status'], 'integer'],
-            [['date_of_admission'], 'string', 'max' => 50],
+            [['academic_year'], 'string', 'max' => 50],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => TblStatusCategory::className(), 'targetAttribute' => ['status' => 'id']],
         ];
     }
@@ -48,9 +48,11 @@ class TblAcadamicYear extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'academic_year' => 'Date Of Admission',
+            'academic_year' => 'Academic Year',
             'doa' => 'Doa',
             'doc' => 'Doc',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
             'status' => 'Status',
         ];
     }
