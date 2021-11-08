@@ -10,6 +10,7 @@ use common\models\TblStRegistration;
 use common\models\TblStRegistrationSearch;
 use common\models\TblStud;
 use common\models\TblStudGrade;
+use common\models\TblStudRegistYear;
 use common\models\TblStudsResult;
 use common\models\User;
 use kartik\mpdf\Pdf;
@@ -265,10 +266,13 @@ class LecturerController extends \yii\web\Controller
 
             $stud=TblStud::find()->where(['user_id'=>$user->id])->one();
 
+            $academicYear=TblStudRegistYear::find()->where(['status'=>1])->one();
+
             $total=($rowData[0][1]+$rowData[0][2]);
             $student->student_id=$stud->id;
             $student->course_id=1;
             $student->semester=1;
+            $student->acadamic_year=$academicYear->id;
             $student->section_id=1;
             $student->class_marks=$rowData[0][1];
             $student->exams_marks=$rowData[0][2];

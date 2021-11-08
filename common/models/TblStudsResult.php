@@ -12,16 +12,18 @@ use Yii;
  * @property int $course_id
  * @property int $semester
  * @property int $section_id
- * @property int|null $total_marks
  * @property int|null $class_marks
  * @property int|null $exams_marks
+ * @property int|null $total_marks
  * @property int $grade_id
  * @property int $status
  * @property string $date_of_entry
  * @property int $course_lecture_id
+ * @property int $acadamic_year
  * @property string $created_at
  * @property string|null $updated_at
  *
+ * @property TblStudRegistYear $acadamicYear
  * @property TblCourse $course
  * @property TblStaffList $courseLecture
  * @property TblStudGrade $grade
@@ -46,8 +48,8 @@ class TblStudsResult extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['student_id', 'course_id', 'semester', 'section_id', 'grade_id', 'status', 'date_of_entry', 'course_lecture_id'], 'required'],
-            [['student_id', 'course_id', 'semester', 'section_id', 'total_marks', 'class_marks', 'exams_marks', 'grade_id', 'status', 'course_lecture_id'], 'integer'],
+            [['student_id', 'course_id', 'semester', 'section_id', 'grade_id', 'status', 'date_of_entry', 'course_lecture_id', 'acadamic_year'], 'required'],
+            [['student_id', 'course_id', 'semester', 'section_id', 'class_marks', 'exams_marks', 'total_marks', 'grade_id', 'status', 'course_lecture_id', 'acadamic_year'], 'integer'],
             [['date_of_entry', 'created_at', 'updated_at'], 'safe'],
             [['student_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStud::className(), 'targetAttribute' => ['student_id' => 'id']],
             [['course_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblCourse::className(), 'targetAttribute' => ['course_id' => 'id']],
@@ -56,6 +58,7 @@ class TblStudsResult extends \yii\db\ActiveRecord
             [['grade_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudGrade::className(), 'targetAttribute' => ['grade_id' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudResultCategory::className(), 'targetAttribute' => ['status' => 'id']],
             [['course_lecture_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStaffList::className(), 'targetAttribute' => ['course_lecture_id' => 'id']],
+            [['acadamic_year'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudRegistYear::className(), 'targetAttribute' => ['acadamic_year' => 'id']],
         ];
     }
 
@@ -70,16 +73,27 @@ class TblStudsResult extends \yii\db\ActiveRecord
             'course_id' => 'Course ID',
             'semester' => 'Semester',
             'section_id' => 'Section ID',
-            'total_marks' => 'Total Marks',
             'class_marks' => 'Class Marks',
             'exams_marks' => 'Exams Marks',
+            'total_marks' => 'Total Marks',
             'grade_id' => 'Grade ID',
             'status' => 'Status',
             'date_of_entry' => 'Date Of Entry',
             'course_lecture_id' => 'Course Lecture ID',
+            'acadamic_year' => 'Acadamic Year',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * Gets query for [[AcadamicYear]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAcadamicYear()
+    {
+        return $this->hasOne(TblStudRegistYear::className(), ['id' => 'acadamic_year']);
     }
 
     /**

@@ -78,15 +78,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Semester',
                 'value'=>'semester0.name'
             ],
+            // [
+            //     'attribute'=>'section_id',
+            //     'label'=>'Session',
+            //     'value'=>'section.name'
+            // ],
             [
-                'attribute'=>'section_id',
-                'label'=>'Session',
-                'value'=>'section.name'
-            ],
-            [
-                'attribute'=>'acadamic_year',
+                'attribute'=>'academic_year',
                 'label'=>'Academic Year',
-                'value'=>'acadamicYear.name'
+                'value'=>'acadamicYear.date_of_admission'
             ],
         ],
     ]); ?>

@@ -70,6 +70,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $item=array();
        $qualification=TblAppQuali::find()->count();
        $admission=TblAppAdmission::find()->count();
        $application=TblApp::find()->select('id')->count();
@@ -83,6 +84,12 @@ class SiteController extends Controller
 
        $programs=TblProgram::find()->all();
 
+       $levels=TblLevel::find()->all();
+
+    //    foreach($programs as $program){
+    //     $item[] = $program->program_name.',';
+    //    }
+
         return $this->render('index',[
             'qualification'=>$qualification,
             'admission'=>$admission,
@@ -92,6 +99,7 @@ class SiteController extends Controller
             'staff'=>$staff,
             'userAdmins'=>$userAdmins,
             'programs'=>$programs,
+            'levels'=>$levels
         ]);
     }
 

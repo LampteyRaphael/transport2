@@ -36,10 +36,27 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= DetailView::widget([
                 'model' => $model,
                 'attributes' => [
-                    'stud_acadamic_year_id',
-                    'date',
-                    'semester',
-                    'status',
+                    [
+                        'attribute'=>'stud_acadamic_year_id',
+                        'value'=>$model->studAcadamicYear->date_of_admission??'',
+                        'label'=>'Academic Year'
+                     ],
+                    [
+                       'attribute'=>'date',
+                       'value'=>$model->date??'',
+                       'label'=>'Date Of Entry'
+                    ],
+                    [
+                        'attribute'=>'semester',
+                        'value'=>$model->semester0->name??'',
+                        'label'=>'Semester'
+                    ],
+                    [
+                        'attribute'=>'status',
+                        'value'=>$model->status0->name??'',
+                        'label'=>'Status'
+                    ]
+                 
                 ],
             ]) ?>
             </p>

@@ -5,16 +5,22 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model backend\modules\students\models\TblStudResultCategory */
 
-$this->title = 'Create Tbl Stud Result Category';
-$this->params['breadcrumbs'][] = ['label' => 'Tbl Stud Result Categories', 'url' => ['index']];
+$this->title = 'Create Result Category';
+$this->params['breadcrumbs'][] = ['label' => 'Result Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-stud-result-category-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
+<div class="card">
+    <div class="card-header bg-red">
+        <h4>New Result category</h4>
+    </div>
+    <div class="card-body">
+        <p class="card-text"> <?= $this->render('_form', [
         'model' => $model,
-    ]) ?>
+    ]) ?></p>
+    </div>
+</div>
+   
 
 </div>

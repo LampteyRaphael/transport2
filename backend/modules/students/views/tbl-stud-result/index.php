@@ -39,7 +39,15 @@ $this->params['breadcrumbs'][] = $this->title;
             //'created_at',
             //'updated_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'kartik\grid\ActionColumn',
+            'template' => '{view}',
+            'buttons' => [
+                'view' => function ($url, $model, $key) {
+                    return Html::a ( 'view', ['view', 'id' => $model->id],['class'=>'btn btn-primary'] );
+                },
+                
+            ],
+        ],
         ],
     ]); ?>
 

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\TblStudRegistYearSearch */
@@ -15,41 +15,61 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
 <!-- End Of Navigation Bar -->
     <?php Pjax::begin(); ?>
-
-    <div class="card">
-        <div class="card-header bg-primary">
-            <h4>
-                <b>Students Course Registration settings</b>
-            </h4>
-        </div>
-        <div class="card-body">
-            <p class="card-text">
-                    <?= GridView::widget([
-                        'dataProvider' => $dataProvider,
-                        'filterModel' => $searchModel,
-                        'columns' => [
-                            ['class' => 'yii\grid\SerialColumn'],
-                            'studAcadamicYear.date_of_admission',
-                            'date:date',
-                            'semester0.name',
-                            'status0.name',
-                            ['class' => 'yii\grid\ActionColumn',
-                            'template' => '{view}',
-                            'buttons' => [
-                                'view' => function ($url, $model, $key) {
-                                    return Html::a ( 'view', ['view', 'id' => $model->id],['class'=>'btn btn-primary'] );
-                                },
-                                
-                            ],
-                        ],
-                        ],
-                    ]); 
-                ?>
-            </p>
-        </div>
-    </div>
-  
-
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'headerRowOptions'=>['class'=>'kartik-sheet-style'],
+            'filterRowOptions'=>['class'=>'kartik-sheet-style'],
+            'containerOptions' => ['style'=>'overflow: auto'],
+            'tableOptions' => ['class' => 'table table-striped table-hover table-condensed text-left'],
+            'toolbar' =>  [
+            [
+                'content'=>
+                Html::a(('Add New'), ['create'],['class' => 'btn btn-primary']),
+                ],
+                '{export}',
+                '{toggleData}'
+            ],
+        'pjax'=>true,
+        'bordered' => true,
+        'striped' => true,
+        'condensed' => false,
+        'responsive' => true,
+        'responsiveWrap' => false,
+        'bootstrap'=>true,
+        'hover' => true,
+        'floatHeader' => false,
+        'panel' => [
+            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i>Date Settings For course Registration</h3>',
+            'type' => GridView::TYPE_PRIMARY,
+        ],
+            
+            'columns' => [
+                ['class' => 'kartik\grid\SerialColumn'],
+                'date:date',
+                'studAcadamicYear.date_of_admission',
+                [
+                    'attribute'=>'semester', 
+                    'label'=>'Semester',
+                    'value'=>'semester0.name'
+                ],
+                [
+                    'attribute'=>'status', 
+                    'label'=>'Status',
+                    'value'=>'status0.name'
+                ],
+                ['class' => 'yii\grid\ActionColumn',
+                'template' => '{view}',
+                'buttons' => [
+                    'view' => function ($url, $model, $key) {
+                        return Html::a ( 'view', ['view', 'id' => $model->id],['class'=>'btn btn-primary'] );
+                    },
+                    
+                ],
+            ],
+            ],
+        ]); 
+    ?>
     <?php Pjax::end(); ?>
 
 </div>

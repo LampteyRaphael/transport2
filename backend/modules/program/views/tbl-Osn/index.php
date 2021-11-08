@@ -53,7 +53,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'osn_number',
-            
             [
                 'attribute'=>'status',
                 'label'=>'Status',
@@ -61,11 +60,20 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $model->status==1? 'Active':'Non Active';
                 },
             ],
-            
-            'year',
+            [
+                'attribute'=>'year',
+                'label'=>'Date',
+                'value'=>'year'
+            ],
             'transaction_no',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'kartik\grid\ActionColumn',
+            'template' => '{view}',
+            'buttons' => [
+                'view' => function ($url, $model, $key) {
+                 return   Html::a('View', ['view', 'id' => $model->id], ['class' => 'btn btn-primary']);
+                },
+            ],
+        ],
         ],
     ]); ?>
 

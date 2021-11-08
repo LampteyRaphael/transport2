@@ -7444,3 +7444,514 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1635951159.2143
     'REQUEST_TIME' => 1635951159
 ]
+2021-11-07 22:25:19 [::1][1][6i78r29nap25fa8ma0qjk84mkb][error][yii\base\ErrorException:8] yii\base\ErrorException: Trying to get property 'id' of non-object in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/modules/lecturer/controllers/LecturerController.php:267
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/modules/lecturer/controllers/LecturerController.php(267): yii\web\ErrorHandler->handleError()
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): frontend\modules\lecturer\controllers\LecturerController->actionUpload()
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array:{/Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php:57}()
+#3 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams()
+#4 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Module.php(534): frontend\modules\lecturer\controllers\LecturerController->runAction()
+#5 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Application.php(104): yii\web\Application->runAction()
+#6 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#7 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\web\Application->run()
+#8 {main}
+2021-11-07 22:25:18 [::1][1][6i78r29nap25fa8ma0qjk84mkb][info][application] $_GET = [
+    'r' => 'lecturer/lecturer/upload'
+]
+
+$_POST = [
+    '_csrf-frontend' => 'JEM9yCuqDmQmUZLrxD-jDmjkU64Uk2RVI3QNygq_KKhyBw6QBuRNAndl_dqRCpJrEaBlwlXbXTp7AjuNU80f3A=='
+    'TblStRegistration' => [
+        'file' => ''
+    ]
+]
+
+$_FILES = [
+    'TblStRegistration' => [
+        'name' => [
+            'file' => 'OSN for IPS.xlsx'
+        ]
+        'type' => [
+            'file' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ]
+        'tmp_name' => [
+            'file' => '/private/var/folders/b4/hhpyhv9s3j70pdr_vzy57jvh0000gn/T/phpgNE3WM'
+        ]
+        'error' => [
+            'file' => 0
+        ]
+        'size' => [
+            'file' => 353380
+        ]
+    ]
+]
+
+$_COOKIE = [
+    'advanced-backend' => 'd5notetd146h7mhampopfi9q1p'
+    '_identity-backend' => '7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca:2:{i:0;s:17:\"_identity-backend\";i:1;s:43:\"[1,\"s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA\",3600]\";}'
+    '_csrf-backend' => 'decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj\";}'
+    'advanced-frontend' => '6i78r29nap25fa8ma0qjk84mkb'
+    '_csrf-frontend' => '072a62702a9c4c1fc2050321789c1e5621e29dfc7392997a7a5441c8ffac7c5ba:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"VD3X-NCfQ4o1U51eyD6lAH9oXv6GYr7t\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/tbl-studs-result/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '60127'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8881'
+    'REQUEST_URI' => '/index.php?r=lecturer%2Flecturer%2Fupload'
+    'REQUEST_METHOD' => 'POST'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=lecturer%2Flecturer%2Fupload'
+    'HTTP_HOST' => 'localhost:8881'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '353943'
+    'HTTP_CONTENT_LENGTH' => '353943'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://localhost:8881'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundary7z8z2lOxwRkvM96b'
+    'HTTP_CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundary7z8z2lOxwRkvM96b'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_REFERER' => 'http://localhost:8881/index.php?r=lecturer%2Flecturer%2Fresult'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=d5notetd146h7mhampopfi9q1p; _identity-backend=7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A43%3A%22%5B1%2C%22s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA%22%2C3600%5D%22%3B%7D; _csrf-backend=decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj%22%3B%7D; advanced-frontend=6i78r29nap25fa8ma0qjk84mkb; _csrf-frontend=072a62702a9c4c1fc2050321789c1e5621e29dfc7392997a7a5441c8ffac7c5ba%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22VD3X-NCfQ4o1U51eyD6lAH9oXv6GYr7t%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1636320318.4572
+    'REQUEST_TIME' => 1636320318
+]
+2021-11-07 22:26:48 [::1][1][6i78r29nap25fa8ma0qjk84mkb][error][yii\base\ErrorException:8] yii\base\ErrorException: Trying to get property 'id' of non-object in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/modules/lecturer/controllers/LecturerController.php:267
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/modules/lecturer/controllers/LecturerController.php(267): yii\web\ErrorHandler->handleError()
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): frontend\modules\lecturer\controllers\LecturerController->actionUpload()
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array:{/Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php:57}()
+#3 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams()
+#4 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Module.php(534): frontend\modules\lecturer\controllers\LecturerController->runAction()
+#5 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Application.php(104): yii\web\Application->runAction()
+#6 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#7 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\web\Application->run()
+#8 {main}
+2021-11-07 22:26:47 [::1][1][6i78r29nap25fa8ma0qjk84mkb][info][application] $_GET = [
+    'r' => 'lecturer/lecturer/upload'
+]
+
+$_POST = [
+    '_csrf-frontend' => 'JEM9yCuqDmQmUZLrxD-jDmjkU64Uk2RVI3QNygq_KKhyBw6QBuRNAndl_dqRCpJrEaBlwlXbXTp7AjuNU80f3A=='
+    'TblStRegistration' => [
+        'file' => ''
+    ]
+]
+
+$_FILES = [
+    'TblStRegistration' => [
+        'name' => [
+            'file' => 'OSN for IPS.xlsx'
+        ]
+        'type' => [
+            'file' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ]
+        'tmp_name' => [
+            'file' => '/private/var/folders/b4/hhpyhv9s3j70pdr_vzy57jvh0000gn/T/phpiz14mh'
+        ]
+        'error' => [
+            'file' => 0
+        ]
+        'size' => [
+            'file' => 353380
+        ]
+    ]
+]
+
+$_COOKIE = [
+    'advanced-backend' => 'd5notetd146h7mhampopfi9q1p'
+    '_identity-backend' => '7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca:2:{i:0;s:17:\"_identity-backend\";i:1;s:43:\"[1,\"s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA\",3600]\";}'
+    '_csrf-backend' => 'decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj\";}'
+    'advanced-frontend' => '6i78r29nap25fa8ma0qjk84mkb'
+    '_csrf-frontend' => '072a62702a9c4c1fc2050321789c1e5621e29dfc7392997a7a5441c8ffac7c5ba:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"VD3X-NCfQ4o1U51eyD6lAH9oXv6GYr7t\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/tbl-studs-result/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '60154'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8881'
+    'REQUEST_URI' => '/index.php?r=lecturer%2Flecturer%2Fupload'
+    'REQUEST_METHOD' => 'POST'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=lecturer%2Flecturer%2Fupload'
+    'HTTP_HOST' => 'localhost:8881'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '353943'
+    'HTTP_CONTENT_LENGTH' => '353943'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://localhost:8881'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundary7z8z2lOxwRkvM96b'
+    'HTTP_CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundary7z8z2lOxwRkvM96b'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_REFERER' => 'http://localhost:8881/index.php?r=lecturer%2Flecturer%2Fresult'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=d5notetd146h7mhampopfi9q1p; _identity-backend=7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A43%3A%22%5B1%2C%22s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA%22%2C3600%5D%22%3B%7D; _csrf-backend=decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj%22%3B%7D; advanced-frontend=6i78r29nap25fa8ma0qjk84mkb; _csrf-frontend=072a62702a9c4c1fc2050321789c1e5621e29dfc7392997a7a5441c8ffac7c5ba%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22VD3X-NCfQ4o1U51eyD6lAH9oXv6GYr7t%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1636320407.0868
+    'REQUEST_TIME' => 1636320407
+]
+2021-11-07 22:26:59 [::1][1][6i78r29nap25fa8ma0qjk84mkb][error][yii\base\ErrorException:8] yii\base\ErrorException: Trying to get property 'id' of non-object in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/modules/lecturer/controllers/LecturerController.php:267
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/modules/lecturer/controllers/LecturerController.php(267): yii\web\ErrorHandler->handleError()
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): frontend\modules\lecturer\controllers\LecturerController->actionUpload()
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): ::call_user_func_array:{/Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php:57}()
+#3 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams()
+#4 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Module.php(534): frontend\modules\lecturer\controllers\LecturerController->runAction()
+#5 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Application.php(104): yii\web\Application->runAction()
+#6 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest()
+#7 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\web\Application->run()
+#8 {main}
+2021-11-07 22:26:58 [::1][1][6i78r29nap25fa8ma0qjk84mkb][info][application] $_GET = [
+    'r' => 'lecturer/lecturer/upload'
+]
+
+$_POST = [
+    '_csrf-frontend' => 'u3GA1uZ1BQHxLktrd7doO2MdhIkz-CWHGMyXXV05KJ3tNbOOyztGZ6AaJFoiglleGlmy5XKwHOhAuqEaBEsf6Q=='
+    'TblStRegistration' => [
+        'file' => ''
+    ]
+]
+
+$_FILES = [
+    'TblStRegistration' => [
+        'name' => [
+            'file' => 'OSN for IPS.xlsx'
+        ]
+        'type' => [
+            'file' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ]
+        'tmp_name' => [
+            'file' => '/private/var/folders/b4/hhpyhv9s3j70pdr_vzy57jvh0000gn/T/phpfm8G7e'
+        ]
+        'error' => [
+            'file' => 0
+        ]
+        'size' => [
+            'file' => 353380
+        ]
+    ]
+]
+
+$_COOKIE = [
+    'advanced-backend' => 'd5notetd146h7mhampopfi9q1p'
+    '_identity-backend' => '7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca:2:{i:0;s:17:\"_identity-backend\";i:1;s:43:\"[1,\"s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA\",3600]\";}'
+    '_csrf-backend' => 'decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj\";}'
+    'advanced-frontend' => '6i78r29nap25fa8ma0qjk84mkb'
+    '_csrf-frontend' => '072a62702a9c4c1fc2050321789c1e5621e29dfc7392997a7a5441c8ffac7c5ba:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"VD3X-NCfQ4o1U51eyD6lAH9oXv6GYr7t\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/tbl-studs-result/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '60167'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8881'
+    'REQUEST_URI' => '/index.php?r=lecturer%2Flecturer%2Fupload'
+    'REQUEST_METHOD' => 'POST'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=lecturer%2Flecturer%2Fupload'
+    'HTTP_HOST' => 'localhost:8881'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '353943'
+    'HTTP_CONTENT_LENGTH' => '353943'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_ORIGIN' => 'http://localhost:8881'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryBEPBbSYnDUJTvZe8'
+    'HTTP_CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryBEPBbSYnDUJTvZe8'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_REFERER' => 'http://localhost:8881/index.php?r=lecturer%2Flecturer%2Fresult'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=d5notetd146h7mhampopfi9q1p; _identity-backend=7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A43%3A%22%5B1%2C%22s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA%22%2C3600%5D%22%3B%7D; _csrf-backend=decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj%22%3B%7D; advanced-frontend=6i78r29nap25fa8ma0qjk84mkb; _csrf-frontend=072a62702a9c4c1fc2050321789c1e5621e29dfc7392997a7a5441c8ffac7c5ba%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22VD3X-NCfQ4o1U51eyD6lAH9oXv6GYr7t%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1636320418.5679
+    'REQUEST_TIME' => 1636320418
+]
+2021-11-07 22:28:40 [::1][1][6i78r29nap25fa8ma0qjk84mkb][error][yii\base\UnknownPropertyException] yii\base\UnknownPropertyException: Setting unknown property: common\models\TblStud::acadamic_year in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Component.php:210
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/db/BaseActiveRecord.php(324): yii\base\Component->__set('acadamic_year', 1)
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/modules/lecturer/controllers/LecturerController.php(275): yii\db\BaseActiveRecord->__set('acadamic_year', 1)
+#2 [internal function]: frontend\modules\lecturer\controllers\LecturerController->actionUpload()
+#3 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#5 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('upload', Array)
+#6 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('lecturer/lectur...', Array)
+#7 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#9 {main}
+2021-11-07 22:28:40 [::1][1][6i78r29nap25fa8ma0qjk84mkb][info][application] $_GET = [
+    'r' => 'lecturer/lecturer/upload'
+]
+
+$_POST = [
+    '_csrf-frontend' => 'DsNXBvGo0WIdz0u-pJp1gNvFmkmVQAXYfMR1y2fdZktYh2Re3OaSBEz7JI_xr0TlooGsJdQIPLckskOMPq9RPw=='
+    'TblStRegistration' => [
+        'file' => ''
+    ]
+]
+
+$_FILES = [
+    'TblStRegistration' => [
+        'name' => [
+            'file' => 'Students-Course-Registration (1).xlsx'
+        ]
+        'type' => [
+            'file' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ]
+        'tmp_name' => [
+            'file' => '/private/var/folders/b4/hhpyhv9s3j70pdr_vzy57jvh0000gn/T/phpTaJbAN'
+        ]
+        'error' => [
+            'file' => 0
+        ]
+        'size' => [
+            'file' => 9877
+        ]
+    ]
+]
+
+$_COOKIE = [
+    'advanced-backend' => 'd5notetd146h7mhampopfi9q1p'
+    '_identity-backend' => '7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca:2:{i:0;s:17:\"_identity-backend\";i:1;s:43:\"[1,\"s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA\",3600]\";}'
+    '_csrf-backend' => 'decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj\";}'
+    'advanced-frontend' => '6i78r29nap25fa8ma0qjk84mkb'
+    '_csrf-frontend' => '072a62702a9c4c1fc2050321789c1e5621e29dfc7392997a7a5441c8ffac7c5ba:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"VD3X-NCfQ4o1U51eyD6lAH9oXv6GYr7t\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"lecturer/tbl-studs-result/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '60196'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8881'
+    'REQUEST_URI' => '/index.php?r=lecturer%2Flecturer%2Fupload'
+    'REQUEST_METHOD' => 'POST'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=lecturer%2Flecturer%2Fupload'
+    'HTTP_HOST' => 'localhost:8881'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'CONTENT_LENGTH' => '10461'
+    'HTTP_CONTENT_LENGTH' => '10461'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
+    'HTTP_ORIGIN' => 'http://localhost:8881'
+    'CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryd2ZvgjlNb0ANdq8U'
+    'HTTP_CONTENT_TYPE' => 'multipart/form-data; boundary=----WebKitFormBoundaryd2ZvgjlNb0ANdq8U'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_REFERER' => 'http://localhost:8881/index.php?r=lecturer%2Flecturer%2Fresult'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=d5notetd146h7mhampopfi9q1p; _identity-backend=7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A43%3A%22%5B1%2C%22s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA%22%2C3600%5D%22%3B%7D; _csrf-backend=decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj%22%3B%7D; advanced-frontend=6i78r29nap25fa8ma0qjk84mkb; _csrf-frontend=072a62702a9c4c1fc2050321789c1e5621e29dfc7392997a7a5441c8ffac7c5ba%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22VD3X-NCfQ4o1U51eyD6lAH9oXv6GYr7t%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1636320519.9976
+    'REQUEST_TIME' => 1636320519
+]
+2021-11-07 22:56:36 [::1][1][-][error][yii\web\HeadersAlreadySentException] yii\web\HeadersAlreadySentException: Headers already sent in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/modules/student/controllers/TblStRegistrationController.php on line 86. in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#3 {main}
+2021-11-07 22:56:36 [::1][1][-][info][application] $_GET = [
+    'r' => 'student/tbl-st-registration/result'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-backend' => 'd5notetd146h7mhampopfi9q1p'
+    '_identity-backend' => '7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca:2:{i:0;s:17:\"_identity-backend\";i:1;s:43:\"[1,\"s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA\",3600]\";}'
+    '_csrf-backend' => 'decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj\";}'
+    'advanced-frontend' => 'j30t102c0l0ouoc3u6i7mlcuv8'
+    '_csrf-frontend' => '4039aa60025fa7e1f3369fc40d4586057823851946e6c2ea12b7c6ca5eb67280a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"OB4WpevPlMwXsRCPu3T4cB6lW4N7HdBh\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"student/tbl-course/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '63468'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8881'
+    'REQUEST_URI' => '/index.php?r=student%2Ftbl-st-registration%2Fresult'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=student%2Ftbl-st-registration%2Fresult'
+    'HTTP_HOST' => 'localhost:8881'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_REFERER' => 'http://localhost:8881/index.php?r=student%2Ftbl-st-registration%2Fresult'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=d5notetd146h7mhampopfi9q1p; _identity-backend=7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A43%3A%22%5B1%2C%22s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA%22%2C3600%5D%22%3B%7D; _csrf-backend=decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj%22%3B%7D; advanced-frontend=j30t102c0l0ouoc3u6i7mlcuv8; _csrf-frontend=4039aa60025fa7e1f3369fc40d4586057823851946e6c2ea12b7c6ca5eb67280a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22OB4WpevPlMwXsRCPu3T4cB6lW4N7HdBh%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1636322196.656
+    'REQUEST_TIME' => 1636322196
+]
+2021-11-07 22:56:37 [::1][1][-][error][yii\web\HeadersAlreadySentException] yii\web\HeadersAlreadySentException: Headers already sent in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/modules/student/controllers/TblStRegistrationController.php on line 86. in /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php(17): yii\base\Application->run()
+#3 {main}
+2021-11-07 22:56:37 [::1][1][-][info][application] $_GET = [
+    'r' => 'student/tbl-st-registration/result'
+]
+
+$_POST = []
+
+$_FILES = []
+
+$_COOKIE = [
+    'advanced-backend' => 'd5notetd146h7mhampopfi9q1p'
+    '_identity-backend' => '7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca:2:{i:0;s:17:\"_identity-backend\";i:1;s:43:\"[1,\"s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA\",3600]\";}'
+    '_csrf-backend' => 'decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa:2:{i:0;s:13:\"_csrf-backend\";i:1;s:32:\"TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj\";}'
+    'advanced-frontend' => 'j30t102c0l0ouoc3u6i7mlcuv8'
+    '_csrf-frontend' => '4039aa60025fa7e1f3369fc40d4586057823851946e6c2ea12b7c6ca5eb67280a:2:{i:0;s:14:\"_csrf-frontend\";i:1;s:32:\"OB4WpevPlMwXsRCPu3T4cB6lW4N7HdBh\";}'
+]
+
+$_SESSION = [
+    '__flash' => []
+    '__id' => 1
+    '__authKey' => 's4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA'
+    'kvGridFiltersCache' => '{\"r\":\"student/tbl-course/index\"}'
+]
+
+$_SERVER = [
+    'DOCUMENT_ROOT' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web'
+    'REMOTE_ADDR' => '::1'
+    'REMOTE_PORT' => '63469'
+    'SERVER_SOFTWARE' => 'PHP 7.3.8 Development Server'
+    'SERVER_PROTOCOL' => 'HTTP/1.1'
+    'SERVER_NAME' => 'localhost'
+    'SERVER_PORT' => '8881'
+    'REQUEST_URI' => '/index.php?r=student%2Ftbl-st-registration%2Fresult'
+    'REQUEST_METHOD' => 'GET'
+    'SCRIPT_NAME' => '/index.php'
+    'SCRIPT_FILENAME' => '/Applications/XAMPP/xamppfiles/htdocs/upsa-new/frontend/web/index.php'
+    'PHP_SELF' => '/index.php'
+    'QUERY_STRING' => 'r=student%2Ftbl-st-registration%2Fresult'
+    'HTTP_HOST' => 'localhost:8881'
+    'HTTP_CONNECTION' => 'keep-alive'
+    'HTTP_CACHE_CONTROL' => 'max-age=0'
+    'HTTP_SEC_CH_UA' => '\"Google Chrome\";v=\"95\", \"Chromium\";v=\"95\", \";Not A Brand\";v=\"99\"'
+    'HTTP_SEC_CH_UA_MOBILE' => '?0'
+    'HTTP_SEC_CH_UA_PLATFORM' => '\"macOS\"'
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1'
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.69 Safari/537.36'
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    'HTTP_SEC_FETCH_SITE' => 'same-origin'
+    'HTTP_SEC_FETCH_MODE' => 'navigate'
+    'HTTP_SEC_FETCH_USER' => '?1'
+    'HTTP_SEC_FETCH_DEST' => 'document'
+    'HTTP_REFERER' => 'http://localhost:8881/index.php?r=student%2Ftbl-st-registration%2Fresult'
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br'
+    'HTTP_ACCEPT_LANGUAGE' => 'en-GB,en-US;q=0.9,en;q=0.8'
+    'HTTP_COOKIE' => 'advanced-backend=d5notetd146h7mhampopfi9q1p; _identity-backend=7a47f1380402e9a29f4de4f87b4246b88db5161a23d6625b28403180dd511b0ca%3A2%3A%7Bi%3A0%3Bs%3A17%3A%22_identity-backend%22%3Bi%3A1%3Bs%3A43%3A%22%5B1%2C%22s4V8ASksY1gfy1WQOnQ8c_ZQgZ627WEA%22%2C3600%5D%22%3B%7D; _csrf-backend=decd88f963e6029f0e716175f29b73bc98628282d2d266c890fb1801312415faa%3A2%3A%7Bi%3A0%3Bs%3A13%3A%22_csrf-backend%22%3Bi%3A1%3Bs%3A32%3A%22TMgnlgMulRgmCm45Maxt7EdJnq8pwWLj%22%3B%7D; advanced-frontend=j30t102c0l0ouoc3u6i7mlcuv8; _csrf-frontend=4039aa60025fa7e1f3369fc40d4586057823851946e6c2ea12b7c6ca5eb67280a%3A2%3A%7Bi%3A0%3Bs%3A14%3A%22_csrf-frontend%22%3Bi%3A1%3Bs%3A32%3A%22OB4WpevPlMwXsRCPu3T4cB6lW4N7HdBh%22%3B%7D'
+    'REQUEST_TIME_FLOAT' => 1636322197.5936
+    'REQUEST_TIME' => 1636322197
+]

@@ -5,6 +5,8 @@ namespace frontend\modules\student\controllers;
 use common\models\TblStRegistration;
 use common\models\TblStRegistrationSearch;
 use common\models\TblStud;
+use common\models\TblStudRegistYear;
+use common\models\TblStudsResult;
 use common\models\TblStudsResultSearch;
 use Yii;
 use yii\web\Controller;
@@ -82,14 +84,19 @@ class TblStRegistrationController extends Controller
          if(Yii::$app->user->can('student')){
     try{
         $id=Yii::$app->user->identity->id;
-        $studId=TblStud::find()->where(['user_id'=>$id])->one();
-        $searchModel = new TblStudsResultSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-        $dataProvider->query->andwhere(['student_id'=>$studId->id]);
+
+        $stud=TblStud::find()->where(['user_id'=>$id])->select('id')->one();
+
+        $result=TblStudsResult::find()->where(['student_id'=>$stud->id])->all();
+
+        $studAcad=TblStudRegistYear::find()->all();
 
         return $this->render('result', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'stud'=>$result,
+            'studAcad'=>$studAcad,
+            'id'=>$stud->id,
+            // 'searchModel' => $searchModel,
+            // 'dataProvider' => $dataProvider,
         ]);
 
          }catch (\Exception $e){

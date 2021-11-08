@@ -1,5 +1,6 @@
 <?php
 
+use common\models\TblApp;
 use common\models\TblCourse;
 
 $this->title = 'IPS Dashboard';
@@ -139,7 +140,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 <div class="row">
   <div class="card col-6">
     <div class="card-header border-transparent">
-      <h3 class="card-title">Program Details</h3>
+      <h3 class="card-title">Levels With Number Of Courses</h3>
 
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -155,13 +156,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
     <!-- /.card-header -->
     <div class="card-body p-0">
       <div class="table-responsive">
-      <div id="billed_sample_today">1</div>
-      <div id="bleeded_sample_today">2</div>
-      <div id="completed_sample_today">3</div>
-      <div id="pending_sample_today">4</div>
-
       <canvas id="myPieChart"></canvas>
-     
       <!-- /.table-responsive -->
       </div>
 
@@ -174,7 +169,31 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 
     <div class="card col-6">
     <div class="card-header border-transparent">
-      <h3 class="card-title">Programs</h3>
+      <h3 class="card-title">Programmes With Number Of Courses</h3>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-tool" data-card-widget="remove">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+      <div class="table-responsive">
+      <canvas id="bchart"></canvas>
+      <!-- /.table-responsive -->
+      </div>
+
+  </div>
+    </div>
+
+
+    <div class="card col-12">
+    <div class="card-header border-transparent">
+      <h3 class="card-title">Application Chart</h3>
 
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -190,18 +209,9 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
     <!-- /.card-header -->
     <div class="card-body p-0">
       <div class="table-responsive">
-      <div id="b1">1</div>
-      <div id="b2">2</div>
-      <div id="b3">3</div>
-      <div id="b4">4</div>
-
-      <canvas id="bchart"></canvas>
-     
-      <!-- /.table-responsive -->
+     <canvas id="myChart" ></canvas>
       </div>
-
   </div>
-
     </div>
 
 
@@ -228,16 +238,18 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
    new Chart(mychart, {
     type: 'doughnut',
     data: {
-      labels: ['Billed Samples (Today)', 'Collected Samples (Today)', 'Completed Test (Today)', 'Pending For Validation'],
+      labels: [
+        <?php foreach($levels as $level):?>
+              "<?= $level->level_name?>",
+        <?php endforeach;?>
+      ],
       datasets: [{
-        lable: 'Samples',
         data: [
-          document.getElementById('billed_sample_today').innerHTML,
-          document.getElementById('bleeded_sample_today').innerHTML,
-          document.getElementById('completed_sample_today').innerHTML,
-          document.getElementById('pending_sample_today').innerHTML
+          <?php foreach($levels as $level):?>
+              "<?= TblCourse::find()->where(['level_id'=>$level->id])->count();?>",
+        <?php endforeach;?>
         ],
-        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#17a673', '#2c9faf'],
         hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
         hoverBorderColor: "rgba(234, 236, 244, 1)",
       }]
@@ -252,23 +264,67 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
   new Chart(vp, {
     type: 'bar',
     data: {
-      labels: ['Billed Samples (Today)', 'Collected Samples (Today)', 'Completed Test (Today)', 'Pending For Validation'],
+      labels: [
+        <?php foreach($programs as $program):?>
+              "<?= $program->program_name?>",
+        <?php endforeach;?>
+      ],
       datasets: [{
-        lable: 'Sampless',
         data: [
-          document.getElementById('b1').innerHTML,
-          document.getElementById('b2').innerHTML,
-          document.getElementById('b3').innerHTML,
-          document.getElementById('b4').innerHTML
+          <?php foreach($programs as $program):?>
+              "<?= TblCourse::find()->where(['program_id'=>$program->id])->count();?>",
+        <?php endforeach;?>
         ],
-        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#4e71df', '#1cc28a', '#30b9cc'],
         hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
         hoverBorderColor: "rgba(234, 236, 244, 6)",
       }]
     }
-
   })
+</script>
 
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['jan','feb','mar','apr','may','june','july','aug','sep','oct','nov','dec'],
+        datasets: [{
+            label: '# of Monthly Application',
+            data: [
+              <?php for($num=1; $num<=12; $num++):?>
+
+              "<?= TblApp::find()->andwhere(['year(created_at)'=>date('Y')])->andwhere(['month(created_at)'=>date($num)])->count();?>",
+
+             <?php endfor;?>
+            ],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
 </script>
 
 

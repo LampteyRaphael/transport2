@@ -94,11 +94,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'value'=>'semester0.name',
         ],
 
-        [
-            'attribute'=>'section',
-            'label'=>'Section',
-            'value'=>'section.name',
-        ],
+        // [
+        //     'attribute'=>'section',
+        //     'label'=>'Section',
+        //     'value'=>'section.name',
+        // ],
      
         [
             'class' => 'kartik\grid\CheckboxColumn',
@@ -164,11 +164,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'label'=>'Semester',
             'value'=>'semester0.name',
         ], 
-        [
-            'attribute'=>'section.name',
-            'label'=>'Section',
-            'value'=>'section.name',
-        ],
+        // [
+        //     'attribute'=>'section.name',
+        //     'label'=>'Section',
+        //     'value'=>'section.name',
+        // ],
         ['class' => 'kartik\grid\CheckboxColumn',
             'checkboxOptions' => function ($data, $key, $index, $column) {
                 if($data->status==1){

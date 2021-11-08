@@ -4,6 +4,8 @@ namespace backend\modules\program\controllers;
 
 use common\models\TblStudRegistYear;
 use common\models\TblStudRegistYearSearch;
+use Exception;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -66,19 +68,29 @@ class TblStudRegistYearController extends Controller
      */
     public function actionCreate()
     {
-        $model = new TblStudRegistYear();
+        try{
+            $model = new TblStudRegistYear();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post())) {
+                    $model->date=date('Y-m-d');
+                    $model->save();
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
+    
+            return $this->render('create', [
+                'model' => $model,
+            ]);
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        }catch(Exception $e){
+            Yii::$app->session->setFlash('success','Successfully saved'.$e->getMessage());
+            return $this->redirect(['create']);
+
+        }
+       
     }
 
     /**

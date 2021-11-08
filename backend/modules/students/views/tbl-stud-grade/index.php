@@ -44,16 +44,23 @@ $this->params['breadcrumbs'][] = $this->title;
     'hover' => true,
     'floatHeader' => false,
     'panel' => [
-        'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Professional Programs</h3>',
+        'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Students Grade</h3>',
         'type' => GridView::TYPE_PRIMARY,
     ],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'kartik\grid\SerialColumn'],
 
             'grade_name',
             'grade_point',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+            'template' => '{view}',
+            'buttons' => [
+                'view' => function ($url, $model, $key) {
+                    return Html::a ( 'view', ['view', 'id' => $model->id],['class'=>'btn btn-primary'] );
+                },
+                
+            ],
+        ],
         ],
     ]); ?>
 

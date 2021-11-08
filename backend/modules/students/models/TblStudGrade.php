@@ -30,7 +30,7 @@ class TblStudGrade extends \yii\db\ActiveRecord
     {
         return [
             [['grade_name', 'grade_point'], 'required'],
-            [['grade_point'], 'integer'],
+            [['grade_point'], 'string'],
             [['grade_name'], 'string', 'max' => 255],
         ];
     }

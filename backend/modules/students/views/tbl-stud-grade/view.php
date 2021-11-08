@@ -16,6 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
 <!-- End Of Navigation Bar -->
  
+<div class="card">
+    <div class="card-header">
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -27,6 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
         ]) ?>
     </p>
 
+    </div>
+    <div class="card-body">
+   
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -34,5 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'grade_point',
         ],
     ]) ?>
+    </div>
+</div>
+   
 
 </div>

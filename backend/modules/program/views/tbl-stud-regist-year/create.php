@@ -11,10 +11,18 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-stud-regist-year-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="card">
+    <div class="card-header bg-primary">
+    <h1>Create New</h1>
 
-    <?= $this->render('_form', [
+    </div>
+    <div class="card-body">
+        <p class="card-text"><?= $this->render('_form', [
         'model' => $model,
-    ]) ?>
+    ]) ?></p>
+    </div>
+</div>
+
+    
 
 </div>

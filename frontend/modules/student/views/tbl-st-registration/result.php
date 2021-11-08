@@ -1,11 +1,13 @@
 <?php
 
+use common\models\TblStudsResult;
 use kartik\grid\GridView;
 
 $this->title = 'Examination Result';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?= GridView::widget([
+<!-- 
+GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
        // 'filterModel' => $searchModel,
@@ -78,4 +80,46 @@ $this->params['breadcrumbs'][] = $this->title;
             'label'=>'Grade Point'
         ],
     ],
-]); ?>
+]);  -->
+
+
+<div class="card">
+    <div class="card-header bg-primary">
+       <h4>
+           <b>Students Result</b>
+       </h4>
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+
+        <table class="table table-striped table-responsive-lg">
+         
+                <tbody>
+                <?php foreach($studAcad as $acadamicyear): ?>
+                    <thead>
+                        <tr>
+                            <th><?= $acadamicyear->semester0->name??''?></th>
+                            <th colspan="4"><?= $acadamicyear->studAcadamicYear->date_of_admission?></th>
+                        </tr>
+                        <tr class="thead-light">
+                                <th>Course No.</th>
+                                <th>Course Title</th>
+                                <th>Grade</th>
+                                <!-- <th>Grade Point</th> -->
+                            </tr>
+                    </thead>
+                    <?php foreach(TblStudsResult::find()->andwhere(['student_id'=>$id])->andWhere(['acadamic_year'=>$acadamicyear->id])->all() as $result): ?>
+                        <tr>
+                        <td><?= $result->course->course_number??''?></td>
+                        <td><?= $result->course->courseName??''?></td>
+                        <td><?= $result->grade->grade_name??''?></td>
+                        <!-- <td>< $result->grade->grade_point??''?></td> -->
+                    </tr>
+                    <?php endforeach;?>
+                <?php endforeach;?>
+                </tbody>
+        </table>
+        </p>
+    </div>
+    
+</div>

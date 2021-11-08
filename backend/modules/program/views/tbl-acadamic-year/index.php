@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'hover' => true,
     'floatHeader' => false,
     'panel' => [
-        'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Admission Academic Year</h3>',
+        'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Academic Year</h3>',
         'type' => GridView::TYPE_PRIMARY,
     ],
         'columns' => [

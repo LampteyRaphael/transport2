@@ -6,7 +6,9 @@ use yii\bootstrap4\Nav;
 <div class="col-12">
   <div class="card">
     <div class="card-header bg-primary">
-      Institute Of Professional Studies
+      <h4>
+        <b>Institute Of Professional Studies</b>
+      </h4>
     </div>
     <div class="card-body">
       <p class="card-text">

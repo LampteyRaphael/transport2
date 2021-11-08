@@ -15,8 +15,17 @@ $this->params['breadcrumbs'][] = 'Update';
 <!-- Navigation Bar -->
 <?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
 <!-- End Of Navigation Bar -->
-    <?= $this->render('_form', [
+<div class="card">
+    <div class="card-header bg-warning">
+        Student Grade
+    </div>
+<div class="card-body">
+<?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+</div>
+</div>
+
+   
 
 </div>
