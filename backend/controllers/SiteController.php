@@ -9,8 +9,10 @@ use common\models\LoginForm;
 use common\models\TblApp;
 use common\models\TblAppAdmission;
 use common\models\TblAppQuali;
+use common\models\TblDepart;
 use common\models\TblLecturer;
 use common\models\TblLevel;
+use common\models\TblOsn;
 use common\models\TblProgram;
 use common\models\TblQualiLog;
 use common\models\TblStaff;
@@ -30,6 +32,7 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
+                'only'=>['reset'],
                 'rules' => [
                     [
                         'actions' => ['login', 'error'],
@@ -86,6 +89,10 @@ class SiteController extends Controller
 
        $levels=TblLevel::find()->all();
 
+       $department=TblDepart::find()->all();
+
+       $osn=TblOsn::find()->where(['status'=>0])->count();
+
     //    foreach($programs as $program){
     //     $item[] = $program->program_name.',';
     //    }
@@ -99,7 +106,9 @@ class SiteController extends Controller
             'staff'=>$staff,
             'userAdmins'=>$userAdmins,
             'programs'=>$programs,
-            'levels'=>$levels
+            'levels'=>$levels,
+            'osn'=>$osn,
+            'department'=>$department
         ]);
     }
 
@@ -139,4 +148,5 @@ class SiteController extends Controller
         Yii::$app->user->logout();
         return $this->goHome();
     }
+
 }

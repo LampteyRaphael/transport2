@@ -2,6 +2,7 @@
 
 use common\models\TblApp;
 use common\models\TblCourse;
+use common\models\TblStaffList;
 
 $this->title = 'IPS Dashboard';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
@@ -58,9 +59,9 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3><?= $admission??''; ?></h3>
+          <h3><?= $osn??''; ?></h3>
 
-          <p>Admission</p>
+          <p>Non Use OSN</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
@@ -191,7 +192,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
     </div>
 
 
-    <div class="card col-12">
+    <div class="card col-6">
     <div class="card-header border-transparent">
       <h3 class="card-title">Application Chart</h3>
 
@@ -215,21 +216,32 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
     </div>
 
 
+    <div class="card col-6">
+    <div class="card-header border-transparent">
+      <h3 class="card-title">Department with Number Of Admins Chart</h3>
+
+      <div class="card-tools">
+        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+          <i class="fas fa-minus"></i>
+        </button>
+        <button type="button" class="btn btn-tool" data-card-widget="remove">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+      <div class="table-responsive">
+     <canvas id="myChart2" ></canvas>
+      </div>
+  </div>
+    </div>
+
+
 </div>
 
-
-
-<?php if($programs):?>
-
-          <?php foreach($programs as $program):?>
-            
-              <!-- < $course=TblCourse::find()->where(['program_id'=>$program->id])->select('id')->count();?> -->
-            </div>
-
-          <?php endforeach;?>
-        
-        <?php endif;?>
-      
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
 
@@ -249,7 +261,9 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
               "<?= TblCourse::find()->where(['level_id'=>$level->id])->count();?>",
         <?php endforeach;?>
         ],
-        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#17a673', '#2c9faf'],
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+
+        // backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#17a673', '#2c9faf'],
         hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
         hoverBorderColor: "rgba(234, 236, 244, 1)",
       }]
@@ -327,9 +341,31 @@ var myChart = new Chart(ctx, {
 });
 </script>
 
+<script>
+var ctx = document.getElementById('myChart2').getContext('2d');
+new Chart(ctx, {
+    type: 'horizontalBar',
+    data: {
+      labels: [
+        <?php foreach($department as $departments):?>
+              "<?= $departments->department_name?>",
+        <?php endforeach;?>
+      ],
+      datasets: [{
+        data: [
+          <?php foreach($department as $departments):?>
+              "<?= TblStaffList::find()->where(['depart_id'=>$departments->id])->count();?>",
+        <?php endforeach;?>
+        ],
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
 
-
-
+        // backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#4e71df', '#1cc28a', '#30b9cc'],
+        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+        hoverBorderColor: "rgba(234, 236, 244, 6)",
+      }]
+    }
+  })
+</script>
 
     <div>
 </div>

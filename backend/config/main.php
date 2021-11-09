@@ -172,7 +172,7 @@ return [
         },
         'rules' => [
             [
-                'actions' => ['login', 'error'],
+                'actions' => ['login', 'error','reset'],
                 'allow' => true,
             ],
             [
@@ -189,7 +189,7 @@ return [
         },
         'rules' => [
             [
-                'actions' => ['login', 'error'],
+                'actions' => ['login', 'error','reset'],
                 'allow' => true,
             ],
             [

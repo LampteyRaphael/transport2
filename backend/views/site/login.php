@@ -40,7 +40,7 @@ $form = ActiveForm::begin(); ?>
 <div class="col-md-lg-12"><?= $form->field($model, 'rememberMe')->checkbox() ?></div>
 <?php ActiveForm::end(); ?>
 <p class="mb-1">
-    <?=Html::a('I forgot my password',['/resetPassword']) ?>
+    <?=Html::a('I forgot my password',['reset']) ?>
             <!-- <a href="forgot-password.html">I forgot my password</a> -->
         </p>
    </div>
