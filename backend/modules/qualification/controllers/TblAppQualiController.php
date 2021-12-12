@@ -341,115 +341,36 @@ protected function findEmploymentDetails($id){
         $adminssion->user_id=$quali->user_id;
         $adminssion->application_id=$quali->application_id;
         $adminssion->accadamin_year_id=$quali->accadamin_year_id;
-        $adminssion->save();
-            // Details from Applicant Personal Information
-    //    $modelp= $this->findPersonalDetails($quali->application->personalDetails->id);
 
-    //    // Details from Applicant's Personal Address
-    //    $modelad= $this->findPersonalAddress($quali->application->personalAddress->id);
+       if($adminssion->save()){
+        $adLog=new TblAdmissLog();
+        $adLog->user_id=Yii::$app->user->identity->id;
+        $adLog->status=1;
+        $adLog->admission_id=$adminssion->id;
+        $adLog->save();
 
-    //     // Applicant's programs
-    //    $courses = $this->findAppProgram($quali->application->personalDetails->id);
+        // if(strtolower($quali->application->program->program->programCategory->name)==='professional program'){
+        //     Yii::$app->mailer->compose(['html' => 'register'],['modelp' => TblAppPersDetails::find()->where(['id'=>$quali->application->personalDetails->id])->one(),'program'=>$quali->application->program->program->programCategory->name,'amount'=>$quali->application->program->program->programCategory->amount])
+        //     ->setFrom(['ips.admin@upsamail.edu.gh'=>'UPSA'])
+        //         ->setTo('raphlamptey@gmail.com')
+        //         ->setSubject('UPSA Professional Admission')
+        //         ->setTextBody("")
+        //         ->send();
+        // }else{
+        //     Yii::$app->mailer->compose(['html' => 'register'],['modelp' => TblAppPersDetails::find()->where(['id'=>$quali->application->personalDetails->id])->one(),'program'=>$quali->application->program->program->programCategory->name,'amount'=>$quali->application->program->program->programCategory->amount])
+        //     ->setFrom(['ips.admin@upsamail.edu.gh'=>'UPSA'])
+        //         ->setTo('raphlamptey@gmail.com')
+        //         ->setSubject('UPSA Access Admission')
+        //         ->setTextBody("")
+        //         ->send();
+        // }
 
-    //      // Get Applicant Program Applied For
-    //      foreach($courses as $course){
-    //        $programCategoryName= $course->program->programCategory->name;
-    //        $programCategoryID= $course->program->program_category_id;
-    //      }
-
-    //      $personal= TblStud::find()->where(['id'=>$id])->one();
-
-        //  $image=Yii::getAlias('@app/web/image/logo.png');
-          //   $content=$this->renderPartial('mail');
-        //   $body= Yii::$app->view->renderFile('@common/mail/register.php',['personal'=>$personal,'image'=>$image,'modelp'=>$modelp, 'modelad'=>$modelad,'programCategoryName'=>$programCategoryName]);
-
-        //   Yii::$app->mailer->compose()
-        //   ->setFrom(['ips.admin@upsamail.edu.gh'=>'UPSA'])
-        //   ->setTo($quali->application->personalAddress->email)
-        //   ->setSubject('UPSA Admission')
-        //   ->setHtmlBody($body)
-        //  ->send();
-
-
-        //  if( $adminssion->save()){
-        //      $adminssionLog=new TblAdmissLog();
-        //      $adminssionLog->user_id=Yii::$app->user->identity->id;
-        //      $adminssionLog->status=$quali->status;
-
-            // Creating Portal For Applicant User
-        //    $this->appAccount($quali->application->personalDetails->date_of_birth,$quali->application->personalDetails->first_name);
-
-            // //   $content=$this->renderPartial('mail');
-            //   Yii::$app->mailer->compose('register',['quali'=>1])
-            //   ->setFrom(['ips.admin@upsamail.edu.gh'=>'UPSA'])
-            //   ->setTo($quali->application->personalAddress->email)
-            //   ->setSubject('UPSA Admission')
-            // //   ->setHtmlBody("")
-            // //   ->setHtmlBody('Your Pass:'.$this->actionGetpass($quali->application->personalDetails->first_name).'And Your User Name :'.$quali->application->personalDetails->date_of_birth.$content)
-            //  ->send();
-
-
-            //     Yii::$app->mailer->compose(['html' => 'passsend-html'],['name'=>$name,'username'=>$username,'pass'=>$pass])
-            //    ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name ])
-            //    ->setTo($quali->application->personalAddress->email)
-            //    ->setSubject('Your Credentials UPSA Hostel Management System')
-            //    ->setTextBody("")
-            //    ->send();
-
-            //  if ($adminssionLog->save()){
-            //      $quali->delete();
-            //  }
-
-            //  $model = new User();
-            //  $model->username='20212021';
-            //  $model->email=$quali->application->personalAddress->email;
-            //  $model->role_id=3;
-            //  $model->password_hash = $model->setPassword($quali->application->personalDetails->date_of_birth);
-            //  $model->status = 10;
-            //  $model->auth_key=$model->generateAuthKey();
-            //  $model->save();
-
-             
-
-            Yii::$app->session->setFlash('success', 'Successfully Qualified Applicant');
+            Yii::$app->session->setFlash('success', 'Successfully Admitted Applicant');
             return $this->redirect(['index']);
-    //    }else{
-    //     Yii::$app->session->setFlash('error', 'Already Admitted');
-    //      return $this->redirect(['index']);
-    //    }
-   
-
-        // $selection = (array) Yii::$app->request->post('selection');
-        // if (null==((array)Yii::$app->request->post('selection'))) {
-        //     Yii::$app->session->setFlash('error', 'Sorry!. Checkbox is not selected');
-        //     return $this->redirect(['index']);
-        // }
-
-        // foreach ($selection as $item)   {
-        //     //changing the status of applicants who  has been selected
-        //     $quali=TblAppQuali::findOne($item);
-        //     $quali->status=Yii::$app->request->post('test');
-        //     $quali->user_id=Yii::$app->user->identity->id;
-        //     $quali->save();
-        //     //sending the applicant who has qualified to admission process
-        //     $toadminssion=new TblAppAdmission();
-        //     $toadminssion->status=3;
-        //     $toadminssion->user_id=Yii::$app->user->identity->id;
-        //     // $toadminssion->doa= '2021-05-06';
-        //     // $toadminssion->doc=	'2021-05-06';
-        //     $toadminssion->application_id=$quali->application_id;
-        //     $toadminssion->accadamin_year_id=1;
-        //     $toadminssion->save();
-            
-        //     //log of qualified applicant
-        //     // if(){
-        //         $quaLoq=new TblQualiLog();
-        //         $quaLoq->status=Yii::$app->request->post('test');
-        //         $quaLoq->user_id=Yii::$app->user->identity->id;
-        //        var_dump( $quaLoq->save());
-        //     //}
-
-        // }
+       }else{
+            Yii::$app->session->setFlash('error', 'Already Admitted Applicant');
+            return $this->redirect(['index']);
+       }
            
     }else
     {

@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\admission\models\TblAdmissLog */
+/* @var $model common\models\TblAdmissLog */
 
 $this->title = 'Update Tbl Admiss Log: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Tbl Admiss Logs', 'url' => ['index']];

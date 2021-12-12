@@ -18,31 +18,27 @@ class Validate  extends  \yii\db\ActiveRecord
         return  ucwords(strtolower($data));
      }
 
-
+     
     public function replace($string)
     {  
       $str = preg_replace('/[^a-zA-Z0-9-_\.]/','', trim($string));
-
       return trim($str);
     }
-
 
     public function replace2($string)
     {  
       $str = preg_replace('/[^a-zA-Z0-9-_\.]/','', $string);
-      
       return ucwords($str);
     }
 
    public function filter_mail($string) 
    {
-         return preg_replace('/[^A-Za-z0-9.@\-]/', '', $string); // We remove special chars and accept only Alphs&Nums&.&@
-    }
+      return preg_replace('/[^A-Za-z0-9.@\-]/', '', $string); // We remove special chars and accept only Alphs&Nums&.&@
+   }
 
     public function check_only_int($data)
     {
-       $str= preg_replace('/[^0-9\.]/','', trim($data));
-
+        $str= preg_replace('/[^0-9\.]/','', trim($data));
        return $str;
     }
 
@@ -60,7 +56,7 @@ class Validate  extends  \yii\db\ActiveRecord
       $imageFile->saveAs($imageName);
       }
       $SID=date('Y').rand(0001,9999);
-      $userAdmin->photo = $fileName;
+      $userAdmin->photo = $fileName??'';
       $userAdmin->username=$SID;
       $userAdmin->email= $email;
       $userAdmin->role_id=$role;
@@ -162,6 +158,41 @@ class Validate  extends  \yii\db\ActiveRecord
   // ->send();
 // }
 
+
+public function professionalMail($id,$program,$amount,$address,$academic_year,$programName,$email){
+
+    $add=$this->check_only_int($address);
+    Yii::$app->mailer->compose(['html' => 'register'],[
+    'modelp' => TblAppPersDetails::find()->where(['id'=>$id])->one(),
+    'program'=>$program,'amount'=>$amount,
+    'addresses'=>$add,
+    'academic_year'=>$academic_year,
+    'program_name'=>$programName
+    ])
+  ->setFrom(['ips.admin@upsamail.edu.gh'=>'UPSA'])
+      ->setTo($email)
+      ->setSubject('UPSA ADMISSION')
+      ->setTextBody("")
+      ->send();
+}
+
+
+public function accessMail($id,$program,$amount,$address,$academic_year,$programName,$email){
+
+  $add=$this->check_only_int($address);
+    Yii::$app->mailer->compose(['html' => 'register'],[
+    'modelp' => TblAppPersDetails::find()->where(['id'=>$id])->one(),
+    'program'=>$program,'amount'=>$amount,
+    'addresses'=>$add,
+    'academic_year'=>$academic_year,
+    'program_name'=>$programName
+    ])
+  ->setFrom(['ips.admin@upsamail.edu.gh'=>'UPSA'])
+      ->setTo($this->filter_mail($email))
+      ->setSubject('UPSA ADMISSION')
+      ->setTextBody("")
+      ->send();
+}
 
 
 }

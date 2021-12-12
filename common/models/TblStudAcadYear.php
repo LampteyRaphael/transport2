@@ -33,7 +33,7 @@ class TblStudAcadYear extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['date_of_admission', 'doc'], 'required'],
+            [['date_of_admission'], 'required'],
             [['doc', 'created_at', 'updated_at'], 'safe'],
             [['date_of_admission'], 'string', 'max' => 50],
         ];

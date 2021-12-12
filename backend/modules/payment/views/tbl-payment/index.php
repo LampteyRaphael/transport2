@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'dates:date',
+            'created_at:datetime',
             [
                 'attribute'=>'admission_id',
                 'label'=>'Admission',
@@ -124,7 +124,7 @@ $this->params['breadcrumbs'][] = $this->title;
   <div class="modal-dialog modal-dialog-scrollable modal-xl">
     <div class="modal-content" style="background-color: lightblue;">
         <div class="modal-header">
-            <h5 class="modal-title" id=""><b>Enter Admission Payment Fees Here</b></h5>
+            <h5 class="modal-title" id=""><b>Fee Details</b></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

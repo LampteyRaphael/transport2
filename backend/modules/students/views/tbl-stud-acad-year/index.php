@@ -2,37 +2,36 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
-/* @var $searchModel backend\modules\students\models\TblStudAcadYearSearch */
+/* @var $searchModel common\TblStudAcadYearSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Students Academic Year';
+$this->title = 'Student Academic Year';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+    <!-- Navigation Bar -->
+    <?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
+    <!-- End Of Navigation Bar -->
+
 <div class="tbl-stud-acad-year-index">
-
-      <!-- Navigation Bar -->
-      <?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
-<!-- End Of Navigation Bar -->
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
+        <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'headerRowOptions'=>['class'=>'kartik-sheet-style'],
         'filterRowOptions'=>['class'=>'kartik-sheet-style'],
-        'containerOptions' => ['style'=>'overflow: auto'],
+        'containerOptions' => ['style'=>'overflow: auto'], 
         'tableOptions' => ['class' => 'table table-striped table-hover table-condensed text-left'],
         'toolbar' =>  [
         [
-            'content'=>
-            Html::a('Create Acadamic Year', ['create'], ['class' => 'btn btn-primary']) 
+             'content'=> 
+             Html::a(('Add New'),['create'], ['class' => 'btn btn-primary']),
          ],
             '{export}',
             '{toggleData}'
         ],
-
+        
     'pjax'=>true,
     'bordered' => true,
     'striped' => true,
@@ -43,18 +42,27 @@ $this->params['breadcrumbs'][] = $this->title;
     'hover' => true,
     'floatHeader' => false,
     'panel' => [
-        // 'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> Programs</h3>',
+        'heading'=>'<h3 class="panel-title">Academic Year</h3>',
         'type' => GridView::TYPE_PRIMARY,
     ],
         'columns' => [
             ['class' => 'kartik\grid\SerialColumn'],
-            
-            'date_of_admission',
 
-            ['class' => 'kartik\grid\ActionColumn'],
+            [
+                'attribute'=>'date_of_admission',
+                'label'=>'Academic Year',
+            ],
+            ['class' => 'kartik\grid\ActionColumn',
+            'template' => '{view}',
+            'buttons' => [
+                'view' => function ($url, $model, $key) {
+                    return Html::a ( 'view', ['view', 'id' => $model->id],['class'=>'btn btn-primary'] );
+                },
+                
+            ],
+        ],
         ],
     ]); ?>
-
-    <?php Pjax::end(); ?>
+  
 
 </div>

@@ -15,10 +15,10 @@ return [
             'class' => 'yii\caching\FileCache',
         ],
      
-        // 'authManager' => [
-        //     'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\PhpManager'
-        //     'defaultRoles' => ['admin', 'guest'],
-        // ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager', // or use 'yii\rbac\PhpManager'
+            'defaultRoles' => ['admin', 'guest'],
+        ],
     ],
 
   

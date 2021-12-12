@@ -71,7 +71,7 @@ return [
                 'yii2mod\alert\AlertAsset' => [
                     'css' => [
                         'dist/sweetalert.css',
-                        'themes/twitter/twitter.css',
+                        // 'themes/twitter/twitter.css',
                     ]
                 ],
             ],
@@ -120,16 +120,15 @@ return [
         // ],
         
     ],
+    
+
     'as access' => [
         'class' => AccessControl::className(),
         'denyCallback' => function ($rule, $action) {
             Yii::$app->user->logout();
             return Yii::$app->response->redirect(['site/login']);
         },
-
-
         'rules' => [
-       
             [
                 'actions' => ['login', 'error','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
                 'allow' => true,
@@ -141,24 +140,23 @@ return [
         ],
     ],
 
-    // 'as beforeRequest' => [
-    //     'class' => 'yii\filters\AccessControl',
-    //     'denyCallback' => function () {
-    //         Yii::$app->user->logout();
-    //         return Yii::$app->response->redirect(['site/login']);
-    //     },
-    //     'rules' => [
-    //         [
-    //             'actions' => ['login', 'error','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
-    //             'allow' => true,
-    //         ],
-    //         [
-    //             'allow' => true,
-    //             'roles' => ['student','lecturer'],
-    //         ],
-    //     ],
+    'as beforeRequest' => [
+        'class' => 'yii\filters\AccessControl',
+        'denyCallback' => function () {
+            Yii::$app->user->logout();
+            return Yii::$app->response->redirect(['site/login']);
+        },
+        'rules' => [
+            [
+                'actions' => ['login', 'error','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
+                'allow' => true,
+            ],
+            [
+                'allow' => true,
+                'roles' => ['student','lecturer'],
+            ],
+        ],
        
-    //  ],
-     
+     ],
     'params' => $params,
 ];

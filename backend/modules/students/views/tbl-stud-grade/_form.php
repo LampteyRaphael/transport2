@@ -16,6 +16,8 @@ use yii\helpers\Html;
         <?php $form = ActiveForm::begin(); ?>
 
         <?= $form->field($model, 'grade_name')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'from')->Input('number',['maxlength' => true]) ?>
+        <?= $form->field($model, 'to')->Input('number',['maxlength' => true]) ?>
 
         <?= $form->field($model, 'grade_point')->textInput() ?>
 

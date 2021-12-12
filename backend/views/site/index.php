@@ -61,7 +61,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <div class="inner">
           <h3><?= $osn??''; ?></h3>
 
-          <p>Non Use OSN</p>
+          <p>Non Used OSN</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Lecturer</span>
+          <span class="info-box-text">Lecturers</span>
           <span class="info-box-number">
             
             <small><?= $lecturer;?></small>
@@ -97,7 +97,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Staff</span>
+          <span class="info-box-text">Staffs</span>
           <span class="info-box-number"><?= $staff;?></span>
         </div>
         <!-- /.info-box-content -->
@@ -128,8 +128,8 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">System Admins</span>
-          <span class="info-box-number"><?= $userAdmins;?></span>
+          <span class="info-box-text"></span>
+          <span class="info-box-number"><?php $userAdmins;?></span>
         </div>
         <!-- /.info-box-content -->
       </div>

@@ -29,7 +29,7 @@ class TblStudGrade extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['grade_name', 'grade_point'], 'required'],
+            [['grade_name', 'grade_point','from','to'], 'required'],
             [['grade_point'], 'string'],
             [['grade_name'], 'string', 'max' => 255],
         ];

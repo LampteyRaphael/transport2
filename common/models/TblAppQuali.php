@@ -38,6 +38,7 @@ class TblAppQuali extends \yii\db\ActiveRecord
         return [
             [['application_id', 'status', 'user_id', 'accadamin_year_id'], 'required'],
             [['application_id', 'status', 'user_id', 'accadamin_year_id'], 'integer'],
+            [['application_id'],'unique'],
             [['created_at', 'updated_at'], 'safe'],
             [['accadamin_year_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblAcademicYear::className(), 'targetAttribute' => ['accadamin_year_id' => 'id']],
             [['application_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblApp::className(), 'targetAttribute' => ['application_id' => 'id']],
@@ -53,12 +54,12 @@ class TblAppQuali extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'application_id' => 'Application ID',
+            'application_id' => 'Application',
             'status' => 'Status',
             'user_id' => 'User ID',
-            'accadamin_year_id' => 'Accadamin Year ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'accadamin_year_id' => 'Academic Year',
+            'created_at' => 'Created',
+            'updated_at' => 'Updated',
         ];
     }
 
@@ -101,4 +102,5 @@ class TblAppQuali extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TblAppQualiStatus::className(), ['id' => 'status']);
     }
+
 }

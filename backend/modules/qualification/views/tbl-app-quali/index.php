@@ -2,6 +2,7 @@
 
 use common\models\TblAcadamicYear;
 use common\models\TblAcademicYear;
+use common\models\TblAppAddress;
 use common\models\TblAppPersDetails;
 use common\models\TblAppQualiStatus;
 use common\models\User;
@@ -26,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-//        'showPageSummary'=>true,
+        'showPageSummary'=>true,
         'headerRowOptions'=>['class'=>'kartik-sheet-style'],
         'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'containerOptions' => ['style'=>'overflow: auto'],
@@ -58,7 +59,10 @@ $this->params['breadcrumbs'][] = $this->title;
         
             // ),
             // ],
-
+            // ['content'=>
+            // Html::a('Quali Log', ['/qualification/tbl-quali-log'],['class' => 'btn btn-primary mr-4']),
+            // ],
+            
             ['content'=>
             Html::submitButton('Admit Applicants', ['class' => 'btn btn-success','data-confirm'=>'Are you sure you want to admit all the applicants?']),
             ],
@@ -101,17 +105,29 @@ $this->params['breadcrumbs'][] = $this->title;
                         return  ucwords(($model->application->personalDetails->title0->name??'').' ' . ($model->application->personalDetails->first_name??'') . ' ' . ($model->application->personalDetails->middle_name??'') .' ' .  ($model->application->personalDetails->last_name??''));
                     }
                 },
-                'filter'=>ArrayHelper::map(TblAppPersDetails::find()->asArray()->all(),'id','last_name'),
+                'filter'=>ArrayHelper::map(TblAppPersDetails::find()->asArray()->all(),'id','first_name'),
                 'filterType'=>GridView::FILTER_SELECT2,
                 'filterWidgetOptions'=>[
                     'options'=>['prompt'=>'Last Name'],
                     'pluginOptions'=>['allowClear'=>true],
                 ],
             ],
+
+            [
+                'attribute'=>'application_id',
+                'label'=>'Phone Number',
+                'value'=>'application.personalAddress.telephone_number',
+                'filter'=>ArrayHelper::map(TblAppAddress::find()->asArray()->all(),'telephone_number','telephone_number'),
+                'filterType'=>GridView::FILTER_SELECT2,
+                'filterWidgetOptions'=>[
+                    'options'=>['prompt'=>'Category'],
+                    'pluginOptions'=>['allowClear'=>true],
+                ],
+            ],
             
             [
                 'attribute'=>'accadamin_year_id',
-                'value'=>'accadaminYear.date_of_admission',
+                'value'=>'accadaminYear.academic_year',
                 'filter'=>ArrayHelper::map(TblAcademicYear::find()->asArray()->all(),'academic_year','academic_year'),
                 'filterType'=>GridView::FILTER_SELECT2,
                 'filterWidgetOptions'=>[
@@ -142,7 +158,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
 
-
             [
                 'attribute'=>'status',
                 'value'=>'status0.name',
@@ -162,13 +177,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
 
-            
-            // 'user_id',
-            // 'accadamin_year_id',
-            //'created_at',
-            //'updated_at',
-
-          //  ['class' => 'yii\grid\ActionColumn'],
           ['class' => 'kartik\grid\ActionColumn',
           'template' => '{view}',
           'width'=>100,

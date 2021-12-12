@@ -86,7 +86,7 @@ class TblStudController extends Controller
             'courses'=>  $courses,
             'modeledu'=>  $modeledu,
              'modelemp'=>  $modelemp,
-            // 'id'=>$id,
+             'id'=>$id,
         ]);
     // }else
     // {

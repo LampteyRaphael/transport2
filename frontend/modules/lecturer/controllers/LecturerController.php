@@ -13,6 +13,7 @@ use common\models\TblStudGrade;
 use common\models\TblStudRegistYear;
 use common\models\TblStudsResult;
 use common\models\User;
+use common\models\Validate;
 use kartik\mpdf\Pdf;
 use PHPExcel;
 use PHPExcel_IOFactory;
@@ -27,7 +28,7 @@ class LecturerController extends \yii\web\Controller
     public function actionIndex()
     {
         if(Yii::$app->user->can('lecturer')){
-            // try{
+             try{
                 $id=Yii::$app->user->identity->id;
                 $model= TblStaffList::find()->where(['user_id'=>$id])->one();
                 // $model1=TblLecturer::find()->where(['staff_id'=>$model->id])->one();
@@ -45,10 +46,10 @@ class LecturerController extends \yii\web\Controller
                     // 'model1'=>$model1,
                     'dataProvider'=>$dataProvider
                 ]);
-            // }catch (\Exception $e){
+            }catch (\Exception $e){
 
-            //     return  $this->goBack(Yii::$app->request->referrer);
-            // }
+                return  $this->goBack(Yii::$app->request->referrer);
+            }
     }else
     {
         Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
@@ -149,23 +150,6 @@ class LecturerController extends \yii\web\Controller
         
         Yii::$app->session->setFlash('success', 'Successfully Uploaded Students Results');
         return $this->redirect(['result']);
-
-        // header("Content-type: application/csv");
-        // header('Content-Disposition: attachment; filename="'. str_replace(" ", "_", strtolower('Students Registration')) . '_results.csv"');
-        // header("Pragma: no-cache");
-        // header("Expires: 0");
-    
-        // $handle = fopen('php://output', 'w');
-        // if (count($vote_record) > 0) {
-        //     fputcsv($handle, array('Students Name', 'Students ID', 'Student Marks'));
-        //     foreach($vote_record as $st){
-        //         fputcsv($handle, array($st->stud->personalDetails->first_name . ' ' . $st->stud->personalDetails->middle_name . ' ' . $st->stud->personalDetails->last_name ,$st->stud->user->username, ' ' ));
-        //     }
-        //     fclose($handle);
-        //     exit;
-        // }
-        // ob_clean();
-        // flush();
        }
     }catch (\Exception $e){
 
@@ -179,24 +163,26 @@ class LecturerController extends \yii\web\Controller
     
     }
 
+    /** Upload Student Registered Courses Using Lecturer courese Id */
     public function actionResult(){
         if(Yii::$app->user->can('lecturer')){
-            // try{
+             try{
         $id=Yii::$app->user->identity->id;
         $model= TblStaffList::find()->where(['user_id'=>$id])->one();
-        $lecC= TblCourseLecturer::find()->andwhere(['lecturer_id'=>$model->id])->all();
+        $lecturer= TblCourseLecturer::find()->where(['lecturer_id'=>$model->id])->andWhere(['course_lecture_status_id'=>1])->all();   
 
-        $model=new TblCourse();
-        
+        $academic_year=TblStudRegistYear::find()->where(['status'=>1])->one();
+
         return $this->render('result', [
              'model'=>new TblStRegistration(),
-            // 'dataProvider'=>$dataProvider??'',
-            'lecC'=>$lecC??''
+            'lecturer'=>$lecturer,
+            'academic_year'=>$academic_year->id,
+            'semester'=>$academic_year->semester,
         ]);
-    // }catch (\Exception $e){
-
-    //     return  $this->goBack(Yii::$app->request->referrer);
-    // }
+    }catch (\Exception $e){
+        return $this->redirect(['result'.$e->getMessage()]);
+        // return  $this->goBack(Yii::$app->request->referrer);
+    }
     }else
     {
         Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
@@ -205,8 +191,21 @@ class LecturerController extends \yii\web\Controller
     }
 
 /** Downloading student course registered by lecturer */
-    public function actionDownload($id){
-        $reg_stud=TblStRegistration::find()->where(['courese_id'=>$id])->all();
+    public function actionDownload(){
+        $valid=new Validate();
+
+        /**Code Clean Up **/
+       $course=  $valid->check_only_int ($_POST['course']);
+       $semester= $valid->check_only_int ($_POST['semester']);
+       $academic= $valid->check_only_int ($_POST['academic_year']);
+
+       $reg_stud=TblStRegistration::find()
+       ->andwhere(['courese_id'=>$course])
+       ->andWhere(['acadamic_year'=>$academic])
+       ->andWhere(['status'=>1])
+       ->andWhere(['semester'=>$semester])
+       ->all();
+
         // Instantiate a new PHPExcel object
         $objPHPExcel = new PHPExcel(); 
         // Set the active Excel worksheet to sheet 0
@@ -229,25 +228,31 @@ class LecturerController extends \yii\web\Controller
 }
 
 
-
+/* Uploading lecturer examination result*/
     public function actionUpload(){
 
-        if(Yii::$app->user->can('lecturer')){
-            
+        if(Yii::$app->user->can('lecturer')){   
          try{
             $model=new TblStRegistration();
+            // $model->file=UploadedFile::getInstance($model,'file');  
             $model->file=UploadedFile::getInstance($model,'file');  
+
+            if(isset($model->file)){
+            if(!file_exists(Url::to('uploads/'))){
+                mkdir(Url::to('uploads/'),0777,true);
+            }
             if($model->file !=null){
                 $model->file->saveAs('uploads/'.time().$model->file);
             }
+        }
             $inputFile='uploads/'.time().$model->file;
             $inputFileType= \PHPExcel_IOFactory::identify($inputFile);
             $objReader =    \PHPExcel_IOFactory::createReader($inputFileType);
             $objPHPExcel = $objReader->load($inputFile);
-
+ 
          }catch(\Exception $e){
-            Yii::$app->session->setFlash('error', 'Excel is not uploaded');
-            return $this->redirect(['result']);
+            Yii::$app->session->setFlash('error', 'Excel is not uploaded'.$e->getMessage());
+            return $this->goBack(Yii::$app->request->referrer);
          }
          $sheet = $objPHPExcel->getSheet(0);
          $highestRow = $sheet->getHighestRow();
@@ -258,37 +263,43 @@ class LecturerController extends \yii\web\Controller
              if($row==1){
                  continue;
              }
+            
+             try{
+                $student= new TblStudsResult();
 
-               //entrying new item that is not in the Item table  whiles importing to inventory table
-            $student= new TblStudsResult();
-
-            $user=User::find()->where(['username'=>$rowData[0][0]])->select('id')->one();
-
-            $stud=TblStud::find()->where(['user_id'=>$user->id])->one();
-
-            $academicYear=TblStudRegistYear::find()->where(['status'=>1])->one();
-
-            $total=($rowData[0][1]+$rowData[0][2]);
-            $student->student_id=$stud->id;
-            $student->course_id=1;
-            $student->semester=1;
-            $student->acadamic_year=$academicYear->id;
-            $student->section_id=1;
-            $student->class_marks=$rowData[0][1];
-            $student->exams_marks=$rowData[0][2];
-            $student->total_marks=$total;
-            foreach(TblStudGrade::find()->all() as $grad){
-                if($total >=$grad->from && $total <= $grad->to){
-
-                    $student->grade_id=$grad->id;
+                $valid=new Validate();
+    
+                $user=User::find()->where(['username'=> $valid->check_only_int($rowData[0][0])])->one();
+    
+                $stud=TblStud::find()->where(['user_id'=>$user->id])->one();
+    
+                $academicYear=TblStudRegistYear::find()->where(['status'=>1])->one();
+    
+                //entrying new item that is not in the Item table  whiles importing to inventory table
+                $total=($valid->check_only_int($rowData[0][1])+$valid->check_only_int($rowData[0][2]));
+                $student->student_id=$stud->id;
+                $student->course_id=1;
+                $student->semester=1;
+                $student->acadamic_year=$academicYear->id;
+                $student->section_id=1;
+                $student->class_marks=$valid->check_only_int($rowData[0][1]);
+                $student->exams_marks=$valid->check_only_int($rowData[0][2]);
+                $student->total_marks=$total;
+                foreach(TblStudGrade::find()->all() as $grad){
+                    if($total >=$grad->from && $total <= $grad->to){
+                        $student->grade_id=$grad->id;
+                    }
                 }
+                $student->status=1;
+                $student->date_of_entry=date('Y-m-d');
+                $student->course_lecture_id=Yii::$app->user->identity->id;
+                $student->save();
+             }catch(\Exception $e){
 
-            }
-        
-            $student->status=1;
-            $student->date_of_entry=date('Y-m-d');
-            $student->course_lecture_id=Yii::$app->user->identity->id;
-            $student->save();
+                Yii::$app->session->setFlash('error', 'Error In Your Excel');
+                return  $this->goBack(Yii::$app->request->referrer);
+             }
+            
          }
          Yii::$app->session->setFlash('success', 'Successfully Uploaded Students Results');
          return  $this->goBack(Yii::$app->request->referrer);

@@ -42,8 +42,8 @@ class TblStudPersAddress extends \yii\db\ActiveRecord
             [['address', 'city', 'email'], 'string', 'max' => 255],
             [['voters_id'], 'string', 'max' => 20],
             [['gps'], 'string', 'max' => 50],
-            // [['telephone_number'], 'unique'],
-            // [['email'], 'unique'],
+            [['telephone_number'], 'unique'],
+            [['email','voters_id'], 'unique'],
             [['country'], 'exist', 'skipOnError' => true, 'targetClass' => TblCountry::className(), 'targetAttribute' => ['country' => 'id']],
             [['voters_id_type'], 'exist', 'skipOnError' => true, 'targetClass' => TblVotersType::className(), 'targetAttribute' => ['voters_id_type' => 'id']],
         ];

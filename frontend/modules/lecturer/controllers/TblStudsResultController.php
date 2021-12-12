@@ -39,7 +39,7 @@ class TblStudsResultController extends Controller
     public function actionIndex()
     {
         if(Yii::$app->user->can('lecturer')){
-            // try{
+             try{
             $searchModel = new TblStudsResultSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -47,10 +47,10 @@ class TblStudsResultController extends Controller
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);
-        // }catch (\Exception $e){
+        }catch (\Exception $e){
 
-        //     return  $this->goBack(Yii::$app->request->referrer);
-        // }
+            return  $this->goBack(Yii::$app->request->referrer);
+        }
         }else
         {
             Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
@@ -146,6 +146,35 @@ class TblStudsResultController extends Controller
         }
     }
 
+/** Remove Selected Result Using Result ID */
+    public function actionRemove(){
+
+        if(Yii::$app->user->can('lecturer')){    
+            try{
+                $selection = (array) Yii::$app->request->post('selection');
+        if (null==((array)Yii::$app->request->post('selection'))) {
+            Yii::$app->session->setFlash('error', 'Sorry!. Checkbox is not selected');
+            return $this->redirect(['index']);
+        }
+
+        foreach ($selection as $item)   {
+            $this->findModel($item)->delete();
+        }
+
+        Yii::$app->session->setFlash('success', 'Successfully Removed The Selected Results');
+        return $this->redirect(['index']);
+           
+        }catch (\Exception $e){
+            return  $this->goBack(Yii::$app->request->referrer);
+        }
+        }else
+        {
+            Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
+            return  $this->goBack(Yii::$app->request->referrer);
+        }
+        
+    }
+
     /**
      * Deletes an existing TblStudsResult model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -155,10 +184,10 @@ class TblStudsResultController extends Controller
      */
     public function actionDelete($id)
     {
-        if(Yii::$app->user->can('lecturer')){
+        if(Yii::$app->user->can('lecturer')){    
             try{
             $this->findModel($id)->delete();
-
+            Yii::$app->session->setFlash('success', 'Successfully Removed The Selected Results');
             return $this->redirect(['index']);
         }catch (\Exception $e){
 

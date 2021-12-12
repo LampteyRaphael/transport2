@@ -1,49 +1,13 @@
 <?php
 
-use common\models\TblCourseLecturer;
 use kartik\detail\DetailView;
 use kartik\grid\GridView;
 $this->title = 'Lecturer Bio Data';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
-
-
 <div class="lecturer-index">
 
-
-
 <?php
-$lecturers= [
-    [
-        'group'=>true,
-        'label'=>'SECTION 2: Lecturer Departmennt And Program',
-        'rowOptions'=>['class'=>'table-info']
-    ],
-    [
-        'columns' => [
-            [
-                'attribute'=>'progrm_id', 
-                'label'=>'Program',
-                'displayOnly'=>true,
-                'value'=> $model1->progrm->program_name??'',
-            ],
-        ] 
-    ],
-
-    [
-        'columns' => [
-            [
-                'attribute'=>'depart_id', 
-                'label'=>'Department',
-                'displayOnly'=>true,
-                 'value'=> $model1->depart->department_name??'',
-            ],
-        ] 
-    ],
-];
-
- 
 $attributes= [
     [
         'group'=>true,
@@ -120,16 +84,7 @@ $attributes= [
             ],
         ],
     ],
-    [
-        'columns' => [
-            [
-                'attribute'=>'user_id', 
-                'label'=>'Staff ID',
-                'displayOnly'=>true,
-                'value'=> $model->user->username??'',
-            ],
-        ],
-    ],
+    
     [
         'columns' => [
             [
@@ -140,7 +95,65 @@ $attributes= [
             ],
         ],
     ],
-  ]
+];
+
+  $lecturers= [
+    [
+        'group'=>true,
+        'label'=>'SECTION 2: Lecturer Departmennt And Program',
+        'rowOptions'=>['class'=>'table-info']
+    ],
+    [
+        'columns' => [
+            [
+                'attribute'=>'program_id', 
+                'label'=>'Program',
+                'displayOnly'=>true,
+                'value'=> $model->program->program_name,
+            ],
+            [
+                'attribute'=>'program_id', 
+                'label'=>'Program Code',
+                'displayOnly'=>true,
+                'value'=> $model->program->program_code,
+            ],
+        ] 
+    ],
+    [
+        'columns' => [
+            [
+                'attribute'=>'depart_id', 
+                'label'=>'Department',
+                'displayOnly'=>true,
+                 'value'=> $model->depart->department_name,
+            ],
+            [
+                'attribute'=>'depart_id', 
+                'label'=>'Department Code',
+                'displayOnly'=>true,
+                'value'=> $model->depart->department_code,
+            ],
+        ] 
+    ],
+    [
+        'columns' => [
+            [
+                'attribute'=>'depart_id', 
+                'label'=>'Department Phone',
+                'displayOnly'=>true,
+                'value'=> $model->depart->department_phone_number,
+            ],
+            [
+                'attribute'=>'depart_id', 
+                'label'=>'Department Location',
+                'displayOnly'=>true,
+                'value'=> $model->depart->department_office,
+            ],
+        ] 
+    ],
+];
+
+ 
 ?>
 
 
@@ -168,7 +181,7 @@ $attributes= [
 </ul>
 
 <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show p-lg-5 active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+    <div class="tab-pane fade show mt-4 active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
         <div class="row">
             <div class="col">
                         <?=
@@ -188,7 +201,7 @@ $attributes= [
                         'type'=>DetailView::TYPE_PRIMARY,
                         'footer' => '<div class="text-center text-muted"></div>'
                     ],
-                    'buttons1' => '{view}',
+                    'buttons1' => '',
                 ]);
                 ?>
             </div>
@@ -196,7 +209,7 @@ $attributes= [
     </div>
 
 
-    <div class="tab-pane fade show p-lg-5" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile=-tab">
+    <div class="tab-pane fade show mt-4" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile=-tab">
         <div class="row">
             <div class="col">
             <?= 
@@ -216,7 +229,7 @@ $attributes= [
                         'type'=>DetailView::TYPE_PRIMARY,
                         'footer' => '<div class="text-center text-muted"></div>'
                     ],
-                    'buttons1' => '{view}',
+                    'buttons1' => '',
                 ]);
             ?> 
             </div>
@@ -224,7 +237,7 @@ $attributes= [
     </div>
 
 
-    <div class="tab-pane fade show p-lg-5" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact=-tab">
+    <div class="tab-pane fade show mt-4" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact=-tab">
         <div class="row">
             <div class="col">
             <?= GridView::widget([
@@ -296,9 +309,7 @@ $attributes= [
 </div>
         </p>
     </div>
-  
 </div>
-
 </div>
 
 

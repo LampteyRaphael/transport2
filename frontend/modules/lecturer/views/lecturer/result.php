@@ -16,11 +16,11 @@ $this->params['breadcrumbs'][] = $this->title;
         
                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'],'action' => Yii::$app->urlManager->createUrl(['/lecturer/lecturer/upload'])]);?>
                     <div class="row">
-                            <div class="col-md-2">
-                            <?= $form->field($model, 'file')->fileInput()->label(false);?>
+                            <div class="col-md-6">
+                            <?= $form->field($model, 'file')->fileInput(['class'=>'float-right'])->label(false);?>
                             </div>
-                            <div class="col-md-3">
-                            <?= Html::submitButton('Save Upload', ['class' => 'btn btn-primary']) ?>
+                            <div class="col-md-6">
+                            <?= Html::submitButton('Save Upload', ['class' => 'btn btn-primary btn-lg float-right']) ?>
                             </div>
                     </div>
                 <?php ActiveForm::end(); ?>
@@ -33,18 +33,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         <th>Course</th>
                         <th>Course Code</th>
                         <th>Semester</th>
-                        <th>Level</th>
-                        <th>Total</th>
+                        <th>Total Registered Students</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach( $lecC as $course): ?>
-                    <?php $total= TblStRegistration::find()->andwhere(['courese_id'=>$course->course->id])
-                            ->andWhere(['level_id'=>$course->course->level->id])
-                            ->andWhere(['semester'=>$course->course->semester0->id])
-                        // ->andWhere(['acadamic_year'=>Yii::$app->session->get('downloadacadamic')])
-                        ->count();
+                    <?php foreach($lecturer as $course): ?>
+                    <?php $total= TblStRegistration::find()
+                             ->andwhere(['courese_id'=>$course->course->id])
+                             ->andWhere(['acadamic_year'=>$academic_year])
+                             ->andWhere(['status'=>1])
+                             ->andWhere(['semester'=>$semester])
+                             ->count();
                         ?>
                   <?php if($total===0): ?>
                     <?php else: ?>
@@ -52,11 +52,18 @@ $this->params['breadcrumbs'][] = $this->title;
                         <td><?= $course->course->courseName??''?></td>
                         <td><?= $course->course->course_number??''?></td>
                         <td><?= $course->course->semester0->name??''?></td>
-                        <td><?= $course->course->level->level_name??''?></td>
                         <td><?= $total??''?></td>
                         <td>
-                        <?= Html::a('download',['/lecturer/lecturer/download', 'id' => $course->course->id],['class'=>'btn btn-primary']) ?>
-                        </td>
+
+                        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data'], 'action' => Yii::$app->urlManager->createUrl(['/lecturer/lecturer/download'])]); ?>
+
+                        <input type="hidden" name="academic_year" value="<?= $academic_year?>">
+                        <input type="hidden" name="semester" value="<?= $semester?>">
+                        <input type="hidden" name="course" value="<?= $course->course->id?>">
+                        <?= Html::submitButton('download',['class'=>'btn btn-primary']) ?>
+                        <?php ActiveForm::end(); ?>
+
+                    </td>
                     </tr>
                     <?php endif; ?>
                     <?php endforeach; ?>

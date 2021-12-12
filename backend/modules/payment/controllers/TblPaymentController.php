@@ -23,6 +23,7 @@ use common\models\TblStudEmployDetails;
 use common\models\TblStudPersAddress;
 use common\models\TblStudPersDetails;
 use common\models\User;
+use common\models\Validate;
 use Exception;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -98,22 +99,20 @@ class TblPaymentController extends Controller
     }
 
     /**
-     * Creates a new TblPayment model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * Migrating admitted applicannts to students table after their fees payments
      */
     public function actionCreate()
     {
         if(Yii::$app->user->can('admission fees permission')){
         
         $personal=$this->admissionList();
-     $amount=0;
+        $amount=0;
         $model = new TblPayments();
         if ($model->load(Yii::$app->request->post())) {
             $amount=$_POST['TblPayments']['amount'];
             $app=TblApp::find()->where(['personal_details_id'=>$_POST['TblPayments']['admission_id']])->one();
-            $admission=TblAppAdmission::find()->where(['application_id'=>$app->id])->select('id')->one();   
-            
+            $admission=TblAppAdmission::find()->where(['application_id'=>$app->id])->one();  
+
             if(!empty($admiss=TblPayments::find()->where(['admission_id'=>$admission->id])->one())){
                 $model1=$admiss;
                 $model1->amount=$amount+$admiss->amount;
@@ -125,64 +124,54 @@ class TblPaymentController extends Controller
 
           if(($amount ?? 0)+ ($admiss->amount?? 0) >= $app->program->program->programCategory->amount){
             $model1->status=1;
-
-            ////
-
-            // try{
+            
                 $id=$app->id;
                 $admitt=$this->application($id);
                 $perID= $this->saveStudentPersonalDetails($id); 
+
                 $perAd=$this->saveStudentPersonalAddress($id);
 
                 $perEm= $this->saveStudentPersonalEmployment($id,$perID);
-                $perEd= $this->studEducationalBackground($id,$perID);
-                $this->studprograms($id,$perID);
-                $this->studDoc($id,$perID); 
-                        
-                $userAdmin = new User();
-                $userAdmin->username=date('Y').rand(0001,9999);
-                $userAdmin->email= date('Y').rand(0001,9999).'@upsamail.edu.gh';
-                $userAdmin->role_id=1;
-                $userAdmin->password_hash = $userAdmin->setPassword($admitt->personalDetails->date_of_birth);
-                $userAdmin->status = 1;
-                $userAdmin->auth_key=$userAdmin->generateAuthKey();
-                $userAdmin->save();
 
+                $perEd= $this->studEducationalBackground($id,$perID);
+
+                $proID=$this->studprograms($id,$perID);
+                $this->studDoc($id,$perID); 
+     
                 $stu= new TblStud();
                 $stu->personal_details_id= $perID;
                 $stu->personal_address_id= $perAd;
-                $stu->personal_education_id=$perID;
-                $stu->personal_employment_id=$perID;
+                $stu->personal_education_id=$perEd;
+                $stu->personal_employment_id=$perEm;
                 $stu->personal_document_id=$perID;
-                $stu->program_id=$perID;
+                $stu->program_id=$proID;
                 $stu->application_type=$admitt->application_type;
                 $stu->status=1;
                 $stu->user_id=Yii::$app->user->identity->id;
                 $stu->dates=date('Y-m-d');
                 $stu->save();
-                
-                // Yii::$app->session->setFlash('success', 'Successfully Registered Applicant as Student');
 
-                // return $this->redirect(['index']);
-            //    }
+                $mail=new Validate();
 
-            // }catch(Exception $e){
-            //     Yii::$app->session->setFlash('error', 'Already Migrated'.$e->getMessage());
-            //     return $this->redirect(['index']);
-            // }
+                $mail->userAdmins($admitt->personalDetails->date_of_birth,date('Y').rand(0001,9999),1,1);
 
-
-            ////
-
-          }else{
-            $model1->status=2;
-          } 
+                if(strtolower($app->program->program->programCategory->name)==='professional program'){
+                    $email=strtolower($mail->filter_mail($app->personalAddress->email));
+                    $mail->professionalMail($admitt->personalDetails->id,$app->program->program->programCategory->name,$app->program->program->programCategory->amount,$app->personalAddress->address,$admission->accadaminYear->academic_year,$app->program->program->program_name,$email);
+                }else{
+                    $email=strtolower($mail->filter_mail($app->personalAddress->email));
+                  $mail->accessMail($admitt->personalDetails->id,$app->program->program->programCategory->name,$app->program->program->programCategory->amount,$app->personalAddress->address,$admission->accadaminYear->academic_year,$app->program->program->program_name,$email);
+               }
+            }else{
+                $model1->status=2;
+            } 
 
           $model1->admission_id=$admission->id;
           $model1->receipt_no=$_POST['TblPayments']['receipt_no'];
           $model1->dates=date('Y-m-d');
           $model1->user_id=Yii::$app->user->identity->id;
           $model1->save();
+
 
           $this->paymentLog($model1->id,$amount,$_POST['TblPayments']['receipt_no']);
           
@@ -288,18 +277,19 @@ class TblPaymentController extends Controller
     Migrating  Admitted Applicant Personal Details To Student Personal Details Table
   */
   public function saveStudentPersonalDetails($id){
+    $valide=new Validate();  
     $register=$this->application($id);
     $personalD=new  TblStudPersDetails();
-    $personalD->title=$register->personalDetails->title;
-    $personalD->last_name=$register->personalDetails->last_name;
-    $personalD->first_name=$register->personalDetails->first_name;
-    $personalD->middle_name=$register->personalDetails->middle_name;
-    $personalD->gender=$register->personalDetails->gender;
-    $personalD->date_of_birth=$register->personalDetails->date_of_birth;
-    $personalD->nationality=$register->personalDetails->nationality;
-    $personalD->contact_person=$register->personalDetails->contact_person;
-    $personalD->contact_number=$register->personalDetails->contact_number;
-    $personalD->date_apply=$register->personalDetails->date_apply;
+    $personalD->title=$valide->replace2($register->personalDetails->title);
+    $personalD->last_name=$valide->replace2($register->personalDetails->last_name);
+    $personalD->first_name=$valide->replace2($register->personalDetails->first_name);
+    $personalD->middle_name=$valide->replace2($register->personalDetails->middle_name);
+    $personalD->gender=$valide->replace2($register->personalDetails->gender);
+    $personalD->date_of_birth=$valide->replace2($register->personalDetails->date_of_birth);
+    $personalD->nationality=$valide->replace2($register->personalDetails->nationality);
+    $personalD->contact_person=$valide->replace2($register->personalDetails->contact_person);
+    $personalD->contact_number=$valide->check_only_int($register->personalDetails->contact_number);
+    $personalD->date_apply=$valide->replace2($register->personalDetails->date_apply);
     $personalD->photo=$register->personalDetails->photo;
     $personalD->save();         
     return $personalD->id;
@@ -360,13 +350,11 @@ public function studEducationalBackground($id,$perID){
   public function studprograms($id,$perID){
     $prag=$this->application($id);
     $pro= TblAppProgram::find()->andwhere(['id'=>$prag->program_id])->one();
-    // foreach($program as $pro){ 
-        $stud=new TblAppStudProgram();
-        $stud->tbl_program=$pro->tbl_program;
-        // $stud->course_id=$pro->course_id;
-        $stud->stud_per_id=$perID;
-        $stud->save();
-    // }   
+    $stud=new TblAppStudProgram();
+    $stud->tbl_program=$pro->tbl_program;
+    $stud->stud_per_id=$perID;
+    $stud->save();
+    return $stud->id;
 }
 
 

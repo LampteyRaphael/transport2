@@ -34,20 +34,35 @@
         < Sidebar Menu -->
         <nav class="mt-2">
             <?php
+             
+             $hod=[];
+             $dean = [];
+             $publisher = [];
+             $transcript = [];
+
+            if(Yii::$app->user->can('hod permission')){
+               $hod= ['label' => 'Students Result',  'icon' => 'fa fa-reply', 'url' => ['/hod/tbl-studs-result/index']];
+            }
+            
+            if(Yii::$app->user->can('dean permission')){
+              $dean=['label' => 'Students Result', 'icon' => 'fa fa-reply', 'url' => ['/dean/tbl-studs-result/index']];
+            }
+            
+            if(Yii::$app->user->can('publisher permission')){
+                $publisher=['label' => 'Students Result', 'icon' => 'fa fa-reply', 'url' => ['/publisher/tbl-studs-result/index']];
+            }
+            
+            if(Yii::$app->user->can('transcript permission')){
+                $transcript=['label' => 'Students Transcript', 'icon' => 'fa fa-reply', 'url' => ['/transcript/tbl-studs-transcript/index']]; 
+            }
+
+            ?>
+            <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
                     ['label' => 'Dashboard', 'url'=>['/site/index'], 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
 
-                    [
-                        'label' => 'Admin Users',
-                        'icon' => 'fa fa-users',
-                        'badge' => '<span class="right badge badge-info">2</span>',
-                        'items' => [
-                            ['label' => 'User', 'url' => ['/user/tbl-user/index'], 'iconStyle' => 'far'],
-                            ['label' => 'Permissions', 'url'=>['/admin/assignment/index'],'iconStyle' => 'far'],
-                            ['label' => 'Roles', 'url'=>['/admin/role/index'],'iconStyle' => 'far'],
-                        ]
-                    ],
+                    ['label' => 'Users', 'url' => ['/user/tbl-user/index'], 'icon' => 'users'],
                    
                     // [
                     //     'label' => 'Applicants',
@@ -55,46 +70,79 @@
                         // 'badge' => '<span class="right badge badge-info">2</span>',
                         // 'items'=>[
                             // ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-                            ['label' => 'Application',  'iconStyle' => 'far', 'url' => ['/application/app/index']],
-                            ['label' => 'Qualification', 'iconStyle' => 'far', 'url' => ['/qualification/tbl-app-quali/index']],
-                            ['label' => 'Admission', 'iconStyle' => 'far', 'url' => ['/admission/tbl-app-admission/index']],
+                            ['label' => 'Applications',  'icon' => 'fa fa-address-book', 'url' => ['/application/app/index']],
+                            ['label' => 'Qualifications', 'icon' => 'fa fa-address-book', 'url' => ['/qualification/tbl-app-quali/index']],
+                            ['label' => 'Admissions', 'icon' => 'fa fa-address-book', 'url' => ['/admission/tbl-app-admission/index']],
                         // ]
                     // ],
 
-                    ['label' => 'Finance Report',  'iconStyle' => 'far', 'url' => ['/payment/tbl-payment/index']],
+                    ['label' => 'Finance',  'icon' => 'fas fa-wallet', 'url' => ['/payment/tbl-payment/index']],
 
+
+                    ['label' => 'Students', 'icon' => 'users', 'url' => ['/students/tbl-stud/index']],
 
                     [
-                        'label' => 'Students',
-                        'icon' => 'fa fa-user',
+                        'label' => 'Examinations',
+                        'icon' => 'fa fa-tasks',
                         // 'badge' => '<span class="right badge badge-info">2</span>',
-                        'items'=>[
-                            ['label' => 'Students List', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud/index']],
-                            ['label' => 'Registered Courses', 'iconStyle' => 'far', 'url' => ['/students/tbl-regis-course/index']], 
-                            // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],  
+                        'items'=> [$hod,$dean,$publisher,$transcript],
+                        // [
+                            // ['label' => 'Students Result',  'icon' => 'fa fa-reply', 'url' => ['/hod/tbl-studs-result/index','visible' => Yii::$app->user->can('backend students permission')]],
+                            // ['label' => 'Students Result', 'icon' => 'fa fa-reply', 'url' => ['/dean/tbl-studs-result/index']], 
+                            // ['label' => 'Students Result', 'icon' => 'fa fa-reply', 'url' => ['/publisher/tbl-studs-result/index']],
+                            // ['label' => 'Students Result', 'icon' => 'fa fa-reply', 'url' => ['/transcript/tbl-studs-transcript/index']],  
                             // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],    
-  
-                        ],
+                        // ],
                     ],
-                    ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
+
+                    // ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
                     
                     [
                         'label' => 'Departments',
-                        'icon' => 'fa fa-user',
+                        'icon' => 'fa fa-landmark',
                         // 'badge' => '<span class="right badge badge-info">2</span>',
                         'items'=>[
-                            ['label' => 'Departments',  'iconStyle' => 'far', 'url' => ['/departments/tbl-depart/index']],
-                            ['label' => 'Courses && Department ', 'iconStyle' => 'far', 'url' => ['/departments/tbl-course-depart/index']], 
+                            ['label' => 'Departments',  'icon' => 'fa fa-reply', 'url' => ['/departments/tbl-depart/index']],
+                            ['label' => 'Courses && Department ', 'icon' => 'fa fa-reply', 'url' => ['/departments/tbl-course-depart/index']], 
                             // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],  
                             // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],    
   
                         ],
                     ],
 
-                 
-                    ['label' => 'Settings', 'iconStyle' => 'far', 'url' => ['/program/tbl-program/index']],
-                    // ['label' => 'Stud. Course Registered', 'iconStyle' => 'far', 'url' => ['/students/tbl-regis-course']],
 
+
+                 
+                    [
+                        'label' => 'Settings', 'icon' => 'cog', 'url' => ['/program/tbl-program/index'],
+                
+                    // [
+                    //     'label' => 'System Users',
+                    //     'icon' => 'fa fa-users',
+                    //     'badge' => '<span class="right badge badge-info">2</span>',
+
+                    //     'items' => [
+                    //         ['label' => 'Permissions', 'url'=>['/admin/assignment/index'],'iconStyle' => 'far'],
+                    //         ['label' => 'Roles', 'url'=>['/admin/role/index'],'iconStyle' => 'far'],
+                    //     ]
+                    // ],
+                
+                ],
+
+                [
+                    'label' => 'Logs',
+                    'icon' => 'fa fa-landmark',
+                    // 'badge' => '<span class="right badge badge-info">2</span>',
+                    'items'=>[
+                        ['label' => 'Qualifications Logs',  'iconStyle' => 'far', 'url' => ['/qualification/tbl-quali-log/index']],
+                        ['label' => 'Admissions Logs ', 'iconStyle' => 'far', 'url' => ['/admission/tbl-admiss-log/index']], 
+                       
+                        // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],    
+
+                    ],
+                ],
+
+                
                     // ['label' => 'MULTI LEVEL EXAMPLE', 'header' => true],
                     // ['label' => 'Level1'],
                     // [

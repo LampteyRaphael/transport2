@@ -25,9 +25,9 @@ use Yii;
  * @property TblStudPersAddress $personalAddress
  * @property TblStudPersDetails $personalDetails
  * @property TblStudPersDetails $personalDocument
- * @property TblStudPersDetails $personalEducation
+ * @property TblStudEduBg $personalEducation
  * @property TblStudPersDetails $personalEmployment
- * @property TblStudPersDetails $program
+ * @property TblAppStudProgram $program
  * @property TblStudStatus $status0
  * @property TblStRegistration[] $tblStRegistrations
  * @property TblStudAdmis[] $tblStudAdmis
@@ -52,14 +52,15 @@ class TblStud extends \yii\db\ActiveRecord
         return [
             [['personal_details_id', 'personal_address_id', 'personal_education_id', 'personal_employment_id', 'application_type', 'status', 'user_id'], 'required'],
             [['personal_details_id', 'personal_address_id', 'personal_education_id', 'personal_employment_id', 'personal_document_id', 'application_type', 'status', 'user_id', 'program_id'], 'integer'],
+            [['personal_details_id', 'personal_address_id', 'personal_education_id', 'personal_employment_id','user_id'],'unique'],
             [['dates', 'created_at', 'updated_at'], 'safe'],
             [['personal_details_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersDetails::className(), 'targetAttribute' => ['personal_details_id' => 'id']],
-            [['personal_education_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersDetails::className(), 'targetAttribute' => ['personal_education_id' => 'id']],
             [['personal_employment_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersDetails::className(), 'targetAttribute' => ['personal_employment_id' => 'id']],
             [['personal_document_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersDetails::className(), 'targetAttribute' => ['personal_document_id' => 'id']],
             [['personal_address_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersAddress::className(), 'targetAttribute' => ['personal_address_id' => 'id']],
-            [['program_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersDetails::className(), 'targetAttribute' => ['program_id' => 'id']],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [['program_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblAppStudProgram::className(), 'targetAttribute' => ['program_id' => 'id']],
+            [['personal_education_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudEduBg::className(), 'targetAttribute' => ['personal_education_id' => 'id']],
             [['application_type'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudTypeCategory::className(), 'targetAttribute' => ['application_type' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudStatus::className(), 'targetAttribute' => ['status' => 'id']],
         ];
@@ -82,8 +83,8 @@ class TblStud extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'program_id' => 'Program ID',
             'dates' => 'Dates',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Created Date',
+            'updated_at' => 'Updated Dated',
         ];
     }
 
@@ -134,7 +135,7 @@ class TblStud extends \yii\db\ActiveRecord
      */
     public function getPersonalEducation()
     {
-        return $this->hasOne(TblStudPersDetails::className(), ['id' => 'personal_education_id']);
+        return $this->hasOne(TblStudEduBg::className(), ['id' => 'personal_education_id']);
     }
 
     /**
@@ -154,7 +155,7 @@ class TblStud extends \yii\db\ActiveRecord
      */
     public function getProgram()
     {
-        return $this->hasOne(TblStudPersDetails::className(), ['id' => 'program_id']);
+        return $this->hasOne(TblAppStudProgram::className(), ['id' => 'program_id']);
     }
 
     /**

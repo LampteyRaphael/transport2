@@ -1,9 +1,9 @@
 <?php
 
-use yii\bootstrap4\Html;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\qualification\models\TblQualiLog */
+/* @var $model common\models\TblQualiLog */
 
 $this->title = 'Update Tbl Quali Log: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Tbl Quali Logs', 'url' => ['index']];

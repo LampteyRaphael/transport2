@@ -99,7 +99,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getCountry0()
     {
-        return $this->hasOne(TblCountry::className(), ['id' => 'country'])->inverseOf('tblStaffLists');
+        return $this->hasOne(TblCountry::className(), ['id' => 'country']);
     }
 
     /**
@@ -109,7 +109,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getDepart()
     {
-        return $this->hasOne(TblDepart::className(), ['id' => 'depart_id'])->inverseOf('tblStaffLists');
+        return $this->hasOne(TblDepart::className(), ['id' => 'depart_id']);
     }
 
     /**
@@ -119,7 +119,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getProgram()
     {
-        return $this->hasOne(TblProgram::className(), ['id' => 'program_id'])->inverseOf('tblStaffLists');
+        return $this->hasOne(TblProgram::className(), ['id' => 'program_id']);
     }
 
     /**
@@ -129,7 +129,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getStaffCategory()
     {
-        return $this->hasOne(TblStaffCategory::className(), ['id' => 'staff_category_id'])->inverseOf('tblStaffLists');
+        return $this->hasOne(TblStaffCategory::className(), ['id' => 'staff_category_id']);
     }
 
     /**
@@ -139,7 +139,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getTblComments()
     {
-        return $this->hasMany(TblComment::className(), ['staff_id' => 'id'])->inverseOf('staff');
+        return $this->hasMany(TblComment::className(), ['staff_id' => 'id']);
     }
 
     /**
@@ -149,7 +149,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getTblLecturers()
     {
-        return $this->hasMany(TblLecturer::className(), ['staff_id' => 'id'])->inverseOf('staff');
+        return $this->hasMany(TblLecturer::className(), ['staff_id' => 'id']);
     }
 
     /**
@@ -159,7 +159,7 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getTblLogBooks()
     {
-        return $this->hasMany(TblLogBook::className(), ['staff_id' => 'id'])->inverseOf('staff');
+        return $this->hasMany(TblLogBook::className(), ['staff_id' => 'id']);
     }
 
     /**
@@ -169,6 +169,6 @@ class TblStaffList extends \yii\db\ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(User::className(), ['id' => 'user_id'])->inverseOf('tblStaffLists');
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

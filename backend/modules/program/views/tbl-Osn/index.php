@@ -26,12 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'toolbar' =>  [
         [
             'content'=>
-            Html::a('Create OSN', ['create'], ['class' => 'btn btn-primary']) 
+            Html::a('Create OSN', ['create'], ['class' => 'btn btn-primary mr-4']) 
          ],
 
          [
             'content'=>
-            Html::button(('Upload'), ['class' => 'btn btn-primary','data-toggle'=>"modal", 'data-target'=>"#exampleModal"]),
+            Html::button(('Upload'), ['class' => 'btn btn-success mr-4','data-toggle'=>"modal", 'data-target'=>"#exampleModal"]),
          ],
             '{export}',
             '{toggleData}'
@@ -52,20 +52,32 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
+            
+            [
+                'attribute'=>'created_at',
+                'label'=>'Date Uploaded',
+                'value'=>'created_at',
+            ],
+
             'osn_number',
+           
+            [
+                'attribute'=>'year',
+                'label'=>'Date Used',
+                'value'=>'year'
+            ],
+            'transaction_no',
             [
                 'attribute'=>'status',
                 'label'=>'Status',
                 'value'=>function($model){
-                    return $model->status==1? 'Active':'Non Active';
+                    return $model->status==1? 'Used':'unused';
+                },
+                'contentOptions' => function ($model, $key, $index, $column) {
+                    return ['style' => 'color:'.($model->status ==1 ? 'green' : 'red')];
                 },
             ],
-            [
-                'attribute'=>'year',
-                'label'=>'Date',
-                'value'=>'year'
-            ],
-            'transaction_no',
+            
             ['class' => 'kartik\grid\ActionColumn',
             'template' => '{view}',
             'buttons' => [

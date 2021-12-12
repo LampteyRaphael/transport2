@@ -201,17 +201,19 @@ $this->params['breadcrumbs'][] = ['label' => 'Students Info', 'url' => ['index']
 ?>
  
 
+
  <div class="card">
      <div class="card-header bg-primary">
        <h4>
-           <b>Student Bio-Data</b>
+           <b>Bio-Data</b>
        </h4>
      </div>
      <div class="card-body">
          <p class="card-text">
 <?php include (Yii::getAlias('@frontend/modules/student/views/include/header.php'))?>
 <div class="tab-content" id="pills-tabContent">
-    <div class="row">
+    <div class="container">
+        <div class="row">
         <div class="col-md-2">
             <?= Html::img('@web'.'/application/images/'.($personal->personalDetails->photo??''),['height'=>'100','width'=>'100','class'=>'thumbnail rounded'])?>
         </div>
@@ -222,48 +224,54 @@ $this->params['breadcrumbs'][] = ['label' => 'Students Info', 'url' => ['index']
                     <td><b><?= ($personal->personalDetails->first_name??'')  . ' ' . ($personal->personalDetails->middle_name??'') . ' ' .($personal->personalDetails->last_name??'') ;?></b></td>
                 </tr>
                 <tr>
-                <td><b><?= ($personal->program->program->program_name??''); ?></b></td>
-
-                <td>
-                    <b>(<?= ($personal->program->program->program_code??'');?>)</b>
-                    <b><?= ($personal->program->program->programCategory->name??'');?></b>
-            </td>
+                    <td>
+                        <b><?= $personal->program->program->program_name; ?></b>
+                    </td>
+                    <td>
+                        <b><?= ($personal->program->program->program_code??'');?></b>
+                    </td>
                 </tr>
                 <tr>
+                    <td>
+                        <b><?= ucwords($personal->program->program->programCategory->name??'');?></b>
+                    </td>
                 </tr>
-                
                 </tbody>
             </table>
         </div>
+        </div>
+       
     </div>
-    <div class="tab-pane fade show p-lg-5 active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+
+
+    <div class="tab-pane fade show mt-4 active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
         <div class="row">
             <div class="col">
             <?=
-     DetailView::widget([
-        'model' => $personal,
-        'attributes' => $attributes,
-        'mode' => 'view',
-        'bordered' => true,
-        'striped' => true,
-        'condensed' => true,
-        'responsive' => true,
-        'hover' => true,
-         'vAlign'=>true,
-        'fadeDelay'=>true,
-        'panel' => [
-            'heading'=>'Personal Information',
-             'type'=>DetailView::TYPE_PRIMARY,
-            'footer' => '<div class="text-center text-muted"></div>'
-        ],
-         'buttons1' => '{view}',
-    ]);
-    ?>
+                DetailView::widget([
+                    'model' => $personal,
+                    'attributes' => $attributes,
+                    'mode' => 'view',
+                    'bordered' => true,
+                    'striped' => true,
+                    'condensed' => true,
+                    'responsive' => true,
+                    'hover' => true,
+                    'vAlign'=>true,
+                    'fadeDelay'=>true,
+                    'panel' => [
+                        'heading'=>'Personal Information',
+                        'type'=>DetailView::TYPE_PRIMARY,
+                        'footer' => '<div class="text-center text-muted"></div>'
+                    ],
+                    'buttons1' => '',
+                ]);
+        ?>
             </div>
         </div>
     </div>
-    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-        <div class="col p-4">
+    <div class="tab-pane fade mt-4" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+        <div class="row">
             <div class="col">
             <?=
                 DetailView::widget([
@@ -282,14 +290,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Students Info', 'url' => ['index']
                         'type'=>DetailView::TYPE_PRIMARY,
                         'footer' => '<div class="text-center text-muted"></div>'
                     ],
-                     'buttons1' => '{view}',
+                     'buttons1' => '',
                 ]);
                  ?>
             </div>
         </div>
     </div>
-    <div class="tab-pane fade p-4" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-        <div class="col p-4">
+    <div class="tab-pane fade mt-4" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+        <div class="row">
                 <div class="col">
                 <?=
                 DetailView::widget([
@@ -308,7 +316,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Students Info', 'url' => ['index']
                         'type'=>DetailView::TYPE_PRIMARY,
                         'footer' => '<div class="text-center text-muted"></div>'
                     ],
-                     'buttons1' => '{view}',             
+                     'buttons1' => '',             
                 ]);
                  ?>
                 </div>

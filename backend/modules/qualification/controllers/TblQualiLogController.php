@@ -2,9 +2,8 @@
 
 namespace backend\modules\qualification\controllers;
 
-use Yii;
-use backend\modules\qualification\models\TblQualiLog;
-use backend\modules\qualification\models\TblQualiLogSearch;
+use common\models\TblQualiLog;
+use common\TblQualiLogSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -15,18 +14,21 @@ use yii\filters\VerbFilter;
 class TblQualiLogController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
+                    ],
                 ],
-            ],
-        ];
+            ]
+        );
     }
 
     /**
@@ -36,7 +38,7 @@ class TblQualiLogController extends Controller
     public function actionIndex()
     {
         $searchModel = new TblQualiLogSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -46,7 +48,7 @@ class TblQualiLogController extends Controller
 
     /**
      * Displays a single TblQualiLog model.
-     * @param integer $id
+     * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -66,8 +68,12 @@ class TblQualiLogController extends Controller
     {
         $model = new TblQualiLog();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } else {
+            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -78,7 +84,7 @@ class TblQualiLogController extends Controller
     /**
      * Updates an existing TblQualiLog model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -86,7 +92,7 @@ class TblQualiLogController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -98,21 +104,21 @@ class TblQualiLogController extends Controller
     /**
      * Deletes an existing TblQualiLog model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->session->setFlash('error', 'Sorry!. Checkbox is not selected');
+
         return $this->redirect(['index']);
     }
 
     /**
      * Finds the TblQualiLog model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id ID
      * @return TblQualiLog the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

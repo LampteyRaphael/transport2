@@ -1,3 +1,7 @@
+<?php
+
+use kartik\helpers\Html;
+?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
@@ -10,7 +14,8 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="images/upsa3.jpg" class="img-circle elevation-2" alt="User Image">
+                <?= Html::img('@web'.'/application/images/'.Yii::$app->user->identity->photo,['height'=>'100','width'=>'100','class'=>'img-circle elevation-2'])?>
+                <!-- <img src="images/upsa3.jpg" class="img-circle elevation-2" alt="User Image"> -->
             </div>
             <div class="info">
                 <a href="#" class="d-block"><?= Yii::$app->user->identity->username??'' ?></a>
@@ -36,10 +41,10 @@
             <?php
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
-                    ['label' => 'Student Info', 'url'=>['/student'], 'icon' => 'user'],
-                    ['label' => 'Registered Courses', 'url' => ['/student/tbl-st-registration/index'], 'iconStyle' => 'fa fa-bookmark'],
-                    ['label' => 'Course Registration',  'iconStyle' => 'far', 'url' => ['/student/tbl-course/index']],
-                    ['label' => 'Examination Result',  'iconStyle' => 'far', 'url' => ['/student/tbl-st-registration/result']],
+                    ['label' => 'Student Info', 'url'=>['/student'], 'icon' => 'users'],
+                    ['label' => 'Registered Courses', 'url' => ['/student/tbl-st-registration/index'], 'icon' => 'book'],
+                    ['label' => 'Course Registration',  'icon' => 'pen', 'url' => ['/student/tbl-course/index']],
+                    ['label' => 'Examination Result',  'icon' => 'fa fa-bookmark', 'url' => ['/student/tbl-st-registration/result']],
 
                 ],
             ]);
@@ -49,9 +54,8 @@
             echo \hail812\adminlte\widgets\Menu::widget([
                 'items' => [
                     ['label' => 'Bio Data', 'url'=>['/lecturer/lecturer/index'], 'icon' => 'user'],
-                    ['label' => 'Registered Courses', 'url' => ['/lecturer/lecturer/courses'], 'iconStyle' => 'fa fa-bookmark'],
-                    ['label' => 'Examination Result',  'iconStyle' => 'far', 'url' => ['/lecturer/lecturer/result']],
-                    ['label' => 'Students Result',  'iconStyle' => 'far', 'url' => ['/lecturer/tbl-studs-result/index']],
+                    ['label' => 'Students Upload', 'icon' => 'fa fa-reply', 'url' => ['/lecturer/lecturer/result']], 
+                    ['label' => 'Students Results',  'icon' => 'fa fa-reply', 'url' => ['/lecturer/tbl-studs-result/index']],
                 ],
             ]);
             ?>

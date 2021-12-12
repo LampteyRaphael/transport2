@@ -17,8 +17,6 @@ $linkLogo=Url::to('image/logo.png',true);
 </head>
 <body>
     <?php $this->beginBody() ?>
-    <?= Html::img($linkLogo,['alt'=>'UPSA']) ?>
-    <h1>This is from Common </h1>
     <?= $content ?>
     <?php $this->endBody() ?>
 </body>

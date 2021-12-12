@@ -18,7 +18,7 @@ use Yii;
  * @property string $date
  * @property string $required_courses
  * @property string $created_at
- * @property string $updated_at
+ * @property string|null $updated_at
  *
  * @property TblLevel $level
  * @property TblProgram $program
@@ -28,7 +28,8 @@ use Yii;
  * @property TblCourseDepart[] $tblCourseDeparts
  * @property TblCourseLecturer[] $tblCourseLecturers
  * @property TblRegisCourse[] $tblRegisCourses
- * @property TblStudResult[] $tblStudResults
+ * @property TblStRegistration[] $tblStRegistrations
+ * @property TblStudsResult[] $tblStudsResults
  */
 class TblCourse extends \yii\db\ActiveRecord
 {
@@ -40,18 +41,15 @@ class TblCourse extends \yii\db\ActiveRecord
         return 'tbl_course';
     }
 
-    public $acadamic_year;
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['courseName', 'course_number', 'level_id', 'section_id', 'semester', 'program_id', 'required_courses'], 'required'],
+            [['courseName', 'course_number', 'level_id', 'section_id', 'program_id', 'date', 'required_courses'], 'required'],
             [['level_id', 'semester', 'section_id', 'program_id'], 'integer'],
             [['course_description'], 'string'],
-            [['acadamic_year'],'required'],
             [['date', 'created_at', 'updated_at'], 'safe'],
             [['courseName', 'required_courses'], 'string', 'max' => 255],
             [['course_number'], 'string', 'max' => 100],
@@ -71,10 +69,10 @@ class TblCourse extends \yii\db\ActiveRecord
             'id' => 'ID',
             'courseName' => 'Course Name',
             'course_number' => 'Course Number',
-            'level_id' => 'Level',
+            'level_id' => 'Level ID',
             'semester' => 'Semester',
-            'section_id' => 'Section',
-            'program_id' => 'Program',
+            'section_id' => 'Section ID',
+            'program_id' => 'Program ID',
             'course_description' => 'Course Description',
             'date' => 'Date',
             'required_courses' => 'Required Courses',
@@ -164,12 +162,22 @@ class TblCourse extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[TblStudResults]].
+     * Gets query for [[TblStRegistrations]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTblStudResults()
+    public function getTblStRegistrations()
     {
-        return $this->hasMany(TblStudResult::className(), ['course_id' => 'id']);
+        return $this->hasMany(TblStRegistration::className(), ['courese_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TblStudsResults]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblStudsResults()
+    {
+        return $this->hasMany(TblStudsResult::className(), ['course_id' => 'id']);
     }
 }

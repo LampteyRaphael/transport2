@@ -4,17 +4,17 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\students\models\TblStudAcadYear */
+/* @var $model common\models\TblStudAcadYear */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Tbl Stud Acad Years', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Academic Year';
+$this->params['breadcrumbs'][] = ['label' => 'Student Academic Year', 'url' => ['index']];
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="tbl-stud-acad-year-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
+<div class="card">
+    <div class="card-header bg-primary">
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -25,13 +25,24 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
+    </div>
+    <div class="card-body">
+        <p class="card-text">
+        <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'date_of_admission',
+            'created_at',
+            'updated_at',
         ],
     ]) ?>
+        </p>
+    </div>
+    
+</div>
+
+   
+
+    
 
 </div>

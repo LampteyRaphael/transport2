@@ -1,10 +1,10 @@
 <?php
 
-use yii\bootstrap4\Html;
-use yii\bootstrap4\ActiveForm;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\qualification\models\TblQualiLog */
+/* @var $model common\models\TblQualiLog */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

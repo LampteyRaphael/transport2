@@ -2,9 +2,9 @@
 
 namespace backend\modules\students\controllers;
 
+use common\models\TblStRegistration;
+use common\models\TblStRegistrationSearch;
 use Yii;
-use backend\modules\students\models\TblStRegistration;
-use backend\modules\students\models\TblStRegistrationSearch;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -64,9 +64,26 @@ class TblStRegistrationController extends Controller
      */
     public function actionView($id)
     {
+
+        $searchModel = new TblStRegistrationSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['stud_Id'=>$id])->all();
+
+        $name=$dataProvider->query->where(['stud_Id'=>$id])->one();
+
+        $fullName= $name->stud->personalDetails->title0->name . ' ' .  $name->stud->personalDetails->first_name . ' ' . $name->stud->personalDetails->middle_name . ' ' . $name->stud->personalDetails->last_name;
+        
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'id'=>$id,
+            'name'=>$fullName,
         ]);
+
+        // return $this->render('view', [
+        //     'model' => $this->findModel($id),
+        // ]);
     }
 
     /**

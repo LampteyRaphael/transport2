@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\admission\models\TblAdmissLog */
+/* @var $model common\models\TblAdmissLog */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

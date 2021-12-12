@@ -33,7 +33,6 @@ class TblAppProgram extends \yii\db\ActiveRecord
         return [
             [['tbl_program', 'osn_id'], 'required'],
             [['tbl_program', 'osn_id'], 'integer'],
-            [['osn_id'], 'unique'],
             [['tbl_program'], 'exist', 'skipOnError' => true, 'targetClass' => TblProgram::className(), 'targetAttribute' => ['tbl_program' => 'id']],
             [['osn_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblOsn::className(), 'targetAttribute' => ['osn_id' => 'id']],
         ];
@@ -76,7 +75,7 @@ class TblAppProgram extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getprogram()
+    public function getProgram()
     {
         return $this->hasOne(TblProgram::className(), ['id' => 'tbl_program']);
     }

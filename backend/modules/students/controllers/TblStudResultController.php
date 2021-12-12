@@ -2,9 +2,9 @@
 
 namespace backend\modules\students\controllers;
 
+use common\models\TblStudsResult;
+use common\models\TblStudsResultSearch;
 use Yii;
-use backend\modules\students\models\TblStudResult;
-use backend\modules\students\models\TblStudResultSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,7 +35,7 @@ class TblStudResultController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new TblStudResultSearch();
+        $searchModel = new TblStudsResultSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -64,7 +64,7 @@ class TblStudResultController extends Controller
      */
     public function actionCreate()
     {
-        $model = new TblStudResult();
+        $model = new TblStudsResult();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -118,7 +118,7 @@ class TblStudResultController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = TblStudResult::findOne($id)) !== null) {
+        if (($model = TblStudsResult::findOne($id)) !== null) {
             return $model;
         }
 

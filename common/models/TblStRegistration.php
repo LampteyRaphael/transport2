@@ -20,7 +20,7 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property TblStudAcadamicYear $acadamicYear
+ * @property TblStudRegistYear $acadamicYear
  * @property TblCourse $courese
  * @property TblLevel $level
  * @property TblProgram $program
@@ -56,11 +56,10 @@ class TblStRegistration extends \yii\db\ActiveRecord
             [['program_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblProgram::className(), 'targetAttribute' => ['program_id' => 'id']],
             [['section_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblSection::className(), 'targetAttribute' => ['section_id' => 'id']],
             [['semester'], 'exist', 'skipOnError' => true, 'targetClass' => TblSemester::className(), 'targetAttribute' => ['semester' => 'id']],
-            [['acadamic_year'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudAcadamicYear::className(), 'targetAttribute' => ['acadamic_year' => 'id']],
+            [['acadamic_year'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudRegistYear::className(), 'targetAttribute' => ['acadamic_year' => 'id']],
             [['stud_Id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStud::className(), 'targetAttribute' => ['stud_Id' => 'id']],
             [['courese_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblCourse::className(), 'targetAttribute' => ['courese_id' => 'id']],
             [['status'], 'exist', 'skipOnError' => true, 'targetClass' => TblRegistCourseStatus::className(), 'targetAttribute' => ['status' => 'id']],
-        
         ];
     }
 
@@ -92,7 +91,7 @@ class TblStRegistration extends \yii\db\ActiveRecord
      */
     public function getAcadamicYear()
     {
-        return $this->hasOne(TblStudAcadamicYear::className(), ['id' => 'acadamic_year']);
+        return $this->hasOne(TblStudRegistYear::className(), ['id' => 'acadamic_year']);
     }
 
     /**

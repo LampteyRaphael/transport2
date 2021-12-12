@@ -1,10 +1,10 @@
 <?php
 
-use yii\bootstrap4\Html;
-use yii\bootstrap4\ActiveForm;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\qualification\models\TblQualiLogSearch */
+/* @var $model common\TblQualiLogSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -13,9 +13,6 @@ use yii\bootstrap4\ActiveForm;
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
-        'options' => [
-            'data-pjax' => 1
-        ],
     ]); ?>
 
     <?= $form->field($model, 'id') ?>

@@ -13,7 +13,6 @@ use common\models\TblAppProgram;
 use common\models\TblAppSearch;
 use Yii;
 use common\models\TblAppQuali;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -274,8 +273,11 @@ protected function findEmploymentDetails($id)
            if ($quali->save()){
                //after saving the information , go ahead and remove the applicants connec
                // $app->delete();
-               Yii::$app->session->setFlash('success', 'Successfully Qualified Applicant','Good');
+               Yii::$app->session->setFlash('success', 'Successfully Qualified Applicant');
                return $this->redirect(['index']);
+           }else{
+                Yii::$app->session->setFlash('error', 'Already Qualified Applicant');
+                return $this->redirect(['index']);
            }
 
         }else

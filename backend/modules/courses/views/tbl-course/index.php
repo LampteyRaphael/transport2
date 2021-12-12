@@ -1,10 +1,7 @@
 <?php
-
-use common\models\TblLevel;
 use yii\bootstrap4\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
-
 $this->title = 'Courses';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -12,10 +9,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <!-- Navigation Bar -->
     <?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
 <!-- End Of Navigation Bar -->
-
     <?php Pjax::begin(); ?>
-    <!-- < // echo $this->render('_search', ['model' => $searchModel]); ?> -->
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -23,7 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'containerOptions' => ['style'=>'overflow: auto'], 
         'tableOptions' => ['class' => 'table table-striped table-hover table-condensed text-left'],
-
         'toolbar' =>  [
         [
             'content'=> 
@@ -32,7 +25,6 @@ $this->params['breadcrumbs'][] = $this->title;
             '{export}',
             '{toggleData}'
         ],
-
     'pjax'=>true,
     'bordered' => true,
     'striped' => true,
@@ -43,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
     'hover' => true,
     'floatHeader' => false,
     'panel' => [
-        'heading'=>'<h3 class="panel-title">Professional Courses</h3>',
+        'heading'=>'<h3 class="panel-title">Courses</h3>',
         'type' => GridView::TYPE_PRIMARY,
     ],
         'columns' => [
@@ -57,11 +49,22 @@ $this->params['breadcrumbs'][] = $this->title;
                  'collapseIcon' => '<i class="fa fa-close small" aria-hidden="true"></i>',
                  'detailUrl'=> Yii::$app->request->getBaseUrl().'/courses/tbl-course/details/', 
               ],
-
             'date:date',
-            'courseName',
-            'course_number',
-            'program.program_name',
+            [
+                'attribute'=>'courseName',
+                'value'=>'courseName',
+                'label'=>'Courses'
+            ],
+            [
+                'attribute'=>'course_number',
+                'value'=>'course_number',
+                'label'=>'Course Code'
+            ],
+            [
+                'attribute'=>'program_id',
+                'value'=>'program.program_name',
+                'label'=>'Course Code',
+            ],
             
             ['class' => 'kartik\grid\ActionColumn',
             'template' => '{view}',
@@ -69,17 +72,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'view' => function ($url, $model, $key) {
                     return Html::a ( 'view', ['/courses/tbl-course/view', 'id' => $model->id],['class'=>'btn btn-primary'] );
                 },
-                
+              ],
             ],
         ],
-
-        ],
     ]); ?>
-
     <?php Pjax::end(); ?>
-
 </div>
-
 <!-- Creating New Courses -->
 <div class="modal fade" id="addCourse" tabindex="-1"  aria-hidden="true" data-backdrop="static" data-keyboard="true"  aria-labelledby="staticBackdropLabel">
   <div class="modal-dialog modal-dialog-scrollable modal-xl">

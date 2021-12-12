@@ -2,10 +2,9 @@
 
 namespace backend\modules\students\controllers;
 
+use common\models\TblStudAcadYear;
+use common\TblStudAcadYearSearch;
 use Yii;
-use backend\modules\students\models\TblStudAcadYear;
-use backend\modules\students\models\TblStudAcadYearSearch;
-use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -16,29 +15,21 @@ use yii\filters\VerbFilter;
 class TblStudAcadYearController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['create', 'delete','index','update','view'],
-                'rules' => [
-                    [
-                        'actions' => ['create', 'delete','index','update','view'],
-                        'allow' => true,
-                        'roles' => ['@'],
+        return array_merge(
+            parent::behaviors(),
+            [
+                'verbs' => [
+                    'class' => VerbFilter::className(),
+                    'actions' => [
+                        'delete' => ['POST'],
                     ],
                 ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+            ]
+        );
     }
 
     /**
@@ -48,7 +39,7 @@ class TblStudAcadYearController extends Controller
     public function actionIndex()
     {
         $searchModel = new TblStudAcadYearSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -58,7 +49,7 @@ class TblStudAcadYearController extends Controller
 
     /**
      * Displays a single TblStudAcadYear model.
-     * @param integer $id
+     * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -78,8 +69,14 @@ class TblStudAcadYearController extends Controller
     {
         $model = new TblStudAcadYear();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+
+                Yii::$app->session->setFlash('success','Successfully Saved');
+                return $this->redirect(['index']);
+            }
+        } else {
+            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
@@ -90,7 +87,7 @@ class TblStudAcadYearController extends Controller
     /**
      * Updates an existing TblStudAcadYear model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
+     * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -98,7 +95,7 @@ class TblStudAcadYearController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -110,7 +107,7 @@ class TblStudAcadYearController extends Controller
     /**
      * Deletes an existing TblStudAcadYear model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
+     * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
@@ -124,7 +121,7 @@ class TblStudAcadYearController extends Controller
     /**
      * Finds the TblStudAcadYear model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
+     * @param int $id ID
      * @return TblStudAcadYear the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */

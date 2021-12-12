@@ -3,7 +3,7 @@
 namespace backend\modules\students\controllers;
 
 use Yii;
-use backend\modules\students\models\TblStudGrade;
+use common\models\TblStudGrade;
 use backend\modules\students\models\TblStudGradeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -67,6 +67,7 @@ class TblStudGradeController extends Controller
         $model = new TblStudGrade();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success','Successfully Saved');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -87,6 +88,7 @@ class TblStudGradeController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success','Successfully Updated');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -105,6 +107,7 @@ class TblStudGradeController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        Yii::$app->session->setFlash('success','Successfully Deleted');
 
         return $this->redirect(['index']);
     }

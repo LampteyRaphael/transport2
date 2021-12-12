@@ -36,6 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'grade_name',
+            'from',
+            'to',
             'grade_point',
         ],
     ]) ?>

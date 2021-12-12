@@ -39,12 +39,10 @@ class TblCourseController extends Controller
     {
         $searchModel = new TblCourseSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        $model=new TblCourse();
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'model'=>$model
+            'model'=>new TblCourse()
         ]);
     }
 
@@ -73,9 +71,18 @@ class TblCourseController extends Controller
             $model = new TblCourse();
             if ($model->load(Yii::$app->request->post())) {
                 //Posted Values to store
-                $models=$this->coursePost($model);
+                // $models=$this->coursePost($model);
+                $model->courseName=$_POST['TblCourse']['courseName'];
+                $model->course_number=$_POST['TblCourse']['course_number'];
+                $model->level_id=$_POST['TblCourse']['level_id'];
+                $model->section_id=$_POST['TblCourse']['section_id'];
+                $model->program_id=$_POST['TblCourse']['program_id'];
+                $model->date=date('Y-m-d');
+                $model->required_courses=$_POST['TblCourse']['required_courses'];
+                $model->semester=$_POST['TblCourse']['semester'];
+                $model->save();
 
-                if($models){
+                if($model){
                     Yii::$app->session->setFlash('success','Successfully saved');
                     return $this->redirect(['index', 'id' => $model->id]);
                 }
@@ -171,14 +178,14 @@ class TblCourseController extends Controller
        //Course Posted
        protected function coursePost($model){
         $validate=new Validate();
-        $model->courseName=$validate->replace2($_POST['TblCourse']['courseName']);
-        $model->course_number=$validate->replace2($_POST['TblCourse']['course_number']);
-        $model->level_id=$validate->check_only_int($_POST['TblCourse']['level_id']);
-        $model->section_id=$validate->check_only_int($_POST['TblCourse']['section_id']);
-        $model->program_id=$validate->check_only_int($_POST['TblCourse']['program_id']);
+        $model->courseName=$_POST['TblCourse']['courseName'];
+        $model->course_number=$_POST['TblCourse']['course_number'];
+        $model->level_id=$_POST['TblCourse']['level_id'];
+        $model->section_id=$_POST['TblCourse']['section_id'];
+        $model->program_id=$_POST['TblCourse']['program_id'];
         $model->date=date('Y-m-d');
-        $model->required_courses=$validate->check_only_int($_POST['TblCourse']['required_courses']);
-        $model->semester=$validate->replace2($_POST['TblCourse']['semester']);
+        $model->required_courses=$_POST['TblCourse']['required_courses'];
+        $model->semester=$_POST['TblCourse']['semester'];
         $model->save();
 }
 

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\students\models\TblStudStatusSearch */
@@ -16,21 +16,35 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php include (Yii::getAlias('@backend/modules/layout/navbar.php'))?>
     <!-- End Of Navigation Bar -->
 
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <div class="card">
+        <div class="card-header bg-primary">
+            <h4>Students Status</h4>
+        </div>
+        <div class="card-body">
+            <p class="card-text">    <?php Pjax::begin(); ?>
+   
+   <?= GridView::widget([
+       'dataProvider' => $dataProvider,
+       'filterModel' => $searchModel,
+       'columns' => [
+           ['class' => 'kartik\grid\SerialColumn'],
 
-            'name',
+           'name',
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+           ['class' => 'kartik\grid\ActionColumn',
+           'template' => '{view}',
+           'buttons' => [
+               'view' => function ($url, $model, $key) {
+                   return Html::a ( 'view', ['view', 'id' => $model->id],['class'=>'btn btn-primary'] );
+               },
+               
+           ],
+       ],
+       ],
+   ]); ?>
 
-    <?php Pjax::end(); ?>
-
+   <?php Pjax::end(); ?></p>
+        </div>
+    </div>
 </div>

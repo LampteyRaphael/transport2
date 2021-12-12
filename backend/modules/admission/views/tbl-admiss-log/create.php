@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\admission\models\TblAdmissLog */
+/* @var $model common\models\TblAdmissLog */
 
 $this->title = 'Create Tbl Admiss Log';
 $this->params['breadcrumbs'][] = ['label' => 'Tbl Admiss Logs', 'url' => ['index']];

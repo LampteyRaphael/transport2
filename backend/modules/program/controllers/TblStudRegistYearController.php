@@ -74,7 +74,15 @@ class TblStudRegistYearController extends Controller
             if ($this->request->isPost) {
                 if ($model->load($this->request->post())) {
                     $model->date=date('Y-m-d');
-                    $model->save();
+                    if($model->save()){
+                     $studAcadamic=  TblStudRegistYear::find()->andwhere(['status'=>1])->andwhere(['!=','id',$model->id])->all();
+                     foreach($studAcadamic as $studAcadamics){
+                        $studAcadamics->status=2;
+                        $studAcadamics->save();
+                     }
+
+                    }
+
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             } else {

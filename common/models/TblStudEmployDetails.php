@@ -34,6 +34,7 @@ class TblStudEmployDetails extends \yii\db\ActiveRecord
         return [
             [['stud_per_id'], 'required'],
             [['stud_per_id'], 'integer'],
+            [['stud_per_id'],'unique'],
             [['company_name', 'employer_address'], 'string', 'max' => 255],
             [['position'], 'string', 'max' => 200],
             [['employer_telephone_number'], 'string', 'max' => 20],

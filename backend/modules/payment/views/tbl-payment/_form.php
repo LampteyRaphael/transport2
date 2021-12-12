@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin(['action' => Yii::$app->urlManager->createUrl(['/payment/tbl-payment/create'])]); ?>
     <div class="row">
 
-       <div class="col-sm-2">Admission Applicant</div>
+       <div class="col-sm-2">Admitted Applicant</div>
        <div class="col-sm-8">
     
        <?= $form->field($model, 'admission_id')->widget(Select2::className(),[
@@ -18,7 +18,7 @@ use yii\helpers\ArrayHelper;
 
                     return $personal->first_name . ' ' . $personal->middle_name . ' ' .  $personal->last_name;
                 }),
-                'options'=>['placeholder'=>'',],
+                'options'=>['placeholder'=>'Select Admitted Applicant Name',],
                 'language'=>'en',
                 'pluginOptions'=>[
                     'allowClear'=>true,
@@ -31,13 +31,13 @@ use yii\helpers\ArrayHelper;
              Amount
         </div>
        <div class="col-sm-8">
-             <?= $form->field($model, 'amount')->Input('number')->label(false) ?>
+             <?= $form->field($model, 'amount')->Input('number',['placeholder'=>'Enter Admitted Applicant\'s Fees Paid'])->label(false) ?>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-2">Reciept</div>
+        <div class="col-sm-2">Reciept Number</div>
         <div class="col-sm-8">
-        <?= $form->field($model, 'receipt_no')->textInput()->label(false) ?>
+        <?= $form->field($model, 'receipt_no')->textInput(['placeholder'=>'Enter Admitted Applicant\'s Fees Paid Reciept Number'])->label(false) ?>
         </div>
     </div>
    

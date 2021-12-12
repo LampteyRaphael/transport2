@@ -2,7 +2,7 @@
             <table style="background-color: lightblue; padding: 50px;">
                 <tr>
                     <td>
-                        <img src="image/download.png" alt="" height="50" width="200">
+                        <img src="/images/download.png" alt="" height="50" width="200">
                     </td>
                     <td class="text-right" style="padding-left: 150px" colspan="5">
                           POST OFFICE BOX LG149, Accra, Ghana<br>
@@ -13,8 +13,7 @@
                         <br>
                         <br>
                         <br>
-                        16th june, 2021.
-
+                         <?php echo date('jS,F Y'); ?>
                     </td>
                 </tr>
                 <br>
@@ -29,10 +28,9 @@
                     <td>
                         <?= strtoupper(($modelp->first_name??'' ). ' ' .( $modelp->middle_name??'') . ' ' . ($modelp->last_name??'')); ?>
                         <br>
-                        <?= strtoupper($modelad->address??'');?>
+                        <?= 'Post Office Box '.strtoupper($addresses??'');?>
                         <br>
                         <?= strtoupper($modelad->city??'');?>
-
                         <br>
                         <br>
                         Dear <?= strtoupper($modelp->first_name??'').',';?>
@@ -43,7 +41,7 @@
 
                 <tr>
                     <td class="text-left" colspan="8">
-                        <b><u><?= strtoupper($programCategoryName??'')?> ADMISSIONS-2021/2022 ACADEMIC YEAR</u></b>
+                        <b><u><?= strtoupper($program??'')?> ADMISSIONS - <?= $academic_year??'' ?> ACADEMIC YEAR</u></b>
                     </td>
                 </tr>
                 <br>
@@ -52,7 +50,7 @@
                 <tr>
                     <td colspan="12">
                        I have the pleasure to offer you admission into the one-year 
-                       <b><?= strtoupper($personal->program->program0->program_name??'');?>  <?= $model->program->program0->programCategory->name??''?> </b> intake 2021/2022 acadamic year being delivered by the University of Professional Studies,Accra as follows:
+                       <b><?= strtoupper($program_name??'');?>  <?= $program??''?> </b> intake <?= $academic_year??'' ?> acadamic year being delivered by the University of Professional Studies,Accra as follows:
                     </td>
                 </tr>
                 <br>
@@ -80,7 +78,7 @@
                 <br>
                 <tr>
                     <td colspan="12">
-                       3.  You will be requred to pay a non-refundable programme fee of <b>One thousand, three hundred and fifty Ghana cedis (GHS 1,350,00).
+                       3.  You will be requred to pay a non-refundable programme fee of <b>One thousand, three hundred and fifty Ghana cedis (GHS <?= $amount;?>).
                         The fees must be paid in full into University's account below the commencement of the programme.</b>
                     </td>
                 </tr>
@@ -155,7 +153,7 @@
                         for: REGISTRAR</b>
                     </td>
                     <td colspan="8" class="text-right">
-                      <img src="<?= $image?>" height="50" width="50">
+                      <img src="/application/images/<?= $modelp->photo?>" height="50" width="50">
                     </td>
                 </tr>
             </table>

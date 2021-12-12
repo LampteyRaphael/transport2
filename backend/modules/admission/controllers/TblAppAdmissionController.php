@@ -262,167 +262,167 @@ class TblAppAdmissionController extends Controller
    /*
     Migrating  Admitted Applicant Personal Details To Student Personal Details Table
   */
-    public function saveStudentPersonalDetails($id){
-        $register=$this->application($id);
-        $personalD=new  TblStudPersDetails();
-        $personalD->title=$register->personalDetails->title;
-        $personalD->last_name=$register->personalDetails->last_name;
-        $personalD->first_name=$register->personalDetails->first_name;
-        $personalD->middle_name=$register->personalDetails->middle_name;
-        $personalD->gender=$register->personalDetails->gender;
-        $personalD->date_of_birth=$register->personalDetails->date_of_birth;
-        $personalD->nationality=$register->personalDetails->nationality;
-        $personalD->contact_person=$register->personalDetails->contact_person;
-        $personalD->contact_number=$register->personalDetails->contact_number;
-        $personalD->date_apply=$register->personalDetails->date_apply;
-        $personalD->photo=$register->personalDetails->photo;
-        $personalD->save();         
-        return $personalD->id;
-    }
+    // public function saveStudentPersonalDetails($id){
+    //     $register=$this->application($id);
+    //     $personalD=new  TblStudPersDetails();
+    //     $personalD->title=$register->personalDetails->title;
+    //     $personalD->last_name=$register->personalDetails->last_name;
+    //     $personalD->first_name=$register->personalDetails->first_name;
+    //     $personalD->middle_name=$register->personalDetails->middle_name;
+    //     $personalD->gender=$register->personalDetails->gender;
+    //     $personalD->date_of_birth=$register->personalDetails->date_of_birth;
+    //     $personalD->nationality=$register->personalDetails->nationality;
+    //     $personalD->contact_person=$register->personalDetails->contact_person;
+    //     $personalD->contact_number=$register->personalDetails->contact_number;
+    //     $personalD->date_apply=$register->personalDetails->date_apply;
+    //     $personalD->photo=$register->personalDetails->photo;
+    //     $personalD->save();         
+    //     return $personalD->id;
+    // }
 
     /*
         Migrating  Admitted Applicant Address Details To Student Address Table
     */
-    public function saveStudentPersonalAddress($id){
-        $register=$this->application($id);
-        $add =new TblStudPersAddress();
-        $add->address=$register->personalAddress->address;
-        $add->city=$register->personalAddress->city;
-        $add->voters_id=$register->personalAddress->voters_id;
-        $add->voters_id_type=$register->personalAddress->voters_id_type;
-        $add->gps=$register->personalAddress->gps;
-        $add->country=$register->personalAddress->country;
-        $add->email=$register->personalAddress->email;
-        $add->telephone_number=preg_replace('/[^0-9\.]/','', trim($register->personalAddress->telephone_number));
-        $add->save();
-        return  $add->id;
-    }
+    // public function saveStudentPersonalAddress($id){
+    //     $register=$this->application($id);
+    //     $add =new TblStudPersAddress();
+    //     $add->address=$register->personalAddress->address;
+    //     $add->city=$register->personalAddress->city;
+    //     $add->voters_id=$register->personalAddress->voters_id;
+    //     $add->voters_id_type=$register->personalAddress->voters_id_type;
+    //     $add->gps=$register->personalAddress->gps;
+    //     $add->country=$register->personalAddress->country;
+    //     $add->email=$register->personalAddress->email;
+    //     $add->telephone_number=preg_replace('/[^0-9\.]/','', trim($register->personalAddress->telephone_number));
+    //     $add->save();
+    //     return  $add->id;
+    // }
 
     /*
         Migrating  Admitted Applicant Empluyment Details To Student Employment Table
     */
-    public function saveStudentPersonalEmployment($id,$persID){
-        $register=$this->application($id);
-        $emp= new TblStudEmployDetails();
-        $emp->company_name= $register->personalEmployment->company_name;
-        $emp->position=$register->personalEmployment->position;
-        $emp->employer_address=$register->personalEmployment->employer_address;
-        $emp->employer_telephone_number=$register->personalEmployment->employer_telephone_number;
-        $emp->stud_per_id=$persID;
-        $emp->save();
-        return $emp->id;
-    }
+    // public function saveStudentPersonalEmployment($id,$persID){
+    //     $register=$this->application($id);
+    //     $emp= new TblStudEmployDetails();
+    //     $emp->company_name= $register->personalEmployment->company_name;
+    //     $emp->position=$register->personalEmployment->position;
+    //     $emp->employer_address=$register->personalEmployment->employer_address;
+    //     $emp->employer_telephone_number=$register->personalEmployment->employer_telephone_number;
+    //     $emp->stud_per_id=$persID;
+    //     $emp->save();
+    //     return $emp->id;
+    // }
 
     /*
     Migrating  Admitted Applicant Educational Details To Student  Educational Table
  */
-public function studEducationalBackground($id,$perID){
-    $resg=$this->application($id);
-    $edu= new TblStudEduBg();
-    $edu->institution= $resg->personalEducation->institution;
-    $edu->program_offered= $resg->personalEducation->program_offered;
-    $edu->date= $resg->personalEducation->date;
-    $edu->stud_per_id=$perID;
-    $edu->save();
-    return $edu->id;
-}
+// public function studEducationalBackground($id,$perID){
+//     $resg=$this->application($id);
+//     $edu= new TblStudEduBg();
+//     $edu->institution= $resg->personalEducation->institution;
+//     $edu->program_offered= $resg->personalEducation->program_offered;
+//     $edu->date= $resg->personalEducation->date;
+//     $edu->stud_per_id=$perID;
+//     $edu->save();
+//     return $edu->id;
+// }
 
 
 /*
  The Admitted Student Program Applied For 
  * is Migrated To Students Program Table 
   */
-public function studprograms($id,$perID){
-    $prag=$this->application($id);
-    $pro= TblAppProgram::find()->andwhere(['id'=>$prag->program_id])->one();
-    // foreach($program as $pro){ 
-        $stud=new TblAppStudProgram();
-        $stud->tbl_program=$pro->tbl_program;
-        // $stud->course_id=$pro->course_id;
-        $stud->stud_per_id=$perID;
-        $stud->save();
-    // }   
-}
+// public function studprograms($id,$perID){
+//     $prag=$this->application($id);
+//     $pro= TblAppProgram::find()->andwhere(['id'=>$prag->program_id])->one();
+//     // foreach($program as $pro){ 
+//         $stud=new TblAppStudProgram();
+//         $stud->tbl_program=$pro->tbl_program;
+//         // $stud->course_id=$pro->course_id;
+//         $stud->stud_per_id=$perID;
+//         $stud->save();
+//     // }   
+// }
 
 
-public function studDoc($id,$perID){
-    $prag=$this->application($id);
-   $appDoc= TblAppDocument::find()->andwhere(['personalDetail_id'=>$prag->personal_details_id])->all();
-    foreach($appDoc as $doc){ 
-        $doc1=new TblStudDoc();
-        $doc1->doc_name=$doc->doc_name;
-        $doc1->stud_per_id=$perID;
-        $doc1->save();
-    } 
-}
+// public function studDoc($id,$perID){
+//     $prag=$this->application($id);
+//    $appDoc= TblAppDocument::find()->andwhere(['personalDetail_id'=>$prag->personal_details_id])->all();
+//     foreach($appDoc as $doc){ 
+//         $doc1=new TblStudDoc();
+//         $doc1->doc_name=$doc->doc_name;
+//         $doc1->stud_per_id=$perID;
+//         $doc1->save();
+//     } 
+// }
 
 
 
-/** Migrating Admitted Applicant Bio Data To Student Table Using Admission Table ID */
-    public function actionRegister($id){
-        if(Yii::$app->user->can('admission permission')){
-            $pay=0;
+// /** Migrating Admitted Applicant Bio Data To Student Table Using Admission Table ID */
+//     public function actionRegister($id){
+//         if(Yii::$app->user->can('admission permission')){
+//             $pay=0;
 
-            $adminID=TblAppAdmission::find()->where(['application_id'=>$id])->select('id')->one();
+//             $adminID=TblAppAdmission::find()->where(['application_id'=>$id])->select('id')->one();
 
-            $payment=TblPayments::find()->where(['admission_id'=>$adminID->id])->all();
+//             $payment=TblPayments::find()->where(['admission_id'=>$adminID->id])->all();
         
-            foreach($payment as $amount){
-                $pay +=$amount->amount;
-            }
+//             foreach($payment as $amount){
+//                 $pay +=$amount->amount;
+//             }
     
-            if($pay<2000){
-                Yii::$app->session->setFlash('error', 'Please Make Full Payment To Enable Student Migration');
-                return $this->redirect(['view', 'id' => $id]);
-            }else{
-                try{
-                    $admitt=$this->application($id);
-                    $perID= $this->saveStudentPersonalDetails($id); 
-                    $perAd=$this->saveStudentPersonalAddress($id);
+//             if($pay<2000){
+//                 Yii::$app->session->setFlash('error', 'Please Make Full Payment To Enable Student Migration');
+//                 return $this->redirect(['view', 'id' => $id]);
+//             }else{
+//                 try{
+//                     $admitt=$this->application($id);
+//                     $perID= $this->saveStudentPersonalDetails($id); 
+//                     $perAd=$this->saveStudentPersonalAddress($id);
 
-                    $perEm= $this->saveStudentPersonalEmployment($id,$perID);
-                    $perEd= $this->studEducationalBackground($id,$perID);
-                    $this->studprograms($id,$perID);
-                    $this->studDoc($id,$perID); 
+//                     $perEm= $this->saveStudentPersonalEmployment($id,$perID);
+//                     $perEd= $this->studEducationalBackground($id,$perID);
+//                     $this->studprograms($id,$perID);
+//                     $this->studDoc($id,$perID); 
                             
-                    $userAdmin = new User();
-                    $userAdmin->username=date('Y').rand(0001,9999);
-                    $userAdmin->email= date('Y').rand(0001,9999).'@upsamail.edu.gh';
-                    $userAdmin->role_id=1;
-                    $userAdmin->password_hash = $userAdmin->setPassword($admitt->personalDetails->date_of_birth);
-                    $userAdmin->status = 1;
-                    $userAdmin->auth_key=$userAdmin->generateAuthKey();
-                    $userAdmin->save();
+//                     $userAdmin = new User();
+//                     $userAdmin->username=date('Y').rand(0001,9999);
+//                     $userAdmin->email= date('Y').rand(0001,9999).'@upsamail.edu.gh';
+//                     $userAdmin->role_id=1;
+//                     $userAdmin->password_hash = $userAdmin->setPassword($admitt->personalDetails->date_of_birth);
+//                     $userAdmin->status = 1;
+//                     $userAdmin->auth_key=$userAdmin->generateAuthKey();
+//                     $userAdmin->save();
 
-                    $stu= new TblStud();
-                    $stu->personal_details_id= $perID;
-                    $stu->personal_address_id= $perAd;
-                    $stu->personal_education_id=$perID;
-                    $stu->personal_employment_id=$perID;
-                    $stu->personal_document_id=$perID;
-                    $stu->program_id=$perID;
-                    $stu->application_type=$admitt->application_type;
-                    $stu->status=1;
-                    $stu->user_id=Yii::$app->user->identity->id;
-                    $stu->dates=date('Y-m-d');
-                    $stu->save();
+//                     $stu= new TblStud();
+//                     $stu->personal_details_id= $perID;
+//                     $stu->personal_address_id= $perAd;
+//                     $stu->personal_education_id=$perID;
+//                     $stu->personal_employment_id=$perID;
+//                     $stu->personal_document_id=$perID;
+//                     $stu->program_id=$perID;
+//                     $stu->application_type=$admitt->application_type;
+//                     $stu->status=1;
+//                     $stu->user_id=Yii::$app->user->identity->id;
+//                     $stu->dates=date('Y-m-d');
+//                     $stu->save();
                     
-                    Yii::$app->session->setFlash('success', 'Successfully Registered Applicant as Student');
+//                     Yii::$app->session->setFlash('success', 'Successfully Registered Applicant as Student');
 
-                    return $this->redirect(['index']);
+//                     return $this->redirect(['index']);
 
-                }catch(Exception $e){
-                    Yii::$app->session->setFlash('error', 'Already Migrated'.$e->getMessage());
-                    return $this->redirect(['index']);
-                }
-            }
-            return $this->redirect(['index']);
-        }else
-        {
-            Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
-            return  $this->goBack(Yii::$app->request->referrer);
-        }
-    }
+//                 }catch(Exception $e){
+//                     Yii::$app->session->setFlash('error', 'Already Migrated'.$e->getMessage());
+//                     return $this->redirect(['index']);
+//                 }
+//             }
+//             return $this->redirect(['index']);
+//         }else
+//         {
+//             Yii::$app->session->setFlash('error', 'You don\'t have permission to view this page');
+//             return  $this->goBack(Yii::$app->request->referrer);
+//         }
+//     }
 
 
     public  function actionDownload($id)
@@ -437,10 +437,10 @@ public function studDoc($id,$perID){
             $courses=$this->findAppProgram($id);
 
             // Get Applicant Program Applied For
-            foreach($courses as $course){
-              $programCategoryName= $course->program->programCategory->name;
-              $programCategoryID= $course->program->program_category_id;
-            }
+            // foreach($courses as $course){
+              $programCategoryName= $courses->program->programCategory->name;
+              $programCategoryID= $courses->program->program_category_id;
+            // }
 
 
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;

@@ -51,6 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'kartik\grid\SerialColumn'],
 
             'grade_name',
+            'from',
+            'to',
             'grade_point',
             ['class' => 'yii\grid\ActionColumn',
             'template' => '{view}',

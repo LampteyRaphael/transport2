@@ -61,6 +61,22 @@ return [
             'payment' => [
                 'class' => 'backend\modules\payment\Payment',
             ],
+
+            'hod' => [
+                'class' => 'backend\modules\hod\Hod',
+            ],
+
+            'dean' => [
+                'class' => 'backend\modules\dean\Dean',
+            ],
+
+            'publisher' => [
+                'class' => 'backend\modules\publisher\publisher',
+            ],
+
+            'transcript' => [
+                'class' => 'backend\modules\transcript\Transcript',
+            ],
             
             'gridview' => [
              'class' => 'kartik\grid\Module',
@@ -73,7 +89,7 @@ return [
         ],
         'user' => [
             'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
             //  'class' => 'common\models\User',
             // 'identityClass' => 'mdm\admin\models\User',
@@ -117,7 +133,7 @@ return [
         // ],
         
         'urlManager' => [
-            // 'enablePrettyUrl' => true,
+            //  'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
                 // 'home'=>'site/index',
@@ -132,7 +148,6 @@ return [
                 // 'settings'=>'program/tbl-program/index'
             ],
         ],
-        
         
 
         'mailer' => [
@@ -157,7 +172,7 @@ return [
                 'yii2mod\alert\AlertAsset' => [
                     'css' => [
                         'dist/sweetalert.css',
-                        'themes/twitter/twitter.css',
+                        // 'themes/twitter/twitter.css',
                     ]
                 ],
             ],
@@ -172,7 +187,7 @@ return [
         },
         'rules' => [
             [
-                'actions' => ['login', 'error','reset'],
+                'actions' => ['login', 'error'],
                 'allow' => true,
             ],
             [
@@ -189,7 +204,7 @@ return [
         },
         'rules' => [
             [
-                'actions' => ['login', 'error','reset'],
+                'actions' => ['login', 'error'],
                 'allow' => true,
             ],
             [

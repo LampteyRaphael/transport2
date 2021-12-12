@@ -14,6 +14,9 @@ use Yii;
  * @property string $date
  * @property string $created_at
  * @property string $updated_at
+ *
+ * @property TblStudPersDetails $studPer
+ * @property TblStud[] $tblStuds
  */
 class TblStudEduBg extends \yii\db\ActiveRecord
 {
@@ -33,8 +36,10 @@ class TblStudEduBg extends \yii\db\ActiveRecord
         return [
             [['institution', 'program_offered', 'stud_per_id', 'date'], 'required'],
             [['stud_per_id'], 'integer'],
+            [['stud_per_id'],'unique'],
             [['date', 'created_at', 'updated_at'], 'safe'],
             [['institution', 'program_offered'], 'string', 'max' => 255],
+            [['stud_per_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersDetails::className(), 'targetAttribute' => ['stud_per_id' => 'id']],
         ];
     }
 
@@ -52,5 +57,25 @@ class TblStudEduBg extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * Gets query for [[StudPer]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getStudPer()
+    {
+        return $this->hasOne(TblStudPersDetails::className(), ['id' => 'stud_per_id']);
+    }
+
+    /**
+     * Gets query for [[TblStuds]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblStuds()
+    {
+        return $this->hasMany(TblStud::className(), ['personal_education_id' => 'id']);
     }
 }

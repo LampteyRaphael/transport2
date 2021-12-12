@@ -31,6 +31,7 @@ class TblStudDoc extends \yii\db\ActiveRecord
         return [
             [['doc_name', 'stud_per_id'], 'required'],
             [['stud_per_id'], 'integer'],
+            [['doc_name'],'unique'],
             [['doc_name'], 'string', 'max' => 255],
             [['stud_per_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersDetails::className(), 'targetAttribute' => ['stud_per_id' => 'id']],
         ];

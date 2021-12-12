@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\admission\models\TblAdmissLog */
+/* @var $model common\models\TblAdmissLog */
 
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Tbl Admiss Logs', 'url' => ['index']];

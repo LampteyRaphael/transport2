@@ -22,8 +22,15 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  *
- * @property TblStud[] $tblStuds
+ * @property TblAppStudProgram[] $tblAppStudPrograms
+ * @property TblStudDoc[] $tblStudDocs
+ * @property TblStudEduBg[] $tblStudEduBgs
  * @property TblStudEmployDetails[] $tblStudEmployDetails
+ * @property TblStud[] $tblStuds
+ * @property TblStud[] $tblStuds0
+ * @property TblStud[] $tblStuds1
+ * @property TblStud[] $tblStuds2
+ * @property TblStud[] $tblStuds3
  * @property TblTitleTb $title0
  */
 class TblStudPersDetails extends \yii\db\ActiveRecord
@@ -49,6 +56,7 @@ class TblStudPersDetails extends \yii\db\ActiveRecord
             [['gender'], 'string', 'max' => 50],
             [['contact_person'], 'string', 'max' => 100],
             [['contact_number'], 'string', 'max' => 20],
+            [['contact_number'],'unique'],
             [['title'], 'exist', 'skipOnError' => true, 'targetClass' => TblTitleTb::className(), 'targetAttribute' => ['title' => 'id']],
         ];
     }
@@ -77,6 +85,46 @@ class TblStudPersDetails extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[TblAppStudPrograms]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblAppStudPrograms()
+    {
+        return $this->hasMany(TblAppStudProgram::className(), ['stud_per_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TblStudDocs]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblStudDocs()
+    {
+        return $this->hasMany(TblStudDoc::className(), ['stud_per_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TblStudEduBgs]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblStudEduBgs()
+    {
+        return $this->hasMany(TblStudEduBg::className(), ['stud_per_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TblStudEmployDetails]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblStudEmployDetails()
+    {
+        return $this->hasMany(TblStudEmployDetails::className(), ['stud_per_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[TblStuds]].
      *
      * @return \yii\db\ActiveQuery
@@ -87,13 +135,43 @@ class TblStudPersDetails extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[TblStudEmployDetails]].
+     * Gets query for [[TblStuds0]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getTblStudEmployDetails()
+    public function getTblStuds0()
     {
-        return $this->hasMany(TblStudEmployDetails::className(), ['personal_id' => 'id']);
+        return $this->hasMany(TblStud::className(), ['personal_education_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TblStuds1]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblStuds1()
+    {
+        return $this->hasMany(TblStud::className(), ['personal_employment_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TblStuds2]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblStuds2()
+    {
+        return $this->hasMany(TblStud::className(), ['personal_document_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[TblStuds3]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTblStuds3()
+    {
+        return $this->hasMany(TblStud::className(), ['program_id' => 'id']);
     }
 
     /**
@@ -105,22 +183,4 @@ class TblStudPersDetails extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TblTitleTb::className(), ['id' => 'title']);
     }
-
-
-
-    // public function students($title, $lname, $fname,$mname,$gender,$dob,$nation,$pcontact,$cnumber,$dateaply,$photo,$program){
-
-    // return[ $this->title=$title,
-    //     $this->last_name=$lname,
-    //     $this->first_name=$fname,
-    //     $this->middle_name=$mname,
-    //     $this->gender=$gender,
-    //     $this->date_of_birth=$dob,
-    //     $this->nationality=$nation,
-    //     $this->contact_person=$pcontact,
-    //     $this->contact_number=$cnumber,
-    //     $this->date_apply=$dateaply,
-    //     $this->photo=$photo,
-    //     $this->program_id=$program];
-    // }
 }

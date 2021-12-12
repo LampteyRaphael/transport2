@@ -8,6 +8,7 @@ use common\models\TblStud;
 use common\models\TblStudRegistYear;
 use common\models\TblStudsResult;
 use common\models\TblStudsResultSearch;
+use common\models\TblStudsTranscript;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -46,7 +47,7 @@ class TblStRegistrationController extends Controller
         if(Yii::$app->user->can('student')){
         try{
         $id=Yii::$app->user->identity->id;
-        
+
         $studId=TblStud::find()->where(['user_id'=>$id])->one();
 
         if(isset($_POST['semester']) && $_POST['level_id']){
@@ -85,9 +86,9 @@ class TblStRegistrationController extends Controller
     try{
         $id=Yii::$app->user->identity->id;
 
-        $stud=TblStud::find()->where(['user_id'=>$id])->select('id')->one();
+        $stud=TblStud::find()->where(['user_id'=>$id])->one();
 
-        $result=TblStudsResult::find()->where(['student_id'=>$stud->id])->all();
+        $result=TblStudsTranscript::find()->where(['student_id'=>$stud->id])->all();
 
         $studAcad=TblStudRegistYear::find()->all();
 

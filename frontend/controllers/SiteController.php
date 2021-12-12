@@ -26,6 +26,7 @@ use yii\helpers\Url;
 use yii\web\UploadedFile;
 use common\models\TblProgram;
 use common\models\TblProgramType;
+use common\models\Validate;
 use Exception;
 use yii\web\NotFoundHttpException;
 
@@ -44,13 +45,13 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                      [
-                'allow' => true,
-                'actions' => ['login', 'verify','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
-            ],
-                    [
-                        'actions' => ['login', 'error','logout'],
-                        'allow' => true,
+                       'allow' => true,
+                       'actions' => ['login', 'verify','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
                     ],
+                    // [
+                    //     'actions' => ['login', 'error','logout'],
+                    //     'allow' => true,
+                    // ],
                     [
                         'actions' => ['logout', 'index','resetPassword'],
                         'allow' => true,
@@ -320,14 +321,15 @@ protected function applicantCourse($program){
 /* Saving Applicant's Personal Details */
 protected function applicantDetails($modelp){
         // $modelp->title = ValidateController::replace2($_POST['TblAppPersDetails']['title']);
-    $modelp->last_name = $_POST['TblAppPersDetails']['last_name'];
-    $modelp->first_name = $_POST['TblAppPersDetails']['first_name'];
-    $modelp->middle_name = $_POST['TblAppPersDetails']['middle_name'];
-    $modelp->gender =$_POST['TblAppPersDetails']['gender'];
-    $modelp->date_of_birth =$_POST['TblAppPersDetails']['date_of_birth'];
-    $modelp->nationality = $_POST['TblAppPersDetails']['nationality'];
-    $modelp->contact_person =$_POST['TblAppPersDetails']['contact_person'];
-    $modelp->contact_number = $_POST['TblAppPersDetails']['contact_number'];
+        $cleanup=new Validate();
+    $modelp->last_name = $cleanup->replace2($_POST['TblAppPersDetails']['last_name']);
+    $modelp->first_name = $cleanup->replace2($_POST['TblAppPersDetails']['first_name']);
+    $modelp->middle_name = $cleanup->replace2($_POST['TblAppPersDetails']['middle_name']);
+    $modelp->gender =$cleanup->replace($_POST['TblAppPersDetails']['gender']);
+    $modelp->date_of_birth =$cleanup->replace($_POST['TblAppPersDetails']['date_of_birth']);
+    $modelp->nationality = $cleanup->replace2($_POST['TblAppPersDetails']['nationality']);
+    $modelp->contact_person =$cleanup->replace2($_POST['TblAppPersDetails']['contact_person']);
+    $modelp->contact_number = $cleanup->check_only_int($_POST['TblAppPersDetails']['contact_number']);
     // Save OSN ID 
     $modelp->osn_id = $this->osnID();
     $modelp->date_apply = date('Y-m-d');
@@ -336,14 +338,15 @@ protected function applicantDetails($modelp){
 
 /* Saving Applicant's Personal Address */
 protected function applicantAddress($modelad){
-    $modelad->address = $_POST['TblAppAddress']['address'];
-    $modelad->city = $_POST['TblAppAddress']['city'];
-    $modelad->country = $_POST['TblAppAddress']['country'];
-    $modelad->voters_id = $_POST['TblAppAddress']['voters_id'];
-    $modelad->voters_id_type = $_POST['TblAppAddress']['voters_id_type'];
-    $modelad->gps = $_POST['TblAppAddress']['gps'];
-    $modelad->email = $_POST['TblAppAddress']['email'];
-    $modelad->telephone_number = $_POST['TblAppAddress']['telephone_number'];
+    $cleanup=new Validate();
+    $modelad->address = $cleanup->check($_POST['TblAppAddress']['address']);
+    $modelad->city = $cleanup->replace2($_POST['TblAppAddress']['city']);
+    $modelad->country = $cleanup->replace2($_POST['TblAppAddress']['country']);
+    $modelad->voters_id = $cleanup->replace2($_POST['TblAppAddress']['voters_id']);
+    $modelad->voters_id_type = $cleanup->replace2($_POST['TblAppAddress']['voters_id_type']);
+    $modelad->gps = $cleanup->replace2($_POST['TblAppAddress']['gps']);
+    $modelad->email = $cleanup->filter_mail($_POST['TblAppAddress']['email']);
+    $modelad->telephone_number = $cleanup->check_only_int($_POST['TblAppAddress']['telephone_number']);
     $modelad->osn_id = $this->osnID();
 }
 
@@ -531,6 +534,7 @@ protected function applicantDocument($imageFile, $perID){
         if (!empty($this->osnID())) {
 
             try{
+                $cleanup=new Validate();
                 // Check to see whether applicant has already fill the educational form
                 if (!empty($ed=$this->applicantEducation())){
                     $model=$ed;
@@ -541,9 +545,9 @@ protected function applicantDocument($imageFile, $perID){
     
                 $model->osn_id=$this->osnID();
     
-                $model->institution= $_POST['TblAppEduBg']['institution'];
+                $model->institution= $cleanup->replace2($_POST['TblAppEduBg']['institution']);
     
-                $model->program_offered=$_POST['TblAppEduBg']['program_offered'];
+                $model->program_offered=$cleanup->replace2($_POST['TblAppEduBg']['program_offered']);
                 
                 if ($model->save()) {
                     Yii::$app->session->set('education', $model->id);

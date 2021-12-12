@@ -2,6 +2,7 @@
 
 use common\models\TblAcadamicYear;
 use common\models\TblAcademicYear;
+use common\models\TblAppAddress;
 use common\models\TblAppAdmissStatus;
 use common\models\TblAppPersDetails;
 use common\models\User;
@@ -19,25 +20,17 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-app-admission-index">
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <div class="table-responsive">
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-//        'showPageSummary'=>true,
         'headerRowOptions'=>['class'=>'kartik-sheet-style'],
         'filterRowOptions'=>['class'=>'kartik-sheet-style'],
         'containerOptions' => ['style'=>'overflow: auto'],
-    
         'toolbar' =>  [
-            // ['content'=>
-            //     Html::a('Import Excel', ['Create'], ['class' => 'btn btn-success']),
-            // ],
             '{export}',
             '{toggleData}'
         ],
-
     'pjax'=>true,
     'bordered' => true,
     'striped' => true,
@@ -64,29 +57,25 @@ $this->params['breadcrumbs'][] = $this->title;
                'collapseIcon' => '<i class="fa fa-close small" aria-hidden="true"></i>',
                'detailUrl'=> Url::to(['/admission/tbl-app-admission/details']), 
             ], 
-
-            // 'created_at:date',
-
-            [
-                'attribute'=>'accadamin_year_id',
-                'value'=>'accadaminYear.doa',
-                'label'=>'DOA',
-                'contentOptions'=>function($model){
-                    return ['style'=>'color:green; font-weight:bold;',];
-                }
-            ],
-
-            [
-                'attribute'=>'accadamin_year_id',
-                'value'=>'accadaminYear.doc',
-                'label'=>'DOC',
-                'contentOptions'=>function($model){
-                    return ['style'=>'color:green; font-weight:bold;',];
-                }
-            ],
-
+            // [
+            //     'attribute'=>'accadamin_year_id',
+            //     'value'=>'accadaminYear.doa',
+            //     'label'=>'DOA',
+            //     'contentOptions'=>function($model){
+            //         return ['style'=>'color:green; font-weight:bold;',];
+            //     }
+            // ],
+            // [
+            //     'attribute'=>'accadamin_year_id',
+            //     'value'=>'accadaminYear.doc',
+            //     'label'=>'DOC',
+            //     'contentOptions'=>function($model){
+            //         return ['style'=>'color:green; font-weight:bold;',];
+            //     }
+            // ],
             [
                 'attribute'=>'application_id',
+                'label'=>'Applicants',
                 'value'=>function($model){
 
                     if($model){
@@ -100,12 +89,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     'pluginOptions'=>['allowClear'=>true],
                 ],
             ],
+            [
+                'attribute'=>'application_id',
+                'label'=>'Phone Number',
+                'value'=>'application.personalAddress.telephone_number',
+                'filter'=>ArrayHelper::map(TblAppAddress::find()->asArray()->all(),'telephone_number','telephone_number'),
+                'filterType'=>GridView::FILTER_SELECT2,
+                'filterWidgetOptions'=>[
+                    'options'=>['prompt'=>'Category'],
+                    'pluginOptions'=>['allowClear'=>true],
+                ],
+            ],
             
-
-
             [
                 'attribute'=>'accadamin_year_id',
-                'value'=>'accadaminYear.date_of_admission',
+                'label'=>'Academic Year',
+                'value'=>'accadaminYear.academic_year',
                 'filter'=>ArrayHelper::map(TblAcademicYear::find()->asArray()->all(),'academic_year','academic_year'),
                 'filterType'=>GridView::FILTER_SELECT2,
                 'filterWidgetOptions'=>[
@@ -113,7 +112,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     'pluginOptions'=>['allowClear'=>true],
                 ],
             ],
-             
+            
+            // [
+            //     'attribute'=>'accadamin_year_id',
+            //     'value'=>'accadaminYear.date_of_admission',
+            //     'filter'=>ArrayHelper::map(TblAcademicYear::find()->asArray()->all(),'academic_year','academic_year'),
+            //     'filterType'=>GridView::FILTER_SELECT2,
+            //     'filterWidgetOptions'=>[
+            //         'options'=>['prompt'=>'Category'],
+            //         'pluginOptions'=>['allowClear'=>true],
+            //     ],
+            // ],
             [
                 'attribute'=>'status',
                 'value'=>'status0.name',
@@ -127,8 +136,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return ['style' =>'font-weight:bold; color:'.($model->status0->name === 3 ? 'green' : 'green')];
                 },
             ],
-            
-
             [
                 'attribute'=>'user_id',
                 'value'=>'user.username',

@@ -82,7 +82,7 @@ use yii\helpers\Url;
                 'label'=>'Applicant\'s Name',
                 'value'=>function($model){
                     if($model){
-                        return  ucwords($model->personalDetails->title0->name . ' ' . $model->personalDetails->first_name . ' ' . $model->personalDetails->middle_name .' ' .  $model->personalDetails->last_name);
+                        return  ucwords(($model->personalDetails->title0->name??'') . ' ' . ($model->personalDetails->first_name??'') . ' ' . ($model->personalDetails->middle_name??'') .' ' .  ($model->personalDetails->last_name??''));
                     }
                 },
                 'filter'=>ArrayHelper::map(TblAppPersDetails::find()->asArray()->all(),'last_name','last_name'),

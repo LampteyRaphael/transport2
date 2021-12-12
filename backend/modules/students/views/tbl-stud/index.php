@@ -19,6 +19,7 @@ $this->title = 'Students';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="tbl-stud-index">
+    
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -67,13 +68,14 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            ['class' => 'kartik\grid\CheckboxColumn'],
+            // ['class' => 'kartik\grid\CheckboxColumn'],
+            'created_at:datetime',
 
-            [
-                'attribute'=>'date',
-                'label'=>'Date',
-                'value'=>'date'
-            ],
+            // [
+            //     'attribute'=>'date',
+            //     'label'=>'Date',
+            //     'value'=>'date'
+            // ],
             [  
               'class' =>'kartik\grid\ExpandRowColumn',  
               'value'=>function ($model, $key, $index,$column) {  

@@ -35,9 +35,10 @@ class TblAppStudProgram extends \yii\db\ActiveRecord
         return [
             [['tbl_program'], 'required'],
             [['tbl_program', 'course_id', 'stud_per_id'], 'integer'],
+            [['stud_per_id'],'unique'],
             [['course_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblCourse::className(), 'targetAttribute' => ['course_id' => 'id']],
-            [['stud_per_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersDetails::className(), 'targetAttribute' => ['stud_per_id' => 'id']],
             [['tbl_program'], 'exist', 'skipOnError' => true, 'targetClass' => TblProgram::className(), 'targetAttribute' => ['tbl_program' => 'id']],
+            [['stud_per_id'], 'exist', 'skipOnError' => true, 'targetClass' => TblStudPersDetails::className(), 'targetAttribute' => ['stud_per_id' => 'id']],
         ];
     }
 
