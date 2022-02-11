@@ -66,11 +66,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'width'=>'20%',
                 'template' => '{view}',
                
-                'buttons' => [
-                    'view' => function ($url, $model, $key) {
-                     return   Html::a('Class List', ['/lecturer/lecturer/view', 'id' => $model->course_id], ['class' => 'btn btn-primary']);
-                    },
-                ],
+                // 'buttons' => [
+                //     'view' => function ($url, $model, $key) {
+                //      return   Html::a('Class List', ['/lecturer/lecturer/view', 'id' => $model->course_id], ['class' => 'btn btn-primary']);
+                //     },
+                // ],
             ],  
 
 

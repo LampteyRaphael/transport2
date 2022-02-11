@@ -9,8 +9,8 @@ use Yii;
  *
  * @property string $name
  * @property resource|null $data
- * @property string|null $created_at
- * @property string|null $updated_at
+ * @property int|null $created_at
+ * @property int|null $updated_at
  *
  * @property AuthItem[] $authItems
  */
@@ -32,7 +32,7 @@ class AuthRule extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['data'], 'string'],
-            [['created_at', 'updated_at'], 'safe'],
+            [['created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 64],
             [['name'], 'unique'],
         ];

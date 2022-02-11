@@ -1,9 +1,11 @@
 <?php
 
-use common\models\TblApp;
+use common\models\Operations;
 use common\models\TblCourse;
 use common\models\TblStaffList;
-
+use common\models\Insurance;
+use common\models\RoadWorthy;
+use kartik\helpers\Html;
 $this->title = 'IPS Dashboard';
 $this->params['breadcrumbs'] = [['label' => $this->title]];
 ?>
@@ -13,9 +15,9 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
       <!-- small box -->
       <div class="small-box bg-info">
         <div class="inner">
-          <h3><?= $admission??'';?></h3>
+          <h3><?= $vehicle??'';?></h3>
 
-          <p>Application</p>
+          <p>Vehicle</p>
         </div>
         <div class="icon">
           <i class="ion ion-bag"></i>
@@ -28,9 +30,9 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
       <!-- small box -->
       <div class="small-box bg-success">
         <div class="inner">
-          <h3><?= $qualification??''; ?><sup style="font-size: 20px"></sup></h3>
+          <h3><?= $repairs??''; ?><sup style="font-size: 20px"></sup></h3>
 
-          <p>Qualification</p>
+          <p>Repairs</p>
         </div>
         <div class="icon">
           <i class="ion ion-stats-bars"></i>
@@ -43,9 +45,9 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
       <!-- small box -->
       <div class="small-box bg-warning">
         <div class="inner">
-          <h3><?= $admission??''; ?></h3>
+          <h3><?= $insurances??''; ?></h3>
 
-          <p>Admission</p>
+          <p>Insurances</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
@@ -59,9 +61,9 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
       <!-- small box -->
       <div class="small-box bg-danger">
         <div class="inner">
-          <h3><?= $osn??''; ?></h3>
+          <h3><?= $accidentRecords??''; ?></h3>
 
-          <p>Non Used OSN</p>
+          <p>Accidents</p>
         </div>
         <div class="icon">
           <i class="ion ion-person-add"></i>
@@ -81,10 +83,10 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Lecturers</span>
+          <span class="info-box-text">Users</span>
           <span class="info-box-number">
             
-            <small><?= $lecturer;?></small>
+            <small><?= $users;?></small>
           </span>
         </div>
         <!-- /.info-box-content -->
@@ -97,8 +99,8 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Staffs</span>
-          <span class="info-box-number"><?= $staff;?></span>
+          <span class="info-box-text">Services</span>
+          <span class="info-box-number"><?= $services;?></span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -114,8 +116,8 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
         <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
         <div class="info-box-content">
-          <span class="info-box-text">Students</span>
-          <span class="info-box-number"><?= $students;?></span>
+          <span class="info-box-text"></span>
+          <span class="info-box-number"></span>
         </div>
         <!-- /.info-box-content -->
       </div>
@@ -129,48 +131,25 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 
         <div class="info-box-content">
           <span class="info-box-text"></span>
-          <span class="info-box-number"><?php $userAdmins;?></span>
+          <span class="info-box-number"></span>
         </div>
         <!-- /.info-box-content -->
       </div>
       <!-- /.info-box -->
     </div>
     <!-- /.col -->
+  
+  
+  
+  
+  
   </div>
 
 <div class="row">
-  <div class="card col-6">
-    <div class="card-header border-transparent">
-      <h3 class="card-title">Levels With Number Of Courses</h3>
-
-      <div class="card-tools">
-        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-          <i class="fas fa-minus"></i>
-        </button>
-        <button type="button" class="btn btn-tool" data-card-widget="remove">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-    </div>
-
-    
-    <!-- /.card-header -->
-    <div class="card-body p-0">
-      <div class="table-responsive">
-      <canvas id="myPieChart"></canvas>
-      <!-- /.table-responsive -->
-      </div>
-
-  </div>
-
-    </div>
-
-
-
 
     <div class="card col-6">
     <div class="card-header border-transparent">
-      <h3 class="card-title">Programmes With Number Of Courses</h3>
+      <h3 class="card-title">Number Of Expired Insurances And Road Worthy</h3>
 
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -194,7 +173,7 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
 
     <div class="card col-6">
     <div class="card-header border-transparent">
-      <h3 class="card-title">Application Chart</h3>
+      <h3 class="card-title">Monthly Bookings</h3>
 
       <div class="card-tools">
         <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -212,84 +191,21 @@ $this->params['breadcrumbs'] = [['label' => $this->title]];
       <div class="table-responsive">
      <canvas id="myChart" ></canvas>
       </div>
-  </div>
     </div>
-
-
-    <div class="card col-6">
-    <div class="card-header border-transparent">
-      <h3 class="card-title">Department with Number Of Admins Chart</h3>
-
-      <div class="card-tools">
-        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-          <i class="fas fa-minus"></i>
-        </button>
-        <button type="button" class="btn btn-tool" data-card-widget="remove">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
     </div>
-
-    
-    <!-- /.card-header -->
-    <div class="card-body p-0">
-      <div class="table-responsive">
-     <canvas id="myChart2" ></canvas>
-      </div>
-  </div>
-    </div>
-
-
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3"></script>
-
-<script>
-  var mychart = document.getElementById("myPieChart").getContext('2d');
-   new Chart(mychart, {
-    type: 'doughnut',
-    data: {
-      labels: [
-        <?php foreach($levels as $level):?>
-              "<?= $level->level_name?>",
-        <?php endforeach;?>
-      ],
-      datasets: [{
-        data: [
-          <?php foreach($levels as $level):?>
-              "<?= TblCourse::find()->where(['level_id'=>$level->id])->count();?>",
-        <?php endforeach;?>
-        ],
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-
-        // backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc', '#17a673', '#2c9faf'],
-        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-        hoverBorderColor: "rgba(234, 236, 244, 1)",
-      }]
-    }
-
-  })
-
-</script>
 
 <script>
   var vp = document.getElementById("bchart").getContext('2d');
   new Chart(vp, {
     type: 'bar',
     data: {
-      labels: [
-        <?php foreach($programs as $program):?>
-              "<?= $program->program_name?>",
-        <?php endforeach;?>
-      ],
+      labels: [ 'Insurance','Road Worthy'],
       datasets: [{
-        data: [
-          <?php foreach($programs as $program):?>
-              "<?= TblCourse::find()->where(['program_id'=>$program->id])->count();?>",
-        <?php endforeach;?>
-        ],
-        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#4e71df', '#1cc28a', '#30b9cc'],
+        data: [<?= $insurances; ?>,<?= $roadworthy;?>],
+        backgroundColor: ['#36b9cc','#4e71df', '#1cc28a', '#30b9cc'],
         hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
         hoverBorderColor: "rgba(234, 236, 244, 6)",
       }]
@@ -304,12 +220,10 @@ var myChart = new Chart(ctx, {
     data: {
         labels: ['jan','feb','mar','apr','may','june','july','aug','sep','oct','nov','dec'],
         datasets: [{
-            label: '# of Monthly Application',
+            label: '# of Monthly Bookings',
             data: [
               <?php for($num=1; $num<=12; $num++):?>
-
-              "<?= TblApp::find()->andwhere(['year(created_at)'=>date('Y')])->andwhere(['month(created_at)'=>date($num)])->count();?>",
-
+              "<?= Operations::find()->andwhere(['year(created_at)'=>date('Y')])->andwhere(['month(created_at)'=>date($num)])->count();?>",
              <?php endfor;?>
             ],
             backgroundColor: [
@@ -339,32 +253,6 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-</script>
-
-<script>
-var ctx = document.getElementById('myChart2').getContext('2d');
-new Chart(ctx, {
-    type: 'horizontalBar',
-    data: {
-      labels: [
-        <?php foreach($department as $departments):?>
-              "<?= $departments->department_name?>",
-        <?php endforeach;?>
-      ],
-      datasets: [{
-        data: [
-          <?php foreach($department as $departments):?>
-              "<?= TblStaffList::find()->where(['depart_id'=>$departments->id])->count();?>",
-        <?php endforeach;?>
-        ],
-        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-
-        // backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc','#4e71df', '#1cc28a', '#30b9cc'],
-        hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
-        hoverBorderColor: "rgba(234, 236, 244, 6)",
-      }]
-    }
-  })
 </script>
 
     <div>

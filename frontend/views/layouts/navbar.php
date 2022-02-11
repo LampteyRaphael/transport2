@@ -30,7 +30,7 @@ use yii\helpers\Html;
     <h4 class="text-center" id="ips-title">
     <img src="images/download.png" alt="IPS" class="upsa-image" height="70">
 
-        <b>University Of Professional Studies,Accra (UPSA)</b>
+        <b>TRANSPORT MANAGEMENT SYSTEM (UPSA)</b>
     </h4>
 
     <!-- Right navbar links -->

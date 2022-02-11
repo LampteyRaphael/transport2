@@ -15,73 +15,14 @@ return [
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log'],
     'modules' => [
-        //this module is for application stage
-            'application' => [
-                'class' => 'backend\modules\application\Module',
-            ],
-            //this model is for qualification 
-            'qualification' => [
-                'class' => 'backend\modules\qualification\Qualification',
-            ],
-            
-            //this is admission stage
-            'admission' => [
-                'class' => 'backend\modules\admission\Admission',
-            ],
-
             //this is user admins module
-
             'user' => [
                 'class' => 'backend\modules\user\User',
             ],
 
-            'departments' => [
-                'class' => 'backend\modules\departments\Departments',
-            ],
-
-            //program modules that 
-
-            'program' => [
-                'class' => 'backend\modules\program\Program',
-            ],
-
-
-            'courses' => [
-                'class' => 'backend\modules\courses\Courses',
-            ],
-
-            'staff' => [
-                'class' => 'backend\modules\staff\Staff',
-            ],
-
-            'students' => [
-                'class' => 'backend\modules\students\Students',
-            ],
-           
-            'payment' => [
-                'class' => 'backend\modules\payment\Payment',
-            ],
-
-            'hod' => [
-                'class' => 'backend\modules\hod\Hod',
-            ],
-
-            'dean' => [
-                'class' => 'backend\modules\dean\Dean',
-            ],
-
-            'publisher' => [
-                'class' => 'backend\modules\publisher\publisher',
-            ],
-
-            'transcript' => [
-                'class' => 'backend\modules\transcript\Transcript',
-            ],
-            
             'gridview' => [
              'class' => 'kartik\grid\Module',
             ],
-
     ],
     'components' => [
         'request' => [
@@ -90,10 +31,9 @@ return [
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => false,
+            'authTimeout' => 360,
             'identityCookie' => ['name' => '_identity-backend', 'httpOnly' => true],
-            //  'class' => 'common\models\User',
-            // 'identityClass' => 'mdm\admin\models\User',
-            // 'loginUrl' => ['admin/user/login'],
+            'loginUrl' => 'admin/default/login' 
         ],
 
         'authManager' => [
@@ -178,21 +118,29 @@ return [
             ],
         ]
     ],
+
+//     'view' => [
+//         'theme' => [
+//             'pathMap' => [
+//                '@app/views' => '@vendor/hail812/yii2-adminlte3/src/views'
+//             ],
+//         ],
+//    ],
   
     'as access' => [
-        'class' => AccessControl::className(),
+        'class' => 'yii\filters\AccessControl',
         'denyCallback' => function ($rule, $action) {
-            Yii::$app->user->logout();
+            // Yii::$app->user->logout();
             return Yii::$app->response->redirect(['site/login']);
         },
         'rules' => [
             [
-                'actions' => ['login', 'error'],
+                'actions' => ['login', 'error','reset'],
                 'allow' => true,
             ],
             [
                 'allow' => true,
-                'roles' => ['staff','hod'],
+                'roles' => ['admin'],
             ],
         ],
     ],
@@ -204,12 +152,12 @@ return [
         },
         'rules' => [
             [
-                'actions' => ['login', 'error'],
+                'actions' => ['login', 'error','reset'],
                 'allow' => true,
             ],
             [
                 'allow' => true,
-                'roles' => ['staff','hod'],
+                'roles' => ['admin'],
             ],
         ],
        

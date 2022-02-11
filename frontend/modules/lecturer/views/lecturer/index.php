@@ -172,9 +172,9 @@ $attributes= [
     <li class="nav-item" role="presentation">
         <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Lecture Program</a>
     </li>
-    <li class="nav-item" role="presentation">
+    <!-- <li class="nav-item" role="presentation">
         <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Courses</a>
-    </li>
+    </li> -->
     <!-- <li class="nav-item" role="presentation">
         <a class="nav-link" id="pills-course-tab" data-toggle="pill" href="#pills-course" role="tab" aria-controls="pills-course" aria-selected="false">Registered Courses</a>
     </li> -->
@@ -235,77 +235,6 @@ $attributes= [
             </div>
         </div>
     </div>
-
-
-    <div class="tab-pane fade show mt-4" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact=-tab">
-        <div class="row">
-            <div class="col">
-            <?= GridView::widget([
-            'dataProvider' => $dataProvider,
-            // 'filterModel' => $searchModel,
-            'headerRowOptions'=>['class'=>'kartik-sheet-style'],
-            'filterRowOptions'=>['class'=>'kartik-sheet-style'],
-            'containerOptions' => ['style'=>'overflow: auto'], 
-            'tableOptions' => ['class' => 'table table-striped table-hover table-condensed text-left'],
-            'toolbar' =>  [
-                '{export}',
-                '{toggleData}'
-            ],
-
-        'pjax'=>true,
-        'bordered' => true,
-        'striped' => true,
-        'condensed' => false,
-        'responsive' => true,
-        'responsiveWrap' => false,
-        'bootstrap'=>true,
-        'hover' => true,
-        'floatHeader' => false,
-        'panel' => [
-            'heading'=>'<h3 class="panel-title">Lecturer Courses</h3>',
-            'type' => GridView::TYPE_PRIMARY,
-        ],
-            'columns' => [
-                ['class' => 'yii\grid\SerialColumn'],
-
-                [
-
-                    'attribute'=>'course_id',
-                    'label'=>'Courses',
-                    'value'=>'course.courseName'
-                ],
-                [
-
-                    'attribute'=>'course_id',
-                    'label'=>'Courses Code',
-                    'value'=>'course.course_number'
-                ],
-                [
-
-                    'attribute'=>'course_id',
-                    'label'=>'Level',
-                    'value'=>'course.level.level_name'
-                ],
-                [
-
-                    'attribute'=>'course_id',
-                    'label'=>'Session',
-                    'value'=>'course.section.name'
-                ],
-                [
-
-                    'attribute'=>'course_id',
-                    'label'=>'Semester',
-                    'value'=>'course.semester0.name'
-                ],
-            ],
-        ]);
-     ?>
-            </div>
-        </div>
-    </div>
-
-
 </div>
         </p>
     </div>

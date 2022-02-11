@@ -1,6 +1,5 @@
 <?php
 
-use yii2mod\rbac\filters\AccessControl;
 
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
@@ -15,15 +14,15 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'modules' => [
-        'osn' => [
-            'class' => 'frontend\modules\osn\Osn',
-        ],
-        'student' => [
-            'class' => 'frontend\modules\student\Student',
-        ],
-        'lecturer' => [
-            'class' => 'frontend\modules\lecturer\lecturer',
-        ],
+        // 'osn' => [
+        //     'class' => 'frontend\modules\osn\Osn',
+        // ],
+        // 'student' => [
+        //     'class' => 'frontend\modules\student\Student',
+        // ],
+        // 'lecturer' => [
+        //     'class' => 'frontend\modules\lecturer\lecturer',
+        // ],
         'gridview' => [
             'class' => 'kartik\grid\Module',
         ],
@@ -122,41 +121,97 @@ return [
     ],
     
 
-    'as access' => [
-        'class' => AccessControl::className(),
-        'denyCallback' => function ($rule, $action) {
-            Yii::$app->user->logout();
-            return Yii::$app->response->redirect(['site/login']);
-        },
-        'rules' => [
-            [
-                'actions' => ['login', 'error','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
-                'allow' => true,
-            ],
-            [
-                'allow' => true,
-                'roles' => ['student','lecturer'],
-            ],
-        ],
-    ],
-
+    // 'access' => [
+    //     'class' => AccessControl::className(),
+    //     'denyCallback' => function ($rule, $action) {
+    //         Yii::$app->user->logout();
+    //         return Yii::$app->response->redirect(['site/login']);
+    //     },
+    //     'rules' => [
+    //         [
+    //             'actions' => ['login','forgot', 'error'],
+    //             'allow' => true,
+    //         ],
+    //         [
+    //             'allow' => true,
+    //             'roles' => ['admin','user'],
+    //         ],
+    //     ],
+    // ],
     'as beforeRequest' => [
         'class' => 'yii\filters\AccessControl',
-        'denyCallback' => function () {
-            Yii::$app->user->logout();
-            return Yii::$app->response->redirect(['site/login']);
-        },
         'rules' => [
             [
-                'actions' => ['login', 'error','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
                 'allow' => true,
+                'actions' => ['login','error'],
             ],
+  
             [
                 'allow' => true,
-                'roles' => ['student','lecturer'],
-            ],
+                'roles' => ['user'],
+            ]
         ],
-       
-     ],
+        'denyCallback' => function () {
+            return Yii::$app->response->redirect(['site/login']);
+        },
+    ],
+     
+
+    'as access' => [
+        'class' => \yii\filters\AccessControl::className(),//AccessControl::className(),
+        'rules' => [
+            [
+                'actions' => ['login', 'error'],
+                'allow' => true,
+            ],
+
+            [
+                'allow' => true,
+                'roles' => ['user'],
+            ]
+        ],
+        'denyCallback' => function () {
+            return Yii::$app->response->redirect(['site/login']);
+        },
+    ],
+        // 'access' => [
+        //     'class' => AccessControl::className(),
+        //     'rules' => [
+        //         [
+        //             'allow' => true,
+        //             'roles' => ['admin', 'editor', 'expert'],
+        //         ],
+        //         [
+        //             'actions' => ['login'],
+        //             'allow' => true,
+        //             'roles' => ['?'],
+        //         ],
+        //         [
+        //             'actions' => ['delete'],
+        //             'allow' => true,
+        //             'roles' => ['admin'],
+        //         ]
+        //     ]
+        // ],
+
+    // 'as beforeRequest' => [
+    //     'class' => 'yii\filters\AccessControl',
+    //     'denyCallback' => function () {
+    //         Yii::$app->user->logout();
+    //         return Yii::$app->response->redirect(['site/login']);
+    //     },
+    //     'rules' => [
+    //         [
+    //             'actions' => ['login', 'error','forgot'],
+    //             'allow' => true,
+    //         ],
+    //         [
+    //             'allow' => true,
+    //             'roles' => ['admin','user'],
+    //         ],
+    //     ],
+    //  ],
+
+
     'params' => $params,
 ];

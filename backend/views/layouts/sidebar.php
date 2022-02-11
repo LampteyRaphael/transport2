@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-        <b class=" tect-center text-uppercase">UNIVERSITY</b>
+    <a href="#" class="brand-link">
+        <b class="tect-center text-uppercase ml-5">UPSA</b>
         <!-- <img src="/images/logo.png" alt="AdminLTE Logo" class="brand-image bg-white elevation-3" style="opacity: .8"> -->
-        <span class="brand-text font-weight-bold text-uppercase"><b>-IPS</b></span>
+        <span class="brand-text font-weight-bold text-uppercase"><b>-TMS</b></span>
     </a>
 
     <!-- Sidebar -->
@@ -11,16 +11,16 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="image/upsa3.jpg" class="img-circle elevation-2" alt="User Image">
+                <img src="images/<?= Yii::$app->user->identity->photo??'' ?>" class="img-circle elevation-3" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block"><?= Yii::$app->user->identity->username??'' ?></a>
+                <a href="#" class="d-block "><b><?= Yii::$app->user->identity->username??'' ?></b></a>
             </div>
         </div>
 
         <!-- SidebarSearch Form -->
-        <!-- href be escaped  -->
-        <!-- <div class="form-inline">
+        <!-- href be escaped 
+        <div class="form-inline">
             <div class="input-group" data-widget="sidebar-search">
                 <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
                 <div class="input-group-append">
@@ -29,32 +29,35 @@
                     </button>
                 </div>
             </div>
-        </div>
+        </div> --
 
         < Sidebar Menu -->
         <nav class="mt-2">
             <?php
-             
-             $hod=[];
-             $dean = [];
-             $publisher = [];
-             $transcript = [];
 
-            if(Yii::$app->user->can('hod permission')){
-               $hod= ['label' => 'Students Result',  'icon' => 'fa fa-reply', 'url' => ['/hod/tbl-studs-result/index']];
-            }
+            // if(Yii::$app->user->can('hod permission')){
+            //    $hod= ['label' => 'Students Result(hod)',  'icon' => 'fa fa-reply', 'url' => ['/hod/tbl-studs-result/index']];
+            // }else{
+            //     $hod=['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest];
+            // }
             
-            if(Yii::$app->user->can('dean permission')){
-              $dean=['label' => 'Students Result', 'icon' => 'fa fa-reply', 'url' => ['/dean/tbl-studs-result/index']];
-            }
+            // if(Yii::$app->user->can('dean permission')){
+            //   $dean=['label' => 'Students Result(dean)', 'icon' => 'fa fa-reply', 'url' => ['/dean/tbl-studs-result/index']];
+            // }else{
+            //     $dean=['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest];
+            // }
             
-            if(Yii::$app->user->can('publisher permission')){
-                $publisher=['label' => 'Students Result', 'icon' => 'fa fa-reply', 'url' => ['/publisher/tbl-studs-result/index']];
-            }
+            // if(Yii::$app->user->can('publisher permission')){
+            //     $publisher=['label' => 'Students Result(academics)', 'icon' => 'fa fa-reply', 'url' => ['/publisher/tbl-studs-result/index']];
+            // }else{
+            //     $publisher=['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest];
+            // }
             
-            if(Yii::$app->user->can('transcript permission')){
-                $transcript=['label' => 'Students Transcript', 'icon' => 'fa fa-reply', 'url' => ['/transcript/tbl-studs-transcript/index']]; 
-            }
+            // if(Yii::$app->user->can('transcript permission')){
+            //     $transcript=['label' => 'Students Transcript(transcript)', 'icon' => 'fa fa-reply', 'url' => ['/transcript/tbl-studs-transcript/index']]; 
+            // }else{
+            //     $transcript=['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest];
+            // }
 
             ?>
             <?php
@@ -62,110 +65,142 @@
                 'items' => [
                     ['label' => 'Dashboard', 'url'=>['/site/index'], 'icon' => 'th', 'badge' => '<span class="right badge badge-danger">New</span>'],
 
-                    ['label' => 'Users', 'url' => ['/user/tbl-user/index'], 'icon' => 'users'],
-                   
-                    // [
-                    //     'label' => 'Applicants',
-                    //     'icon' => 'tachometer-alt',
-                        // 'badge' => '<span class="right badge badge-info">2</span>',
-                        // 'items'=>[
-                            // ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-                            ['label' => 'Applications',  'icon' => 'fa fa-address-book', 'url' => ['/application/app/index']],
-                            ['label' => 'Qualifications', 'icon' => 'fa fa-address-book', 'url' => ['/qualification/tbl-app-quali/index']],
-                            ['label' => 'Admissions', 'icon' => 'fa fa-address-book', 'url' => ['/admission/tbl-app-admission/index']],
-                        // ]
-                    // ],
-
-                    ['label' => 'Finance',  'icon' => 'fas fa-wallet', 'url' => ['/payment/tbl-payment/index']],
-
-
-                    ['label' => 'Students', 'icon' => 'users', 'url' => ['/students/tbl-stud/index']],
-
+                    ['label' => 'Users', 'url' => ['/user-admins/index'], 'icon' => 'users'],
                     [
-                        'label' => 'Examinations',
-                        'icon' => 'fa fa-tasks',
-                        // 'badge' => '<span class="right badge badge-info">2</span>',
-                        'items'=> [$hod,$dean,$publisher,$transcript],
-                        // [
-                            // ['label' => 'Students Result',  'icon' => 'fa fa-reply', 'url' => ['/hod/tbl-studs-result/index','visible' => Yii::$app->user->can('backend students permission')]],
-                            // ['label' => 'Students Result', 'icon' => 'fa fa-reply', 'url' => ['/dean/tbl-studs-result/index']], 
-                            // ['label' => 'Students Result', 'icon' => 'fa fa-reply', 'url' => ['/publisher/tbl-studs-result/index']],
-                            // ['label' => 'Students Result', 'icon' => 'fa fa-reply', 'url' => ['/transcript/tbl-studs-transcript/index']],  
-                            // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],    
-                        // ],
+                        'label' => 'Drivers\'s','icon' => 'users','url' => ['#'],
+                        'items' => [
+                            ['label' => 'Drivers List', 'icon' => 'fa fa-share-square', 'url' => ['/drivers/index']],
+                            ['label' => 'Add Drivers', 'icon' => 'fa fa-share-square', 'url' => ['/drivers/create']],
+                        ],
                     ],
-
-                    // ['label' => 'Login', 'url' => ['site/login'], 'icon' => 'sign-in-alt', 'visible' => Yii::$app->user->isGuest],
-                    
                     [
-                        'label' => 'Departments',
-                        'icon' => 'fa fa-landmark',
-                        // 'badge' => '<span class="right badge badge-info">2</span>',
-                        'items'=>[
-                            ['label' => 'Departments',  'icon' => 'fa fa-reply', 'url' => ['/departments/tbl-depart/index']],
-                            ['label' => 'Courses && Department ', 'icon' => 'fa fa-reply', 'url' => ['/departments/tbl-course-depart/index']], 
-                            // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],  
-                            // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],    
-  
+                        'label' => 'Vehicle\'s','icon' => 'car','url' => ['#'],
+                        'items' => [
+                            ['label' => 'Vehicles List', 'icon' => 'fa fa-share-square', 'url' => ['/vehicles/index']],
+                            ['label' => 'Add Vehicles', 'icon' => 'fa fa-share-square', 'url' => ['/vehicles/create']],
+                            ['label' => 'Vehicle Group', 'icon' => 'fa fa-share-square', 'url' => ['/vehicle-group/index']],
                         ],
                     ],
 
+                    
 
-
-                 
                     [
-                        'label' => 'Settings', 'icon' => 'cog', 'url' => ['/program/tbl-program/index'],
-                
-                    // [
-                    //     'label' => 'System Users',
-                    //     'icon' => 'fa fa-users',
-                    //     'badge' => '<span class="right badge badge-info">2</span>',
-
-                    //     'items' => [
-                    //         ['label' => 'Permissions', 'url'=>['/admin/assignment/index'],'iconStyle' => 'far'],
-                    //         ['label' => 'Roles', 'url'=>['/admin/role/index'],'iconStyle' => 'far'],
-                    //     ]
-                    // ],
-                
-                ],
-
-                [
-                    'label' => 'Logs',
-                    'icon' => 'fa fa-landmark',
-                    // 'badge' => '<span class="right badge badge-info">2</span>',
-                    'items'=>[
-                        ['label' => 'Qualifications Logs',  'iconStyle' => 'far', 'url' => ['/qualification/tbl-quali-log/index']],
-                        ['label' => 'Admissions Logs ', 'iconStyle' => 'far', 'url' => ['/admission/tbl-admiss-log/index']], 
-                       
-                        // ['label' => 'Students Result', 'iconStyle' => 'far', 'url' => ['/students/tbl-stud-result/index']],    
-
+                        'label' => 'Bookings','icon' => 'book','url' => ['#'],
+                        'items' => [
+                            ['label' => 'Bookings List', 'icon' => 'fa fa-share-square', 'url' => ['/operations/index']],
+                            ['label' => 'Add Booking', 'icon' => 'fa fa-share-square', 'url' => ['/operations/create']],
+                        ],
                     ],
-                ],
 
-                
-                    // ['label' => 'MULTI LEVEL EXAMPLE', 'header' => true],
-                    // ['label' => 'Level1'],
+                    [
+                        'label' => 'Services','icon' => 'wrench','url' => ['#'],
+                        'items' => [
+                            ['label' => 'Services', 'icon' => 'fa fa-share-square', 'url' => ['/servicings/index']],
+                            ['label' => 'Repairs', 'icon' => 'fa fa-share-square', 'url' => ['/repairs/index']],
+                            ['label' => 'Add Service', 'icon' => 'fa fa-share-square', 'url' => ['/servicings/create']],
+                            ['label' => 'Add Repair', 'icon' => 'fa fa-share-square', 'url' => ['/repairs/create']],
+                        ],
+                    ],
+                    [
+                        'label' => 'Road Worthy','icon' => 'fa fa-road','url' => ['#'],
+                        'items' => [
+                            ['label' => 'Road Worthy List', 'icon' => 'fa fa-share-square', 'url' => ['/road-worthy/index']],
+                            ['label' => 'Add Worthy', 'icon' => 'fa fa-share-square', 'url' => ['/road-worthy/create']],
+                        ],
+                    ],
+
+                    [
+                        'label' => 'Insurances','icon' => 'fa fa-industry','url' => ['#'],
+                        'items' => 
+                        [
+                            ['label' => 'Insurances List', 'icon' => 'fa fa-share-square', 'url' => ['/insurance/index']],
+                            ['label' => 'Add Insurance', 'icon' => 'fa fa-share-square', 'url' => ['/insurance/create']],
+                        ],
+                    ],
+
+                    [
+                        'label' => 'Scraps','icon' => 'wrench','url' => ['#'],
+                        'items' => 
+                        [
+                            ['label' => 'Scrap List', 'icon' => 'fa fa-share-square', 'url' => ['/scrab/index']],
+                            ['label' => 'Add Scrap', 'icon' => 'fa fa-share-square', 'url' => ['/scrab/create']],
+                        ],
+                    ],
+
+                    [
+                        'label' => 'Reminder','icon' => 'fa fa-bell','url' => ['#'],
+                        'items' => 
+                        [
+                            ['label' => 'Reminder List', 'icon' => 'fa fa-share-square', 'url' => ['/reminder/index']],
+                            ['label' => 'Add Reminder', 'icon' => 'fa fa-share-square', 'url' => ['/reminder/create']],
+                        ],
+                    ],
+
+                    ['label' => 'Accidents','icon' => 'car','url' => ['/accident-records/index']],
+                    // ['label'=>'Vehicles To Renew','icon'=>'car','url'=>['insurance-renewal-dates-index']],
+
+                    [
+                        'label' => 'Settings',
+                         'icon' => 'cogs', 
+                         'url' => ['#'],
+                         'items'=>[
+                            // ['label' => 'Reset Password', 'icon' => 'key', 'url' => ['/user-request/reset']],
+                            // ['label'=>'Admins','icon'=>'user','url'=>['/user/index']],
+                            // ['label' =>'Add New Admins', 'icon'=>'circle-o', 'url'=>['/user/create']],
+                             ['label'=>'Roles', 'icon'=>'circle-o','url'=>['/role/index']]
+                            // ['label'=>'Add New Role','icon'=>'circle-o','url'=>['/role/create']],
+                            // ['label'=>'Auth Assignment', 'icon'=>'circle-o','url'=>['/auth-assignment/index']],
+                            // ['label'=>'New Assignment','icon'=>'circle-o','url'=>['/auth-assignment/create']],
+                            // ['label'=>'Auth Child', 'icon'=>'circle-o','url'=>['/auth-item-child/index']],
+                            // ['label'=>'Add New Auth Child','icon'=>'circle-o','url'=>['/auth-item-child/create']],
+                            // ['label'=>'Auth Item', 'icon'=>'circle-o','url'=>['/auth-item/index']],
+                            // ['label'=>'New Auth Item','icon'=>'circle-o','url'=>['/auth-item/create']],
+                            // ],                    
+                    ],
+                    ]
+
+
                     // [
-                    //     'label' => 'Level1',
+                    //     'label' => 'Password','icon' => 'key','url' => ['#'],
                     //     'items' => [
-                    //         ['label' => 'Level2', 'iconStyle' => 'far'],
-                    //         [
-                    //             'label' => 'Level2',
-                    //             'iconStyle' => 'far',
-                    //             'items' => [
-                    //                 ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                    //                 ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle'],
-                    //                 ['label' => 'Level3', 'iconStyle' => 'far', 'icon' => 'dot-circle']
-                    //             ]
-                    //         ],
-                    //         ['label' => 'Level2', 'iconStyle' => 'far']
-                    //     ]
+                    //         // ['label'=>'Requested Items','icon'=>'plus','url'=>['/request/create']],
+                    //         ['label' => 'Reset Password', 'icon' => 'key', 'url' => ['/user-request/reset']],
+                    //     ],
                     // ],
-                    // ['label' => 'Level1'],
-                    // ['label' => 'LABELS', 'header' => true],
-                    // ['label' => 'Important', 'iconStyle' => 'far', 'iconClassAdded' => 'text-danger'],
-                    // ['label' => 'Warning', 'iconClass' => 'nav-icon far fa-circle text-warning'],
-                    // ['label' => 'Informational', 'iconStyle' => 'far', 'iconClassAdded' => 'text-info'],
+                    
+                    //   ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
+                    // [
+                    //     'label' => 'Request','icon' => 'cog','url' => ['#'],
+                    //     'items' => [
+                    //         // ['label'=>'Requested Items','icon'=>'plus','url'=>['/request/create']],
+                    //         ['label' => 'Make New Request', 'icon' => 'circle-o', 'url' => ['/user-request/create']],
+                    //     ],
+                    // ],
+
+                    // [
+                    //     'label' => 'Pending', 'icon' => 'cog', 'url' => ['#'],
+                    //    'items'=>[
+                    //        ['label'=>'Pending','icon'=>'circle-o','url'=>['//user-request/pending']],
+                    //     //    ['label'=>'Add New Room','icon'=>'plus','url'=>['/room/create']],
+                    //    ]
+                    //   ],
+
+                    //   [
+                    //     'label' => 'Approved', 'icon' => 'cog', 'url' => ['/'],
+                    //    'items'=>[
+                    //        ['label'=>'Approved','icon'=>'circle-o','url'=>['//user-request/approved']],
+                    //     //    ['label'=>'Add New Item','icon'=>'plus','url'=>['/item/create']],
+                    //    ]
+                    //   ],
+                    //   [
+                    //     'label' => 'Rejected', 'icon' => 'cog', 'url' => ['/'],
+                    //    'items'=>[
+                    //        ['label'=>'Rejected','icon'=>'circle-o','url'=>['//user-request/rejected']],
+                    //     //    ['label'=>'Add New Brand','icon'=>'plus','url'=>['/brand/create']],
+                    //    ]
+                    //   ],
+
+              
                 ],
             ]);
             ?>

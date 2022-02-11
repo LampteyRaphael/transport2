@@ -210,7 +210,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Students Info', 'url' => ['index']
      </div>
      <div class="card-body">
          <p class="card-text">
-<?php include (Yii::getAlias('@frontend/modules/student/views/include/header.php'))?>
 <div class="tab-content" id="pills-tabContent">
     <div class="container">
         <div class="row">
@@ -243,6 +242,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Students Info', 'url' => ['index']
        
     </div>
 
+    <?php include (Yii::getAlias('@frontend/modules/student/views/include/header.php'))?>
 
     <div class="tab-pane fade show mt-4 active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
         <div class="row">

@@ -22,7 +22,7 @@ $fieldOptions2 = [
     <?php echo Html::img('images/logo.png',['width'=>'150','height'=>'70'],['alt' => 'alt image'], ['class' => 'rounded float-left img-responsive']);?>
     </div>   
     <div class="col text-center mt-5">
-        <h3 class="text-center"><b>IPS STUDENTS PORTAL</b></h3>
+        <h3 class="text-center"><b>DRIVERS TRANSPORT SYSTEM</b></h3>
     </div> 
      <div class="form" style="background-color: lightblue">
 <?php
@@ -40,7 +40,8 @@ $form = ActiveForm::begin(); ?>
 <div class="col-md-lg-12"><?= $form->field($model, 'rememberMe')->checkbox() ?></div>
 <?php ActiveForm::end(); ?>
 <p class="mb-1">
-    <?=Html::a('I forgot my password',['/resetPassword']) ?>
+    <!-- <Html::a('I forgot my password',['/resetPa']) ?> -->
+        <?= Html::a('I forgot my password',['forgot','class'=>'form-control'])?>
             <!-- <a href="forgot-password.html">I forgot my password</a> -->
         </p>
    </div>

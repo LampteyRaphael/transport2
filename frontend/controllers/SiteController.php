@@ -35,31 +35,23 @@ use yii\web\NotFoundHttpException;
  */
 class SiteController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                     [
-                       'allow' => true,
-                       'actions' => ['login', 'verify','osn','application','program','education','employment','document','declaration','exit','report','remove','courses'],
-                    ],
-                    // [
-                    //     'actions' => ['login', 'error','logout'],
-                    //     'allow' => true,
-                    // ],
                     [
-                        'actions' => ['logout', 'index','resetPassword'],
+                        'actions' => ['login', 'error'],
                         'allow' => true,
-                        'roles' => ['student','lecturer'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
                     ],
                 ],
             ],
-            
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -78,69 +70,41 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
         ];
     }
 
-    /**
-     * Displays homepage.
-     *
-     * @return mixed
-     */
+
     public function actionIndex()
     {
-        if(Yii::$app->user->can('student')){
-            // return  $this->goBack(Yii::$app->request->referrer);
-            return $this->redirect(['index']);
-         }else{
-          
-            return  $this->goBack(Yii::$app->request->referrer);
-        } 
+
+        return $this->render('index');
     }
 
     /**
-     * Logs in a user.
+     * Login action.
      *
-     * @return mixed
+     * @return string
      */
     public function actionLogin()
     {
-        
         $this->layout = 'main-login';
-
         if (!Yii::$app->user->isGuest) {
-         return $this->goHome();
+            return $this->goHome();
         }
+
+        
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-
-            if(Yii::$app->user->can('student')){
-
-                return $this->redirect(['/student']);
-
-            }else if(Yii::$app->user->can('lecturer')){
-
-                return $this->redirect(['/lecturer']);
-            }
-
-            // return $this->redirect(['login']);
-            else
-            {                
-                return $this->render('login', [
-                    'model' => $model,
-                ]);
-            } 
-        }else {
+            return $this->goBack();
+        } else {
             $model->password = '';
             return $this->render('login', [
                 'model' => $model,
             ]);
         }
     }
+
 
     /**
      * Logs out the current user.
@@ -255,7 +219,7 @@ protected function osnID(){
     }
     // throw new HttpException('Error with your osn');
 }
-  
+
 
        /* Fetch Personal ID With OSN ID */
 protected function personalDetails(){
@@ -264,7 +228,6 @@ protected function personalDetails(){
     }
     // throw new HttpException('Error Fetching Data');
 }
-
 
        /* Fetch Personal Address */
        protected function personalAddress(){
@@ -282,7 +245,6 @@ protected function applicantMainTable(){
         return $model;
     }
 }
-
 
 //Get Applicant's Educational ID
 protected  function  applicantEducation(){
@@ -308,7 +270,6 @@ protected function applicantPrograms(){
     throw new NotFoundHttpException('The requested page does not exist.');
 }
 
-
 protected function applicantCourse($program){
 
     if(($program=TblProgram::find()->where(['program_category_id' => $program])->all()) !==null){
@@ -316,7 +277,6 @@ protected function applicantCourse($program){
         return $program;
     }
 }
-
 
 /* Saving Applicant's Personal Details */
 protected function applicantDetails($modelp){
@@ -334,7 +294,6 @@ protected function applicantDetails($modelp){
     $modelp->osn_id = $this->osnID();
     $modelp->date_apply = date('Y-m-d');
 }
-
 
 /* Saving Applicant's Personal Address */
 protected function applicantAddress($modelad){
@@ -757,7 +716,7 @@ protected function applicantDocument($imageFile, $perID){
      * @return mixed
      */
     public function actionResendVerificationEmail()
-    {
+    {        
         $model = new ResendVerificationEmailForm();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
             if ($model->sendEmail()) {
@@ -773,8 +732,8 @@ protected function applicantDocument($imageFile, $perID){
     }
 
 
-
-    public function actionReport($id) {
+    public function actionReport($id) 
+    {
         Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         $personal= TblApp::find()->where(['id'=>$id])->one();
         //  $images= 'application/images/'.$personal->personalDetails->photo;
@@ -798,39 +757,54 @@ protected function applicantDocument($imageFile, $perID){
             ]
         ]);
         return $pdf->render();
-        }
+    }
 
         
-        public function actionExit()
+    public function actionExit()
+    {
+        Yii::$app->user->logout();
+        Yii::$app->getSession()->destroy();
+        return $this->redirect(['osn']);
+    }
+
+    protected function applicantMainStoreTable($application){        
+        $application->personal_details_id = Yii::$app->session->get('person');
+        $application->personal_address_id = Yii::$app->session->get('address');
+        $application->personal_education_id = Yii::$app->session->get('education');
+        $application->personal_employment_id = Yii::$app->session->get('employment');
+        $application->personal_document_id = Yii::$app->session->get('person');
+        $application->application_type =1;
+        $application->program_id = Yii::$app->session->get('program');
+        $application->status = 1;
+        $application->osn = $this->osnID();
+        $application->date = date('Y-m-d');
+        $application->save();
+        return $application->id;
+    }
+
+
+    public function actionForgot()
+    {
+        $this->layout = 'main-osn';
+        $model = new PasswordResetRequestForm();
+
+        if ($model->load(Yii::$app->request->post()))
         {
-            Yii::$app->user->logout();
-            Yii::$app->getSession()->destroy();
-            return $this->redirect(['osn']);
+
+            if ($model->sendEmail()) {
+                Yii::$app->session->setFlash('success', 'Check your email for further instructions.');
+                return $this->goHome();
+            }
+            Yii::$app->session->setFlash('error', 'Sorry, we are unable to resend verification email for the provided email address.');
         }
 
+        return $this->render('requestPasswordResetToken', [
+            'model' => $model,
+        ])  ;
+    }
 
 
-        protected function applicantMainStoreTable($application){        
-            $application->personal_details_id = Yii::$app->session->get('person');
-            $application->personal_address_id = Yii::$app->session->get('address');
-            $application->personal_education_id = Yii::$app->session->get('education');
-            $application->personal_employment_id = Yii::$app->session->get('employment');
-            $application->personal_document_id = Yii::$app->session->get('person');
-            $application->application_type =1;
-            $application->program_id = Yii::$app->session->get('program');
-            $application->status = 1;
-            $application->osn = $this->osnID();
-            $application->date = date('Y-m-d');
-            $application->save();
-            return $application->id;
-        }
 
-        public function actionForgot(){
-            $model = new PasswordResetRequestForm();
 
-            return $this->render('requestPasswordResetToken', [
-                'model' => $model,
-            ])  ;
 
-        }
 }

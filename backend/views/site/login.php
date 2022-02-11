@@ -1,6 +1,4 @@
-
-
-        <?php
+<?php
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
@@ -22,7 +20,7 @@ $fieldOptions2 = [
     <?php echo Html::img('image/logo.png',['width'=>'150','height'=>'70'],['alt' => 'alt image'], ['class' => 'rounded float-left img-responsive']);?>
     </div>   
     <div class="col text-center mt-5">
-        <h3 class="text-center"><b>IPS  STUDENTS PORTAL</b></h3>
+        <h3 class="text-center"><b>TRANSPORT SYSTEM</b></h3>
     </div> 
      <div class="form" style="background-color: lightblue">
 <?php

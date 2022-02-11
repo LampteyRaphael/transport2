@@ -6,25 +6,21 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
-use common\models\TblApp;
-use common\models\TblAppAdmission;
-use common\models\TblAppQuali;
-use common\models\TblDepart;
-use common\models\TblLecturer;
-use common\models\TblLevel;
-use common\models\TblOsn;
-use common\models\TblProgram;
-use common\models\TblQualiLog;
-use common\models\TblStaff;
-use common\models\TblStud;
+use common\models\Vehicles;
+use common\models\Drivers;
+use common\models\Insurance;
+use common\models\Repairs;
+use common\models\Servicings;
+use common\models\AccidentRecords;
 use common\models\User;
+use common\models\RoadWorthy;
 
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
-    /**
+        /**
      * {@inheritdoc}
      */
     public function behaviors()
@@ -32,23 +28,25 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only'=>['reset'],
+                'only'=>['logout'],
                 'rules' => [
+                    //  [
+                    //    'allow' => true,
+                    //    'actions' => ['login', 'forgot', 'verify'],
+                    // ],
+        
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['logout'],
                         'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['staff','hod'],
+                        'roles' => ['@'],
                     ],
                 ],
             ],
+            
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'logout' => ['post','get'],
+                    'logout' => ['post'],
                 ],
             ],
         ];
@@ -63,53 +61,29 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
+            'captcha' => [
+                'class' => 'yii\captcha\CaptchaAction',
+                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+            ],
         ];
     }
-
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
+   
     public function actionIndex()
     {
-        $item=array();
-       $qualification=TblAppQuali::find()->count();
-       $admission=TblAppAdmission::find()->count();
-       $application=TblApp::find()->select('id')->count();
-       $students=TblStud::find()->select('id')->count();
+        $vehicle=Vehicles::find()->select('id')->count();
+        $drivers=Drivers::find()->select('id')->count();
+        $repairs=Repairs::find()->select('id')->count();
+        $insurances=Insurance::find()->select('id')->count();
 
-       $lecturer=TblLecturer::find()->select('id')->count();
+        $accidentRecords=AccidentRecords::find()->select('id')->count();
+        $users=User::find()->select('id')->count();
+        $services=Servicings::find()->select('id')->count();
 
-       $staff=TblStaff::find()->select('id')->count();
+        $insurances=Insurance::find()->where(['<','expiringDate',date('Y-m-d')])->count();
 
-       $userAdmins=User::find()->select('id')->count();
+        $roadworthy=RoadWorthy::find()->where(['<','expiringDate',date('Y-m-d')])->count();
 
-       $programs=TblProgram::find()->all();
-
-       $levels=TblLevel::find()->all();
-
-       $department=TblDepart::find()->all();
-
-       $osn=TblOsn::find()->where(['status'=>0])->count();
-
-    //    foreach($programs as $program){
-    //     $item[] = $program->program_name.',';
-    //    }
-
-        return $this->render('index',[
-            'qualification'=>$qualification,
-            'admission'=>$admission,
-            'application'=>$application,
-            'lecturer'=>$lecturer,
-            'students'=>$students,
-            'staff'=>$staff,
-            'userAdmins'=>$userAdmins,
-            'programs'=>$programs,
-            'levels'=>$levels,
-            'osn'=>$osn,
-            'department'=>$department
-        ]);
+        return $this->render('index',compact('vehicle','drivers','repairs','insurances','accidentRecords','users','services','insurances','roadworthy'));
     }
 
     /**
@@ -119,11 +93,11 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        $this->layout = 'main-login';
-
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
+
+        $this->layout = 'main-login';
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -144,9 +118,24 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        $this->layout = 'main-login';
+        //  $this->layout = 'main-login';
         Yii::$app->user->logout();
-        return $this->goHome();
+        Yii::$app->getSession()->destroy();
+        return $this->redirect(['site/login']);
     }
+
+    
+
+
+    public function actionReset()
+    {
+        $this->layout = 'main-login';
+        $model=new User();
+       
+        return  $this->render('reset',compact('model'));
+    }
+
+
+
 
 }

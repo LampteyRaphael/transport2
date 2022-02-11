@@ -86,7 +86,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute'=>'academic_year',
                 'label'=>'Academic Year',
-                'value'=>'acadamicYear.date_of_admission'
+                'value'=>function($model){
+                  return  $model->acadamicYear->studAcadamicYear->date_of_admission??'';
+                },
             ],
         ],
     ]); ?>

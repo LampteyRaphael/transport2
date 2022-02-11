@@ -6,10 +6,50 @@ use Exception;
 use Yii;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
+use common\models\Vehicles;
+use common\models\VehiclesSearch;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use common\models\Operations;
+use common\models\Repairs;
+use common\models\Servicings;
+use common\models\Insurance;
+use common\models\RoadWorthy;
+use common\models\AccidentRecords;
 
 class Validate  extends  \yii\db\ActiveRecord
 {
-    
+  
+  
+
+ public function headernavebar($id){
+
+  $vehicleService=Servicings::find()->where(['vehicle_id'=>$id])->all();
+
+  $vehicleRepairs=Repairs::find()->where(['vehicle_id'=>$id])->all();
+
+  $trips=Operations::find()->where(['vehicle_id'=>$id])->all();
+
+  $insurance=Insurance::find()->where(['vehicle_id'=>$id])->all();
+
+  $worthy=RoadWorthy::find()->where(['vehicle_id'=>$id])->all();
+
+  $accident=AccidentRecords::find()->where(['vehicle_id'=>$id])->all();
+
+
+  return  [
+    'vehicleService'=>$vehicleService,
+    'vehicleRepairs'=>$vehicleRepairs,
+    'trips'=>$trips,
+    'insurance'=>$insurance,
+    'worthy'=>$worthy,
+    'accident'=>$accident,
+  ];
+
+ }
+
+
     public function check($data)
      {
         $data = trim($data);
@@ -42,6 +82,17 @@ class Validate  extends  \yii\db\ActiveRecord
        return $str;
     }
 
+    public function vehiclesServices()
+    {
+     return [
+              'Oil/oil filter changed'=>'Oil/oil filter changed','Wiper blades replacement'=>'Wiper blades replacement',
+              'Replace air filter'=>'Replace air filter','Scheduled maintenance'=>'Scheduled maintenance','New tires'=>'New tires',
+              'Battery replacement'=>'Battery replacement','Brake work'=>'Brake work','Antifreeze added'=>'Antifreeze added',
+              'Engine tune-up'=>'Engine tune-up','Wheels aligned/balanced'=>'Wheels aligned/balanced'
+            ];  
+    }
+
+    
 
     public function userAdmins($password,$email,$role,$status){
    
@@ -177,11 +228,10 @@ public function professionalMail($id,$program,$amount,$address,$academic_year,$p
 }
 
 
-public function accessMail($id,$program,$amount,$address,$academic_year,$programName,$email){
+public function accessMail($program,$amount,$address,$academic_year,$programName,$email){
 
   $add=$this->check_only_int($address);
     Yii::$app->mailer->compose(['html' => 'register'],[
-    'modelp' => TblAppPersDetails::find()->where(['id'=>$id])->one(),
     'program'=>$program,'amount'=>$amount,
     'addresses'=>$add,
     'academic_year'=>$academic_year,

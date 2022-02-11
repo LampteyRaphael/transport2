@@ -174,7 +174,7 @@ class LecturerController extends \yii\web\Controller
         $academic_year=TblStudRegistYear::find()->where(['status'=>1])->one();
 
         return $this->render('result', [
-             'model'=>new TblStRegistration(),
+            'model'=>new TblStRegistration(),
             'lecturer'=>$lecturer,
             'academic_year'=>$academic_year->id,
             'semester'=>$academic_year->semester,
